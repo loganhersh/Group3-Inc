@@ -251,6 +251,8 @@
 .text1
 {
 	
+
+
 	text-align: center;
 	font-family: Times;
 }
@@ -291,4 +293,157 @@
 	padding-top: 20px;
 	padding-bottom: 5px;
 	background-color: grey;
+}
+/*------------------Room Selection----------*/
+#roomSelect
+{
+	text-align: center;
+	font-family: Times;
+	font-size: 20px;
+	padding-top: 25px;
+	padding-bottom: 50px;
+}
+#roomSelect .text-box
+{
+	padding-bottom: 25px;
+}
+#roomSelect h2
+{
+	font-weight: bold;
+	font-size: 50px;
+	color: #555;
+	border-bottom: 5px solid #FFC300;
+	letter-spacing: 1.75px;
+}
+/*------------------King----------*/
+#king
+{
+	text-align: center;
+	font-family: Times;
+	font-size: 20px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+#king h2
+{
+	padding-top: 50px;
+}
+/*------------------Queen----------*/
+#queen
+{
+	text-align: center;
+	font-family: Times;
+	font-size: 20px;
+	padding-top: 50px;
+	padding-bottom: 100px;
+}
+#queen h2
+{
+	padding-top: 50px;
+}
+/*----------------Amenities-----------*/
+#amenities
+{
+	text-align: center;
+	font-family: Times;
+	font-size: 20px;
+	padding-top: 25px;
+	padding-bottom: 50px;
+}
+#amenities .text-box
+{
+	padding-bottom: 25px;
+}
+#amenities h1
+{
+	font-weight: bold;
+	font-size: 50px;
+	color: #555;
+	border-bottom: 5px solid #FFC300;
+	letter-spacing: 1.75px;
+}
+#amenities .row
+{
+	text-align:left;
+	padding-top: 50px;
+}
+#amenities p
+{
+	padding-bottom: 50px;
+}
+#amenities .col-md-2
+{
+	text-align: center;
+	padding-top: 25px;
+}
+#amenities h3
+{
+	padding-top: 50px;
+	font-size: 35px;
+}
+/*------------------Gallery---------------*/
+#gallery
+{
+	text-align: center;
+	font-family: Times;
+	font-size: 20px;
+	padding-top: 25px;
+	padding-bottom: 50px;
+}
+#gallery .text-box
+{
+	padding-bottom: 25px;
+}
+#gallery .photos
+{
+	text-align: center;
+	padding-top: 50px;
+}
+#gallery h2
+{
+	font-weight: bold;
+	font-size: 50px;
+	color: #555;
+	border-bottom: 5px solid #FFC300;
+	letter-spacing: 1.75px;	
+}
+/*---------------------Contact Us--------------*/
+#contactus
+{
+	text-align: center;
+	font-family: Times;
+	font-size: 20px;
+	padding-top: 25px;
+	padding-bottom: 50px;
+}
+#contactus .text-box
+{
+	padding-bottom: 50px;
+}
+#contactus h2
+{
+	font-weight: bold;
+	font-size: 50px;
+	color: #555;
+	border-bottom: 5px solid #FFC300;
+	letter-spacing: 1.75px;	
+}
+#contactus .text
+{
+	padding-top:50px;
+}
+#fillin
+{
+	text-align: left;
+	font-family: Times;
+	font-size: 20px;
+	padding-top: 50px;
+	padding-bottom: 100px;
+}
+#fillin h2
+{
+	font-weight: bold;
+	font-size: 35px;
+	color: #555;
+	
 }
