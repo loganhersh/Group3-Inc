@@ -1,0 +1,6 @@
+{
+  "host": "localhost",
+  "user": "hms_owner",
+  "password": "password123",
+  "database": "HMS_DB"
+}

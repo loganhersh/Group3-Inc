@@ -1,0 +1,46 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Change Price Example</title>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+  <input type="button" value="Change Price" onclick="changePrice()">
+  <input type="button" value="Get User" onclick="getUser()">
+</body>
+<script>
+  /*
+    This demo sends an http request to change the base price of a room.
+    It assumes that the backend server is up and running on port 3000 of the localhost.
+ */
+  let baseUrl = "http://localhost:3000/";
+
+  function changePrice() {
+    const url = baseUrl + "rooms/price";
+    let payload = {
+      "roomId": 101,
+      "price": 100
+    };
+    sendRequest(url, payload);
+  }
+
+  function getUser() {
+    const url = baseUrl + "users";
+    let payload = {"user":"admin"};
+    sendRequest(url, payload);
+  }
+
+  function sendRequest(url, payload) {
+    $.post(url, payload)
+    .done(function (data, status, jqXHR) {
+      alert(JSON.stringify(data));
+    }).fail(function() {
+      alert("Failed");
+    });
+  }
+
+
+</script>
+</html>

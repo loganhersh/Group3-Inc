@@ -1,0 +1,11 @@
+{
+  "rooms": [
+    {
+      "roomId": "101",
+      "roomType": "King",
+      "isUsable": true,
+      "basePrice": "85"
+    }
+  ]
+
+}
