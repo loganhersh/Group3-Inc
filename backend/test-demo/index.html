@@ -5,42 +5,25 @@
   <meta charset="utf-8">
   <title>Change Price Example</title>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="auth.test.js"></script>
+  <script type="text/javascript" src="api-endpoint.test.js"></script>
 </head>
 <body>
-  <input type="button" value="Change Price" onclick="changePrice()">
+  <p>
+    Change Price button is not protected by auth, just tests that a price can be changed in the
+    database and then a response returned.
+  </p>
+  <input type="button" value="Change Price" onclick="changePrice()"><br>
+  <p>
+    Get User is protected by auth. Must login using username: 'admin', password: 'password'
+    to get auth cookie. admin is the only user currently in the database. After logging in, get user
+    alerts with the username and password of the user.
+  </p>
   <input type="button" value="Get User" onclick="getUser()">
+  <br>
+  Username: <input type="text" id="username"><br>
+  Password: <input type="text" id="password"><br>
+  <input type="button" value="Login" onclick="auth()">
+  <input type="button" value="Logout" onclick="logout()">
 </body>
-<script>
-  /*
-    This demo sends an http request to change the base price of a room.
-    It assumes that the backend server is up and running on port 3000 of the localhost.
- */
-  let baseUrl = "http://localhost:3000/";
-
-  function changePrice() {
-    const url = baseUrl + "rooms/price";
-    let payload = {
-      "roomId": 101,
-      "price": 100
-    };
-    sendRequest(url, payload);
-  }
-
-  function getUser() {
-    const url = baseUrl + "users";
-    let payload = {"user":"admin"};
-    sendRequest(url, payload);
-  }
-
-  function sendRequest(url, payload) {
-    $.post(url, payload)
-    .done(function (data, status, jqXHR) {
-      alert(JSON.stringify(data));
-    }).fail(function() {
-      alert("Failed");
-    });
-  }
-
-
-</script>
 </html>
