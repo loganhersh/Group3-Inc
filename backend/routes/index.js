@@ -4,10 +4,12 @@
   a 'require()' statement and add the routes variable to the exports.
  */
 
+const authRoutes = require('./auth.routes')
 const roomsRoutes = require('./rooms.routes');
 const usersRoutes = require('./users.routes');
 
 module.exports = {
+  authRoutes,
   roomsRoutes,
   usersRoutes
 };
