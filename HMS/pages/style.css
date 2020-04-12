@@ -197,6 +197,10 @@
 	font-weight: 600;
 	font-size: 28px;
 }
+.nav-item
+{
+	cursor: pointer;
+}
 /*------------------Availabiltiy----------------*/
 #available
 {
