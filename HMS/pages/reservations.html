@@ -5,9 +5,10 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 	<script src="https://kit.fontawesome.com/8f4261c3af.js" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="../js/auth.js"></script>
 </head>
 <body>
 <!-------------Navigation Bar---------------------------->
@@ -29,7 +30,7 @@
         <a class="nav-link" href="../pages/management.html">Management</a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link" href="../index.html">Log Out</a>
+        <a class="nav-link" onclick="logout()">Log Out</a>
       </li>
     </ul>
   </div>
@@ -71,9 +72,9 @@
 	</div>
 	<div class="col-md-2">
 		<button class="button">SEARCH
-		</button> 
+		</button>
 	</div>
-</div>	
+</div>
 </div>
 </section>
 <!----------------------Rooms------------------------->
@@ -87,7 +88,7 @@
 				<div class="col-md-4">
 				<img src="../photos/king-bed.jpg" class="img-responsive" style="width:100%">
 				</div>
-				
+
 				<div class="col-md-4">
 				<div class="room">
 				<h2> King </h2>
@@ -96,7 +97,7 @@
 					<h5><i class="fas fa-user-friends"></i>  Max Occupancy: 2</h5>
 				</div>
 				</div>
-				
+
 				<div class="col-md-4">
 				<div class="rates">
 				<h6>(USD-$)</h6>
@@ -116,7 +117,7 @@
 				<div class="col-md-4">
 				<img src="../photos/queen-bed.jpg" class="img-responsive" style="width:100%">
 				</div>
-				
+
 				<div class="col-md-4">
 				<div class="room">
 				<h2> Queen </h2>
@@ -141,7 +142,7 @@
 	<div class="popup">
 	<a class="close" href="#">&times;</a>
 	<div class="container" style="text-align:center">
-		
+
 <!----------------------------------Booking Details------------------------------------------->
 <section class="bookingdetails">
 	<div class="bookingdetails" style="text-align:center">
@@ -217,7 +218,7 @@
 			<span style="color: red">* </span><input type="text" name="State" size="24" placeholder="State"><br/>
 			<br/>
 			</div>
-			
+
 			<div class="col-md-6">
 			<span style="color: red">* </span><input type="text" name="LastName" size="24" placeholder="Last Name"><br/>
 			<br/>
@@ -322,7 +323,7 @@
 	<div class="popup">
 	<a class="close" href="#">&times;</a>
 	<div class="container" style="text-align:center">
-		
+
 <!----------------------------------Booking Details------------------------------------------->
 <section class="bookingdetails">
 	<div class="bookingdetails" style="text-align:center">
@@ -398,7 +399,7 @@
 			<span style="color: red">* </span><input type="text" name="State" size="24" placeholder="State"><br/>
 			<br/>
 			</div>
-			
+
 			<div class="col-md-6">
 			<span style="color: red">* </span><input type="text" name="LastName" size="24" placeholder="Last Name"><br/>
 			<br/>
