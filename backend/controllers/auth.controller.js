@@ -24,7 +24,7 @@ async function authenticate(req, res, next) {
   .catch(err => next(err));
 }
 
-// Sets the users auth cookie to null, removing their jwt
+// Sets the users auth cookie to 'bad', removing their jwt
 async function logout(req, res, next) {
   res.cookie('auth', 'bad', {httpOnly: true, sameSite: true});
   res.send();
