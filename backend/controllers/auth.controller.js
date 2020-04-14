@@ -5,6 +5,8 @@ module.exports = {
   logout
 };
 
+// Validates username & password against the database and then issues the user
+// a cookie that contains a json web token
 async function authenticate(req, res, next) {
   const {username,password} = req.body;
   authService.authenticate(username, password)
@@ -22,7 +24,8 @@ async function authenticate(req, res, next) {
   .catch(err => next(err));
 }
 
+// Sets the users auth cookie to null, removing their jwt
 async function logout(req, res, next) {
-  res.cookie('auth', null, {httpOnly: true, sameSite: true});
+  res.cookie('auth', 'bad', {httpOnly: true, sameSite: true});
   res.send();
 }
