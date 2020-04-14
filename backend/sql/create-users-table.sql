@@ -4,9 +4,11 @@
 */
 USE HMS_DB;
 
+DROP TABLE users;
+
 CREATE TABLE users (
 	username VARCHAR(25) PRIMARY KEY,
-	password VARCHAR(25) NOT NULL
+	password VARCHAR(80) NOT NULL
 );
 
-INSERT INTO users VALUES ('admin', 'password');
+INSERT INTO users VALUES ('admin', '$2b$10$hf2WwnBkhwjXNwturHMPTuasjCipC3R3GbB9ERtkSCmMRDy.OcpZe');
