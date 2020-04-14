@@ -3,21 +3,27 @@
 	margin: 0;
 	padding: 0;
 }
+html, body
+{
+	background-color: #FFC300;
+	height: 100%;
+}
 #index
 {
 	background-color: #FFC300;
-	padding-top: 10%;
-	padding-bottom: 90%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 20%;
 }
-#index .form-container
-{
-	width:400px;
-	height:auto;
+#index .form-container {
+	width: 400px;
+	height: auto;
 	padding: 20px 40px;
 	background-color: white;
 	border-radius: 20px;
-	box-shadow:0 0 10px 0 #000;
-	margin: auto;
+	box-shadow: 0 0 10px 0 #000;
 	font-size: 18px;
 }
 #index ul.list
@@ -55,6 +61,18 @@
 {
 	font-size: 18px;
 	padding-right:20px;
+}
+#index input#login-again
+{
+	padding-left: 15px;
+	padding-right: 15px;
+	text-align: center;
+}
+.center-box
+{
+	flex-direction: column;
+	display: flex;
+	align-items: center;
 }
 .overlay {
   position: fixed;

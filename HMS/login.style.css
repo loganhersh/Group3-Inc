@@ -12,7 +12,10 @@ html, body
 {
 	background-color: #FFC300;
   height: 100%;
-	padding-top: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20%;
 }
 #index .form-container
 {

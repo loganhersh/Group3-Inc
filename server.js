@@ -22,7 +22,8 @@ var apiPort = 3000;
 const excludedPaths = [
     /\S*\/login.html/,
     /\S*\.css/,/photos\/\S*/,
-    /js\/\S*/
+    /js\/\S*/,
+    /\S*\/timeout.html/
 ];
 
 /////////////////////////// Configure App \\\\\\\\\\\\\\\\\\\\\\\\\
@@ -57,9 +58,12 @@ app.use(cors({
     function(err, req, res, next) {
       // invalid or no jwt, deny access
       if(err.name === 'UnauthorizedError') {
-        res.redirect('/pages/login.html');
+        if(err.inner.name === 'TokenExpiredError') {
+          res.redirect('/pages/timeout.html');
+        } else {
+          res.redirect('/pages/login.html');
+        }
       }
-      // TODO: Implement handling of expired tokens
     })
 .use(express.static('HMS'));
 
