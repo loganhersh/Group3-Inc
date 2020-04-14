@@ -3,11 +3,16 @@
 	margin: 0;
 	padding: 0;
 }
+html, body
+{
+  height: 100%;
+  background-color: #FFC300;
+}
 #index
 {
 	background-color: #FFC300;
+  height: 100%;
 	padding-top: 10%;
-	padding-bottom: 90%;
 }
 #index .form-container
 {
@@ -30,6 +35,15 @@
 {
 	width: 250px;
 	margin-bottom: 15px;
+}
+#index ul.list li#invalid-login
+{
+  color: #D00000;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: bold;
 }
 #index ul.list li input[type="button"]
 {
@@ -68,9 +82,10 @@
 .popup {
   margin: 70px auto;
   padding: 20px;
+  padding-bottom: 40px;
   background: #fff;
   border-radius: 5px;
-  width: 30%;
+  width: 400px;
   position: relative;
   transition: all 5s ease-in-out;
 }
@@ -112,3 +127,4 @@
     width: 70%;
   }
 }
+

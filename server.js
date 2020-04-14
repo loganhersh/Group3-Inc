@@ -19,7 +19,11 @@ var api = express();
 var appPort = 8080;
 var apiPort = 3000;
 
-var excludedPaths = [/\S*\.css/,/photos\/\S*/,/js\/\S*/];
+const excludedPaths = [
+    /\S*\/login.html/,
+    /\S*\.css/,/photos\/\S*/,
+    /js\/\S*/
+];
 
 /////////////////////////// Configure App \\\\\\\\\\\\\\\\\\\\\\\\\
 app.use(cors({
@@ -49,7 +53,7 @@ app.use(cors({
         } else {
           return null;
         }
-      } }).unless({ path: [/\S*\/login.html/,/\S*\.css/,/photos\/\S*/,/js\/\S*/]}),
+      } }).unless({ path: excludedPaths}),
     function(err, req, res, next) {
       // invalid or no jwt, deny access
       if(err.name === 'UnauthorizedError') {

@@ -1,10 +1,22 @@
 const baseApiUrl = "http://localhost:3000";
 const baseAppUrl = "http://localhost:8080";
 
+var loginErr;
+
+$(document).ready(() => {
+  loginErr = $("#invalid-login");
+})
+
 function auth() {
   const url = baseApiUrl + "/auth";
-  username = document.getElementById("username").value;
-  password = document.getElementById("password").value;
+  username = $("#username").val();
+  password = $("#password").val();
+
+  if(username === "" || password === "") {
+    loginErr.text("*Username/password cannot be blank");
+    return;
+  }
+
   const payload = {
     username,
     password
@@ -38,8 +50,8 @@ function sendAuthRequest(url, payload) {
       withCredentials: true
     }
   }).done(function (data, status, jqXHR) {
-    window.location.replace(baseAppUrl + '/pages/home.html');
+    window.location.assign(baseAppUrl + '/pages/home.html');
   }).fail(function(data, status, jqXHR) {
-    alert(JSON.stringify(data.responseJSON.message));
+    loginErr.text("*Username/password not found");
   });
 }
