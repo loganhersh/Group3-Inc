@@ -351,13 +351,11 @@ table {
   width: 100%;
 	background-color: white;
 }
-
 td, th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
 }
-
 tr:nth-child(odd) {
   background-color: #c3c3c3;
 }
