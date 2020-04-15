@@ -1,4 +1,4 @@
-# Group$-Inc
+# Group3-Inc
 Reservation / Billing Application
 
 **Setup instructions**<br />
