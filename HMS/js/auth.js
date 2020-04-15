@@ -50,6 +50,7 @@ function sendAuthRequest(url, payload) {
       withCredentials: true
     }
   }).done(function (data, status, jqXHR) {
+    window.localStorage.setItem('username',data);
     window.location.assign(baseAppUrl + '/pages/home.html');
   }).fail(function(data, status, jqXHR) {
     loginErr.text("*Username/password not found");

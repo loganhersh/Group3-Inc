@@ -189,7 +189,7 @@ html, body
 	float: right;
 	text-align: left;
 	font-weight: 600;
-	font-size: 28px;
+	font-size: 20px;
 	color: #FFC300;
 	background: #D00000;
 }
@@ -213,16 +213,29 @@ html, body
 {
 	color: #555!important;
 	font-weight: 600;
-	font-size: 28px;
+	font-size: 20px;
 }
 .nav-item
 {
 	cursor: pointer;
 }
+#nav-info
+{
+	text-align: right;
+	position: absolute;
+	right: 10px;
+	bottom: 0px;
+	font-size: 13px;
+}
+.nav-rule
+{
+	border: 1px solid #555;
+	margin: 0px;
+
+}
 /*------------------Availabiltiy----------------*/
 #available
 {
-	font-family: Times;
 	text-align: center;
 	background-color: rgba(208, 0, 0,0.85);
 	color: #Black;
@@ -331,14 +344,12 @@ html, body
 }
 #queen .bookingdetails
 {
-	font-family:times;
 	font-size: 15px;
-
 }
 table {
-  font-family: times;
   border-collapse: collapse;
   width: 100%;
+	background-color: white;
 }
 
 td, th {
@@ -354,12 +365,12 @@ tr:nth-child(odd) {
 {
 	float:left;
 	width: 20%;
-	padding: 13px;
+	padding: 11px;
 }
 #search
 {
 	text-align:left;
-	font-family: times;
+	margin-top: 16px;
 }
 #search input
 {
