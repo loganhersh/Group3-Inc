@@ -34,10 +34,11 @@ function logout() {
       withCredentials: true
     }
   }).done(function (data, status, jqXHR) {
+    window.localStorage.clear();
     window.location.replace(baseAppUrl + '/pages/login.html');
   }).fail(function(data, status, jqXHR) {
     alert(JSON.stringify(data.responseJSON.message));
-  })
+  });
 }
 
 function sendAuthRequest(url, payload) {
@@ -50,7 +51,8 @@ function sendAuthRequest(url, payload) {
       withCredentials: true
     }
   }).done(function (data, status, jqXHR) {
-    window.localStorage.setItem('username',data);
+    window.localStorage.setItem('username', data['username']);
+    window.localStorage.setItem('ad-auth', data['ad-auth']);
     window.location.assign(baseAppUrl + '/pages/home.html');
   }).fail(function(data, status, jqXHR) {
     loginErr.text("*Username/password not found");

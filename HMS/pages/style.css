@@ -231,13 +231,12 @@ html, body
 {
 	border: 1px solid #555;
 	margin: 0px;
-
 }
 /*------------------Availabiltiy----------------*/
 #available
 {
 	text-align: center;
-	background-color: rgba(208, 0, 0,0.85);
+	background-color: rgba(208, 0, 0, 0.85);
 	color: #Black;
 	padding-top: 10px;
 	padding-bottom: 50px;
@@ -425,4 +424,8 @@ tr:nth-child(odd) {
   display: none;
   border: 1px solid #ccc;
   border-top: none;
+}
+.admin-item
+{
+	display: none;
 }

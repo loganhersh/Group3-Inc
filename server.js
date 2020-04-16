@@ -8,8 +8,9 @@ var cors = require('cors');
 var parser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var expressjwt = require('express-jwt');
-var jwt = require('jsonwebtoken');
-var config = require('./backend/config.json')
+var adminGuard = require('express-jwt-permissions')();
+var config = require('./backend/config.json');
+var serverUtils = require('./backend/server.utils');
 var routes = require('./backend/routes');
 
 // Create the servers
@@ -19,11 +20,17 @@ var api = express();
 var appPort = 8080;
 var apiPort = 3000;
 
-const excludedPaths = [
+const excludedAppPaths = [
     /\S*\/login.html/,
     /\S*\.css/,/photos\/\S*/,
     /js\/\S*/,
-    /\S*\/timeout.html/
+    /\S*\/timeout.html/,
+    /dev\/\S*/
+];
+
+const excludedApiPaths = [
+  '/auth',
+  '/users/new'
 ];
 
 /////////////////////////// Configure App \\\\\\\\\\\\\\\\\\\\\\\\\
@@ -36,35 +43,30 @@ app.use(cors({
 .use(parser.json())
 .use(cookieParser())
 .use(/\S*\/login.html/, function(req, res, next) {
-  // Redirect to home page if valid token exists
-  token = req.cookies.auth;
-  try {
-    jwt.verify(token, config.secret);
-    res.redirect('/pages/home.html');
-  } catch(err) {
-    next();
-  }
+  // redirect to home if already logged in
+  serverUtils.loggedInRedirect(req, res, next);
 })
 .use(expressjwt({
       secret: config.secret,
       credentialsRequired: true,
-      getToken: function(req) {
-        if(req.cookies.auth) {
-          return req.cookies.auth;
-        } else {
-          return null;
-        }
-      } }).unless({ path: excludedPaths}),
-    function(err, req, res, next) {
-      // invalid or no jwt, deny access
-      if(err.name === 'UnauthorizedError') {
-        if(err.inner.name === 'TokenExpiredError') {
-          res.redirect('/pages/timeout.html');
-        } else {
-          res.redirect('/pages/login.html');
-        }
-      }
-    })
+      getToken: function(req) { return req.cookies.auth; }
+    }).unless({ path: excludedAppPaths }))
+.use('/pages/admin.html', adminGuard.check(['admin']))
+.use(function(err, req, res, next) {
+  // ERROR HANDLER
+  if(err.code === 'permission_denied') {
+    res.status(403).send('Not authorized to access this resource');
+  } else if(err.name === 'UnauthorizedError') {
+    if(err.inner.name === 'TokenExpiredError') {
+      res.redirect('/pages/timeout.html');
+    } else {
+      res.redirect('/pages/login.html');
+    }
+  } else {
+    console.log(err);
+    res.status(500).send("Internal Server Error");
+  }
+})
 .use(express.static('HMS'));
 
 
@@ -80,22 +82,22 @@ api.use(cors({
 .use(expressjwt({
       secret: config.secret,
       credentialsRequired: true,
-      getToken: function(req) {
-        if(req.cookies.auth) {
-          return req.cookies.auth;
-        } else {
-          return null;
-        }
-      } }).unless({ path: ['/auth','/users/new']}),
-    function(err, req, res, next) {
-      // invalid or no jwt, deny access
-      if(err.name === 'UnauthorizedError') {
-        res.status(401).send(err.message);
-      }
-    })
+      getToken: function(req) { return req.cookies.auth; }
+    }).unless({ path: excludedApiPaths}))
 .use('/auth', routes.authRoutes)
 .use('/rooms', routes.roomsRoutes)
-.use('/users', routes.usersRoutes)
+.use('/users', adminGuard.check(['admin']), routes.usersRoutes)
+.use(function(err, req, res, next) {
+  // ERROR HANDLER
+  if(err.code === 'permission_denied') {
+    console.log("Guard blocked a request to '"+req.url+"' by user: '"+req.user.sub+"'");
+  } else if(err.name === 'UnauthorizedError') {
+    res.status(401).send(err.message);
+  } else {
+    console.log(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 //  Listens for all http requests to 'localhost:8080/'
 app.listen(appPort, function() {
