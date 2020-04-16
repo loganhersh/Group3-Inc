@@ -55,5 +55,17 @@ function verify(username, password) {
 
 // Returns a new JWT with a 30 minute expiration
 function getToken(username) {
-  return jwt.sign({sub: username}, config.secret, {expiresIn: 60 * 30});
+  var payload;
+  if(username === 'admin') {
+    payload = {
+      sub: username,
+      permissions: ['admin']
+    };
+  } else {
+    payload = {
+      sub: username,
+      permissions: ['user']
+    }
+  }
+  return jwt.sign(payload, config.secret, {expiresIn: 60 * 30});
 }
