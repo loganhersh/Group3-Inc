@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Billing | HMS Group3Inc.</title>
-  <link rel="stylesheet" type="text/css" href="../pages/style.css">
+  <link rel="stylesheet" type="text/css" href="../styles/style.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <script src="https://kit.fontawesome.com/8f4261c3af.js" crossorigin="anonymous"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -12,35 +12,39 @@
   <script src="../js/auth.js"></script>
 </head>
 <body>
-
+<!--
+  Be sure to change href urls and the active nav link
+-->
 <!------------------------ COPY THIS SECTION ------------------->
 <section id="nav-bar">
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="home.html"><img src="../photos/g3logo.png"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="../pages/reservations.html">Reservations</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../pages/billing.html">Billing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../pages/management.html">Management</a>
-        </li>
-        <li class="nav-item admin-item">
-          <a class="nav-link" href="../pages/admin.html">Admin</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" onclick="logout()">Log Out</a>
-        </li>
-      </ul>
-    </div>
-    <div id="nav-info">
-      <span id="nav-info-text"></span>
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid m-0">
+      <a class="navbar-brand" href="../home.html"><img src="../../photos/g3logo.png" alt="HMS logo"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../reservations">Reservations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../billing">Billing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../management">Management</a>
+          </li>
+          <li class="nav-item admin-item">
+            <a class="nav-link active" href="#">Admin</a>
+          </li>
+          <li class="nav-item" id="logout-button">
+            <a class="nav-link" href="#" onclick="logout()">Log Out</a>
+          </li>
+        </ul>
+      </div>
+      <div id="nav-info">
+        <span id="nav-info-text" class=""></span>
+      </div>
     </div>
   </nav>
   <hr class="nav-rule">
