@@ -1,0 +1,242 @@
+body {
+  font-size: 1.2rem;
+}
+
+.feather {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+}
+
+/*
+ * Sidebar
+ */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 120px 0 0; /* Height of navbar */
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  background-color: #f1f1f1;
+}
+
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 128px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+  .sidebar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+  }
+}
+
+.sidebar .nav-link {
+  font-weight: 400;
+  text-align: right;
+}
+
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+  color: #555;
+}
+
+.sidebar .nav-link.active {
+  color: #D00000;
+}
+
+.sidebar .nav-link a:hover{
+  color: #D00000;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+  color: inherit;
+}
+
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
+}
+
+/*
+ * Nav Bar
+ */
+#nav-bar
+{
+  position: sticky;
+  top: 0;
+  z-index: 500;
+}
+.navbar-brand img
+{
+  height: 100px;
+  padding-left: 5px;
+}
+.navbar .nav-link
+{
+  font-weight: 600;
+}
+a.nav-link{
+  color: rgba(0,0,0,0.5);
+}
+a.nav-link:hover
+{
+  color: rgba(0,0,0,0.7);
+}
+a.nav-link.active
+{
+  color: #D00000;
+}
+#nav-info
+{
+  text-align: right;
+  position: absolute;
+  right: 12px;
+  top: 5px;
+  font-size: 13px;
+}
+.nav-rule
+{
+  border: 1px solid #555;
+  margin: 0px;
+}
+#logout-button
+{
+  margin-left: 20px;
+}
+
+/*------------------Availabiltiy----------------*/
+#available
+{
+  text-align: center;
+  background-color: rgba(208, 0, 0, 0.85);
+  color: #Black;
+  padding-top: 10px;
+  padding-bottom: 50px;
+}
+#available h1
+{
+  font-size: 30px;
+  font-weight: bold;
+  color: #FFFFFF;
+  letter-spacing: 2px;
+}
+#available h5
+{
+  color: white;
+}
+#available input
+{
+  height: 45px;
+  width: 250px;
+}
+.dropbtn
+{
+  height: 45px;
+  width: 160px;
+  border: none;
+  color: #Black;
+  padding: 5 50px;
+  font-size: 25px;
+}
+.dropdown
+{
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 45px;
+  display: block;
+}
+.button {
+  height: 45px;
+  width: 250px;
+  background-color: #FFC300;
+  border: none;
+  color: #D00000;
+  font-size: 25px;
+}
+.dropdown-content a:hover {background-color: #ddd;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: #f1f1f1;}
+.dropdown:hover .dropbtn {background-color: #f1f1f1;}
+/*---------------------Room-------------------------*/
+#rooms .room
+{
+  padding-top:40px;
+}
+#rooms .rates
+{
+  padding-top:50px;
+  text-align: center;
+}
+#rooms .rates h6
+{
+  font-size: 12px;
+}
+#rooms .rates h5
+{
+  font-size: 30px;
+}
+#rooms .rates h4
+{
+  font-size: 40px;
+  color: #0B98DE;
+}
+#rooms .king-button
+{
+  width: 250px;
+  height: 40px;
+}
+#rooms .queen-button
+{
+  width: 250px;
+  height: 40px;
+}
+#rooms .king-button:hover
+{
+  color: #D00000;
+}
+#rooms .queen-button:hover
+{
+  color: #D00000;
+}
+#rooms .booked
+{
+  text-align: center;
+}
+#queen .bookingdetails
+{
+  font-size: 15px;
+}
+.admin-item
+{
+  display: none;
+}
+.scroll
+{
+  position: absolute;
+  top: 199px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow-y: scroll;
+}
