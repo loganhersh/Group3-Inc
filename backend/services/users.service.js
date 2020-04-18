@@ -1,11 +1,11 @@
 const db = require('../db/db');
 
 module.exports = {
-  getUser
+  getUsers
 };
 
-function getUser(user) {
-  const query = "SELECT * FROM users WHERE username='" + user + "'";
+function getUsers() {
+  const query = "SELECT * FROM users";
   return new Promise(resolve => {
     db.query(query,
         (error, results) => {
@@ -13,6 +13,7 @@ function getUser(user) {
             console.log(error);
             resolve();
           } else {
+            console.log(results.)
             resolve({username: results[0].username, password: results[0].password});
           }
         })

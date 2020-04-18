@@ -22,8 +22,7 @@ module.exports = {
 };
 
 async function getUsers(req, res, next) {
-
-  usersService.getUser(user).then(data => {
+  usersService.getUsers().then(data => {
     data ? res.json(data) :
         res.status(404).json({message: "User could not be found"});
   })
