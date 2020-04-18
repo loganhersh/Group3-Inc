@@ -13,7 +13,7 @@ const router = express.Router();
 const usersController = require('../controllers/users.controller');
 
 // endpoint = 'localhost:3000/users/'
-// body expected to have json: { "user": "username" }
-router.post('/', usersController.getUser);
+// returns all application users
+router.get('/', usersController.getUsers);
 
 module.exports = router;
