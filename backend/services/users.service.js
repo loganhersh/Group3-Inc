@@ -8,13 +8,15 @@ function getUsers() {
   const query = "SELECT * FROM users";
   return new Promise(resolve => {
     db.query(query,
-        (error, results) => {
+        (error, results, fields) => {
           if(error) {
             console.log(error);
             resolve();
           } else {
-            console.log(results.)
-            resolve({username: results[0].username, password: results[0].password});
+            results.forEach(row => {
+              console.log(row);
+            });
+            resolve({ success: true });
           }
         })
   });
