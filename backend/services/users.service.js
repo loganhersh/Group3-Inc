@@ -7,6 +7,7 @@ module.exports = {
 function getUsers() {
   const query = "SELECT * FROM users";
   return new Promise(resolve => {
+    var userArr = [];
     db.query(query,
         (error, results, fields) => {
           if(error) {
@@ -14,10 +15,16 @@ function getUsers() {
             resolve();
           } else {
             results.forEach(row => {
-              console.log(row);
+              userArr.push({
+                username: row.username,
+                password: row.password,
+                firstname: row.firstname,
+                lastname: row.lastname,
+                role: row.role
+              });
             });
-            resolve({ success: true });
+            resolve(userArr);
           }
-        })
+        });
   });
 }

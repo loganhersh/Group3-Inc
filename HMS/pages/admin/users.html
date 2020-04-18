@@ -13,7 +13,9 @@
     <div class="container-fluid m-0">
       <a class="navbar-brand" href="../home.html"><img src="../../photos/g3logo.png" alt="HMS logo"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon">
+          <i class="fas fa-bars"></i>
+        </span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
@@ -100,88 +102,6 @@
           <!--Table head-->
           <!--Table body-->
           <tbody id="#users-table-body">
-          <tr>
-            <th scope="row">1</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td>doe.john@gmail.com</td>
-            <td>Admin</td>
-            <td class="text-center">
-              <button class="btn m-0" data-toggle="modal" data-target="#changePasswordModal" data-user="user">
-                <i class="fas fa-user-shield table-button"></i>
-              </button>
-            </td>
-            <td class="text-center">
-              <button class="btn m-0" data-toggle="modal" data-target="#deleteUserModal" data-user="user">
-                <i class="fas fa-user-slash table-button"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td>doe.john@gmail.com</td>
-            <td>User</td>
-            <td class="text-center"><button class="btn m-0"><i class="fas fa-user-shield table-button"></i></button></td>
-            <td class="text-center"><button class="btn m-0"><i class="fas fa-user-slash table-button"></i></button></td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td>doe.john@gmail.com</td>
-            <td>Admin</td>
-            <td class="text-center"><button class="btn m-0"><i class="fas fa-user-shield table-button"></i></button></td>
-            <td class="text-center"><button class="btn m-0"><i class="fas fa-user-slash table-button"></i></button></td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td>doe.john@gmail.com</td>
-            <td>User</td>
-            <td class="text-center"><button class="btn m-0"><i class="fas fa-user-shield table-button"></i></button></td>
-            <td class="text-center"><button class="btn m-0"><i class="fas fa-user-slash table-button"></i></button></td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td>doe.john@gmail.com</td>
-            <td>Admin</td>
-            <td class="text-center"><button class="btn m-0"><i class="fas fa-user-shield table-button"></i></button></td>
-            <td class="text-center"><button class="btn m-0"><i class="fas fa-user-slash table-button"></i></button></td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td>doe.john@gmail.com</td>
-            <td>User</td>
-            <td class="text-center"><button class="btn m-0"><i class="fas fa-user-shield table-button"></i></button></td>
-            <td class="text-center"><button class="btn m-0"><i class="fas fa-user-slash table-button"></i></button></td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td>doe.john@gmail.com</td>
-            <td>Admin</td>
-            <td class="text-center"><button class="btn m-0"><i class="fas fa-user-shield table-button"></i></button></td>
-            <td class="text-center"><button class="btn m-0"><i class="fas fa-user-slash table-button"></i></button></td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td>doe.john@gmail.com</td>
-            <td>User</td>
-            <td class="text-center"><button class="btn m-0"><i class="fas fa-user-shield table-button"></i></button></td>
-            <td class="text-center"><button class="btn m-0"><i class="fas fa-user-slash table-button"></i></button></td>
-          </tr>
-
-
           </tbody>
           <!--Table body-->
         </table>
@@ -234,14 +154,14 @@
 
       <!----------------------- END MODALS ------------------------->
       <!----------------------- NEW USER ------------------------------>
-      <p class="pt-5 text-center">
-        <a class="btn btn-primary new-user-button p-3" onclick="scrollToBottom()" data-toggle="collapse" href="#collapse-new-user" role="button" aria-expanded="false" aria-controls="collapse-new-user">
+      <p class="pt-5 text-center d-none" id="new-user-container">
+        <a class="btn btn-primary p-3" id="new-user-button" onclick="scrollToBottom()" data-toggle="collapse" href="#collapse-new-user" role="button" aria-expanded="false" aria-controls="collapse-new-user">
           <i class="fas fa-user-plus"></i>
         </a>
       </p>
       <div class="d-flex justify-content-center pb-5 mb-5">
         <div class="collapse" id="collapse-new-user">
-          <div class="card d-flex justify-content-center">
+          <div class="card d-flex justify-content-center" id="newUserCard">
             <div class="card-header">
               New User
             </div>

@@ -103,6 +103,14 @@ a.nav-link.active
   border: 1px solid #555;
   margin: 0px;
 }
+.navbar-toggler-icon
+{
+  color: rgba(0,0,0,0.5);
+}
+span.navbar-toggler-icon:hover
+{
+  color: rgba(0,0,0,0.7);
+}
 #logout-button
 {
   margin-left: 20px;
@@ -119,7 +127,6 @@ a.nav-link.active
 .users-table-scrollbar
 {
   position: relative;
-  height: 600px;
   overflow: auto;
 }
 .sticky-top

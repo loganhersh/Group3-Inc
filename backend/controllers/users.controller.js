@@ -22,9 +22,9 @@ module.exports = {
 };
 
 async function getUsers(req, res, next) {
-  usersService.getUsers().then(data => {
-    data ? res.json(data) :
-        res.status(404).json({message: "User could not be found"});
+  usersService.getUsers().then(userArr => {
+    userArr ? res.json(userArr) :
+        res.status(404).json({message: "No users were found"});
   })
   .catch(err => next(err));
 }
