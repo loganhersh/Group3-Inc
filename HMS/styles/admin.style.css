@@ -70,12 +70,6 @@ body {
 /*
  * Nav Bar
  */
-#nav-bar
-{
-  position: sticky;
-  top: 0;
-  z-index: 500;
-}
 .navbar-brand img
 {
   height: 100px;
@@ -109,7 +103,42 @@ a.nav-link.active
   border: 1px solid #555;
   margin: 0px;
 }
+.navbar-toggler-icon
+{
+  color: rgba(0,0,0,0.5);
+}
+span.navbar-toggler-icon:hover
+{
+  color: rgba(0,0,0,0.7);
+}
 #logout-button
 {
   margin-left: 20px;
+}
+
+[role="main"] {
+  padding-top: 128px; /* Space for fixed navbar */
+}
+
+
+/*
+ * Table
+ */
+.users-table-scrollbar
+{
+  position: relative;
+  overflow: auto;
+}
+.sticky-top
+{
+  background: #cccccc;
+}
+
+
+/*
+ * USERS PAGE
+ */
+#collapse-new-user .card
+{
+  width: 600px;
 }

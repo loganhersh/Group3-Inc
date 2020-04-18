@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <title>Admin | HMS Group3Inc.</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/css/mdb.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link href="../../styles/admin.style.css" rel="stylesheet">
+</head>
+<body>
+<!------------------------ NAV BAR ------------------->
+<section id="nav-bar">
+  <nav class="navbar navbar-expand-lg fixed-top flex-md-nowrap bg-light shadow">
+    <div class="container-fluid m-0">
+      <a class="navbar-brand" href="../home.html"><img src="../../photos/g3logo.png" alt="HMS logo"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon">
+          <i class="fas fa-bars"></i>
+        </span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../reservations">Reservations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../billing">Billing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../management">Management</a>
+          </li>
+          <li class="nav-item admin-item">
+            <a class="nav-link active" href="#">Admin</a>
+          </li>
+          <li class="nav-item" id="logout-button">
+            <a class="nav-link" href="#" onclick="logout()">Log Out</a>
+          </li>
+        </ul>
+      </div>
+      <div id="nav-info">
+        <span id="nav-info-text" class=""></span>
+      </div>
+    </div>
+  </nav>
+  <hr class="nav-rule">
+</section>
+<!---------------------- END NAV BAR -------------------->
+
+<div class="container-fluid">
+  <div class="row">
+    <!---------------------- SIDE BAR ----------------------->
+    <nav class="col-md-2 d-none d-md-block sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <span data-feather="home"></span>
+              Dashboard <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              <span data-feather="file"></span>
+              Users
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="shopping-cart"></span>
+              Database
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="users"></span>
+              Logs
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!------------------------ END SIDE BAR ------------------>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom pt-3 pb-2 mb-3">
+          <h2>Users</h2>
+      </div>
+
+        <!---------------------- TABLE ---------------------------->
+      <div class="table-responsive d-block users-table-scrollbar">
+        <table class="table" id="users-table">
+          <!--Table head-->
+          <thead>
+          <tr>
+            <th class="sticky-top">#</th>
+            <th class="sticky-top">First Name</th>
+            <th class="sticky-top">Last Name</th>
+            <th class="sticky-top">Username</th>
+            <th class="sticky-top">Role</th>
+            <th class="sticky-top text-center">Change Password</th>
+            <th class="sticky-top text-center">Delete</th>
+          </tr>
+          </thead>
+          <!--Table head-->
+          <!--Table body-->
+          <tbody id="#users-table-body">
+          </tbody>
+          <!--Table body-->
+        </table>
+        <h4 id="users-table-error"></h4>
+      </div>
+      <!----------------------- END TABLE ---------------------------------->
+      <!----------------------- MODALS ----------------------------->
+      <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="changePasswordModalLabel"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group ml-3 mr-3">
+                  <label for="inputChangePassword" class="col-form-label">Password: </label>
+                  <input type="password" class="form-control" id="inputChangePassword">
+                </div>
+                <div class="form-group ml-3 mr-3">
+                  <label for="inputConfirmChangePassword" class="col-form-label">Confirm Password:</label>
+                  <input type="password" class="form-control" id="inputConfirmChangePassword">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <h5 class="modal-title" id="deleteUserLabel"></h5>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!----------------------- END MODALS ------------------------->
+      <!----------------------- NEW USER ------------------------------>
+      <p class="pt-5 text-center d-none" id="new-user-container">
+        <a class="btn btn-primary p-3" id="new-user-button" onclick="scrollToBottom()" data-toggle="collapse" href="#collapse-new-user" role="button" aria-expanded="false" aria-controls="collapse-new-user">
+          <i class="fas fa-user-plus"></i>
+        </a>
+      </p>
+      <div class="d-flex justify-content-center pb-5 mb-5">
+        <div class="collapse" id="collapse-new-user">
+          <div class="card d-flex justify-content-center" id="newUserCard">
+            <div class="card-header">
+              New User
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="form-row">
+                  <div class="form-group col-md-5">
+                    <label for="inputFirstname">First name</label>
+                    <input type="text" class="form-control" id="inputFirstname">
+                  </div>
+                  <div class="form-group col-md-5 ml-5">
+                    <label for="inputLastname">Last name</label>
+                    <input type="text" class="form-control" id="inputLastname">
+                  </div>
+                </div>
+                <div class="form-group col-md-6 p-0">
+                  <label for="inputUsername">Username</label>
+                  <input type="text" class="form-control" id="inputUsername">
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-5">
+                    <label for="inputPassword">Password</label>
+                    <input type="password" class="form-control" id="inputPassword">
+                  </div>
+                  <div class="form-group col-md-5 ml-5">
+                    <div class="form-group">
+                      <label for="inputConfirmPassword">Confirm Password</label>
+                      <input type="password" class="form-control" id="inputConfirmPassword">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-md-5 p-0">
+                  <select id="selectRole" class="form-control">
+                    <option selected>Choose role...</option>
+                    <option>Admin</option>
+                    <option>User</option>
+                  </select>
+                </div>
+                <div class="form-row justify-content-center">
+                  <a class="btn btn-primary">Create User</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!------------------------- END NEW USER ------------------------>
+    </main>
+  </div>
+</div>
+
+<!------------------- JS FILES ------------------------->
+<script src="https://kit.fontawesome.com/8f4261c3af.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="../../js/nav.js"></script>
+<script src="../../js/auth.js"></script>
+<script src="../../js/users.js"></script>
+<!----------------- END JS FILES --------------------->
+</body>
+</html>

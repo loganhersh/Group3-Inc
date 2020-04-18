@@ -18,14 +18,13 @@
 const usersService = require('../services/users.service');
 
 module.exports = {
-  getUser
+  getUsers
 };
 
-async function getUser(req, res, next) {
-  const {user} = req.body;
-  usersService.getUser(user).then(data => {
-    data ? res.json(data) :
-        res.status(404).json({message: "User could not be found"});
+async function getUsers(req, res, next) {
+  usersService.getUsers().then(userArr => {
+    userArr ? res.json(userArr) :
+        res.status(404).json({message: "No users were found"});
   })
   .catch(err => next(err));
 }

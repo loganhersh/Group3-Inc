@@ -1,20 +1,30 @@
 const db = require('../db/db');
 
 module.exports = {
-  getUser
+  getUsers
 };
 
-function getUser(user) {
-  const query = "SELECT * FROM users WHERE username='" + user + "'";
+function getUsers() {
+  const query = "SELECT * FROM users";
   return new Promise(resolve => {
+    var userArr = [];
     db.query(query,
-        (error, results) => {
+        (error, results, fields) => {
           if(error) {
             console.log(error);
             resolve();
           } else {
-            resolve({username: results[0].username, password: results[0].password});
+            results.forEach(row => {
+              userArr.push({
+                username: row.username,
+                password: row.password,
+                firstname: row.firstname,
+                lastname: row.lastname,
+                role: row.role
+              });
+            });
+            resolve(userArr);
           }
-        })
+        });
   });
 }
