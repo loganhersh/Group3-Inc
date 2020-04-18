@@ -14,5 +14,4 @@ Reservation / Billing Application
     are listening and the database is connected.<br />
 <br />
 
-You should now be able to go to `localhost:8080` from a browser. The only current valid login is 
-username: 'admin', password: 'password'.  
+You should now be able to go to `localhost:8080` from a browser. Main usernames are 'admin' and 'user'. See create-users-table.sql for all usernames. All passwords are 'password'. 
