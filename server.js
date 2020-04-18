@@ -29,8 +29,7 @@ const excludedAppPaths = [
 ];
 
 const excludedApiPaths = [
-  '/auth',
-  '/users/new'
+  '/auth'
 ];
 
 /////////////////////////// Configure App \\\\\\\\\\\\\\\\\\\\\\\\\
