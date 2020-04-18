@@ -70,12 +70,6 @@ body {
 /*
  * Nav Bar
  */
-#nav-bar
-{
-  position: sticky;
-  top: 0;
-  z-index: 500;
-}
 .navbar-brand img
 {
   height: 100px;
@@ -112,4 +106,32 @@ a.nav-link.active
 #logout-button
 {
   margin-left: 20px;
+}
+
+[role="main"] {
+  padding-top: 128px; /* Space for fixed navbar */
+}
+
+
+/*
+ * Table
+ */
+.users-table-scrollbar
+{
+  position: relative;
+  height: 600px;
+  overflow: auto;
+}
+.sticky-top
+{
+  background: #cccccc;
+}
+
+
+/*
+ * USERS PAGE
+ */
+#collapse-new-user .card
+{
+  width: 600px;
 }
