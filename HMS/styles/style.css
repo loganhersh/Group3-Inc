@@ -490,3 +490,12 @@ tr:nth-child(odd) {
 .admin-item {
 	display: none;
 }
+.home-tab
+{
+	font-size: 100px;
+	color: #d00000;
+}
+a.home-tab:hover
+{
+	color: #d00000;
+}
