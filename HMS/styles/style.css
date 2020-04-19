@@ -76,6 +76,11 @@ html, body {
 	align-items: center;
 }
 
+.centered
+{
+	text-align: center;
+}
+
 .overlay {
 	position: fixed;
 	top: 120px;
