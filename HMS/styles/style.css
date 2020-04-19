@@ -6,6 +6,7 @@
 html, body {
 	background-color: #FFC300;
 	height: 100%;
+	font-size: 1.2rem;
 }
 
 #index {
@@ -179,46 +180,16 @@ html, body {
 	height: 100px;
 	padding-left: 5px;
 }
-
-.navbar-nav li {
-	padding: 0 10px;
+a.nav-link{
+	color: rgba(0,0,0,0.5);
+}
+a.nav-link:hover
+{
+	color: rgba(0,0,0,0.7);
 }
 
-.navbar-nav li a {
-	float: right;
-	text-align: left;
-}
-
-#nav-bar .nav-link2 {
-	padding: 6px 10px;
-	float: right;
-	text-align: left;
+.navbar .nav-link {
 	font-weight: 600;
-	font-size: 20px;
-	color: #FFC300;
-	background: #D00000;
-}
-
-#nav-bar .nav-link2:hover {
-	color: #555 !important;
-}
-
-#nav-bar ul li a:hover {
-	color: #D00000 !important;
-}
-
-.navbar {
-	background: #FFFFFF;
-}
-
-.navbar-toggler {
-	border: none !important;
-}
-
-.nav-link {
-	color: #555 !important;
-	font-weight: 600;
-	font-size: 20px;
 }
 
 .nav-item {
@@ -240,7 +211,19 @@ html, body {
 }
 a.nav-link.active
 {
-	color: #D00000!important;
+	color: #D00000;
+}
+.navbar-toggler-icon
+{
+	color: rgba(0,0,0,0.5);
+}
+span.navbar-toggler-icon:hover
+{
+	color: rgba(0,0,0,0.7);
+}
+#logout-button
+{
+	margin-left: 20px;
 }
 /*------------------Availabiltiy----------------*/
 #available {
