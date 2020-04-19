@@ -2,35 +2,33 @@
 <html>
 <head>
 	<title>Home | HMS Group3Inc.</title>
-	<link rel="stylesheet" type="text/css" href="../styles/style.css">
+	<link rel="stylesheet" type="text/css" href="/styles/style.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-	<script src="https://kit.fontawesome.com/8f4261c3af.js" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <section id="home">
-<div class="container">
-	<div class="row">
-		<div class="col-md-3">
-			<a href="reservations/index.html"><i class="far fa-calendar-alt" style="font-size:100px;color: #D00000;"></i></a>
-		<h2>Reservation</h2>
+<div class="container-fluid" id="home-container">
+	<div class="row justify-content-center">
+		<div class="col-md">
+			<a class="h2 home-tab" href="reservations"><i class="far fa-calendar-alt home-tab"></i>Reservation</a>
 		</div>
-		<div class="col-md-3">
-			<a href="billing/index.html"><i class="fas fa-money-bill-wave" style="font-size:100px;color: #D00000;"></i></a>
-		<h2>Billing</h2>
+		<div class="col-md">
+			<a class="h2 home-tab" href="billing"><i class="fas fa-money-bill-wave home-tab"></i>Billing</a>
 		</div>
-		<div class="col-md-3">
-			<a href="management/index.html"><i class="fas fa-chart-line" style="font-size:100px;color: #D00000;"></i></a>
-		<h2>Management</h2>
+		<div class="col-md">
+			<a class="h2 home-tab" href="management"><i class="fas fa-chart-line home-tab"></i>Management</a>
 		</div>
-		<div class="col-md-3">
-			<a href="admin/index.html"><i class="fas fa-users-cog" style="font-size:100px;color: #D00000;"></i></a>
-			<h2>Admin</h2>
+		<div class="col-md d-none" id="admin-tab">
+			<a class="h2 home-tab" href="admin"><i class="fas fa-users-cog home-tab"></i>Admin</a>
 		</div>
 	</div>
 </div>
 </section>
+<script src="https://kit.fontawesome.com/8f4261c3af.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="/js/home.js"></script>
 </body>
 </html>

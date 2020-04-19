@@ -6,6 +6,7 @@
 html, body {
 	background-color: #FFC300;
 	height: 100%;
+	font-size: 1.2rem;
 }
 
 #index {
@@ -152,19 +153,16 @@ html, body {
 #home {
 	background-color: #FFC300;
 	padding-top: 10%;
-	padding-bottom: 90%;
+	height: 100%;
 	text-align: center;
 }
 
-#home .container {
-	width: 1000px;
-	height: auto;
-	padding: 50px 50px;
+#home .container-fluid {
 	background-color: white;
 	border-radius: 20px;
 	box-shadow: 0 0 10px 0 #000;
-	margin: auto;
-	font-size: 18px;
+	padding: 50px 50px;
+	width: 80%;
 }
 
 #home h2 {
@@ -182,65 +180,51 @@ html, body {
 	height: 100px;
 	padding-left: 5px;
 }
-
-.navbar-nav li {
-	padding: 0 10px;
+a.nav-link{
+	color: rgba(0,0,0,0.5);
+}
+a.nav-link:hover
+{
+	color: rgba(0,0,0,0.7);
 }
 
-.navbar-nav li a {
-	float: right;
-	text-align: left;
-}
-
-#nav-bar .nav-link2 {
-	padding: 6px 10px;
-	float: right;
-	text-align: left;
+.navbar .nav-link {
 	font-weight: 600;
-	font-size: 20px;
-	color: #FFC300;
-	background: #D00000;
-}
-
-#nav-bar .nav-link2:hover {
-	color: #555 !important;
-}
-
-#nav-bar ul li a:hover {
-	color: #D00000 !important;
-}
-
-.navbar {
-	background: #FFFFFF;
-}
-
-.navbar-toggler {
-	border: none !important;
-}
-
-.nav-link {
-	color: #555 !important;
-	font-weight: 600;
-	font-size: 20px;
 }
 
 .nav-item {
 	cursor: pointer;
 }
 
-#nav-info {
+#nav-info
+{
 	text-align: right;
 	position: absolute;
-	right: 10px;
-	bottom: 0px;
+	right: 12px;
+	top: 5px;
 	font-size: 13px;
+	font-weight: 400;
 }
-
 .nav-rule {
 	border: 1px solid #555;
 	margin: 0px;
 }
-
+a.nav-link.active
+{
+	color: #D00000;
+}
+.navbar-toggler-icon
+{
+	color: rgba(0,0,0,0.5);
+}
+span.navbar-toggler-icon:hover
+{
+	color: rgba(0,0,0,0.7);
+}
+#logout-button
+{
+	margin-left: 20px;
+}
 /*------------------Availabiltiy----------------*/
 #available {
 	text-align: center;
@@ -486,7 +470,12 @@ tr:nth-child(odd) {
 	border: 1px solid #ccc;
 	border-top: none;
 }
-
-.admin-item {
-	display: none;
+.home-tab
+{
+	font-size: 100px;
+	color: #d00000;
+}
+a.home-tab:hover
+{
+	color: #d00000;
 }

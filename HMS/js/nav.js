@@ -17,6 +17,6 @@ function clockUpd() {
 function checkAdmin() {
   var admin = window.localStorage.getItem('ad-auth');
   if(admin === 'true') {
-    $('.admin-item').show();
+    $('#admin-tab').removeClass('d-none');
   }
 }
