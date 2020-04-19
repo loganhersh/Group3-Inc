@@ -11,7 +11,7 @@ module.exports = {
 // Verifies the provided username and password match a user in the database and resolves
 // with a new JWT
 function authenticate(username, password) {
-  const query = "SELECT * FROM users WHERE username=?"
+  const query = "SELECT username,password,role FROM users WHERE username=?"
   const values = [username];
   return new Promise(resolve => {
     db.query(query, values,
@@ -23,7 +23,7 @@ function authenticate(username, password) {
             if(user) {
               bcrypt.compare(password, user.password, function (err, result) {
                 if (result === true) {
-                  const token = getToken(user.username);
+                  const token = getToken(user.username, user.role);
                   resolve({username: user.username, token: token});
                 } else {
                   resolve();
@@ -54,9 +54,9 @@ function verify(username, password) {
 }
 
 // Returns a new JWT with a 30 minute expiration
-function getToken(username) {
+function getToken(username, role) {
   var payload;
-  if(username === 'admin') {
+  if(role === 'admin') {
     payload = {
       sub: username,
       permissions: ['admin']
