@@ -24,7 +24,7 @@ function authenticate(username, password) {
               bcrypt.compare(password, user.password, function (err, result) {
                 if (result === true) {
                   const token = getToken(user.username, user.role);
-                  resolve({username: user.username, token: token});
+                  resolve({username: user.username, role: user.role, token: token});
                 } else {
                   resolve();
                 }
@@ -67,5 +67,5 @@ function getToken(username, role) {
       permissions: ['user']
     }
   }
-  return jwt.sign(payload, config.secret, {expiresIn: 60 * 30});
+  return jwt.sign(payload, config.secret, {expiresIn: 60 * 20});
 }

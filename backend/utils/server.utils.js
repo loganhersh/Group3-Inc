@@ -1,5 +1,5 @@
 var jwt = require('jsonwebtoken');
-var config = require('./config.json');
+var config = require('../config.json');
 
 module.exports = {
   loggedInRedirect
@@ -15,3 +15,4 @@ function loggedInRedirect(req, res, next) {
     next();
   }
 }
+

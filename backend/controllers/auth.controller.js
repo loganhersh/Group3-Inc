@@ -12,14 +12,10 @@ async function authenticate(req, res, next) {
   authService.authenticate(username, password)
   .then(user => {
     if(user) {
-      const {username, token} = user;
+      const {username, role, token} = user;
       const cookieConfig = {httpOnly: true, sameSite: true}
       res.cookie('auth', token, cookieConfig);
-      if(username === 'admin') {
-        res.json({ 'username': username, 'ad-auth': true });
-      } else {
-        res.json({ 'username': username, 'ad-auth': false });
-      }
+      res.json({ 'username': username, 'ad-auth': (role === 'admin') });
       next();
     } else {
       res.status(400).json({message: 'Username or password is incorrect'});
