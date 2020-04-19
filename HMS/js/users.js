@@ -15,7 +15,7 @@ $('#deleteUserModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget);
   var username = button.data('user');
   var modal = $(this);
-  modal.find('.modal-title').text('Delete user: ' + username + '?');
+  modal.find('#deleteUserLabel').text(username);
 })
 
 
@@ -31,6 +31,13 @@ function scrollToBottom() {
     }
   }, 10);
 }
+
+function showNewUser() {
+  $('#new-user-container').removeClass('d-none');
+}
+
+
+//------------------ USERS TABLE POPULATE AND CONFIGURE ------------------------
 
 // Fetches all users and populates the users-table
 // Upon failure: displays error
@@ -78,7 +85,7 @@ function addUsersToTable(users) {
     usersHtml += rowHtml;
   });
   replaceTableData(usersHtml, '#users-table');
-  setTableHeight(i-1);
+  setUsersTableHeight(i-1);
 }
 
 // Replaces all tr in the tbody
@@ -89,12 +96,48 @@ function replaceTableData(data, tableId) {
 }
 
 // Resizes table, should be used after rows are added
-function setTableHeight(rowCount) {
+function setUsersTableHeight(rowCount) {
   var x = 80 + 72*rowCount;
   var tableHeight = (x < 600) ? x : 600;
   $('.users-table-scrollbar').height(tableHeight);
 }
 
-function showNewUser() {
-  $('#new-user-container').removeClass('d-none');
+// ----------------- END USERS TABLE POPULATE AND CONFIGURE -----------------------
+
+// ------------------- DELETE USER FUNCTIONS --------------------------
+// Sends API request to delete a specific user
+function deleteUser() {
+  var username = $('#deleteUserLabel').text();
+  var url = "http://localhost:3000/users/delete";
+  var payload = {
+    username
+  }
+  sendPostWithCreds(url, payload).done(function(data) {
+    // Repopulate table and trigger success alert
+    populateUsersTable();
+    $('#delete-success-alert-username').text(username);
+    triggerAlert('#delete-success-alert');
+  })
+  .fail(function(data, status, jqXHR) {
+    // Trigger failure alert
+    triggerAlert('#delete-failure-alert');
+  })
 }
+
+// Alert drops in to screen and stops just below nav bar
+// Fades after 5 seconds
+function triggerAlert(alertId) {
+  $(alertId).addClass('show');
+  var x = -20;
+  setInterval(function() {
+    if(x < 140) {
+      $(alertId).css('top', x + 'px');
+    }
+    x += 5;
+  }, 2)
+  setTimeout(function() {
+    $(alertId).removeClass('show');
+  }, 4000);
+}
+
+// ----------------- END DELETE USER FUNCTIONS -----------------------

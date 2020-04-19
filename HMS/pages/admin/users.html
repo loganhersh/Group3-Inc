@@ -100,67 +100,21 @@
             <th class="sticky-top text-center">Delete</th>
           </tr>
           </thead>
-          <!--Table head-->
-          <!--Table body-->
           <tbody id="#users-table-body">
           </tbody>
-          <!--Table body-->
         </table>
         <h4 id="users-table-error"></h4>
       </div>
       <!----------------------- END TABLE ---------------------------------->
-      <!----------------------- MODALS ----------------------------->
-      <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="changePasswordModalLabel"></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form>
-                <div class="form-group ml-3 mr-3">
-                  <label for="inputChangePassword" class="col-form-label">Password: </label>
-                  <input type="password" class="form-control" id="inputChangePassword">
-                </div>
-                <div class="form-group ml-3 mr-3">
-                  <label for="inputConfirmChangePassword" class="col-form-label">Confirm Password:</label>
-                  <input type="password" class="form-control" id="inputConfirmChangePassword">
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Submit</button>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-body">
-              <h5 class="modal-title" id="deleteUserLabel"></h5>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!----------------------- END MODALS ------------------------->
       <!----------------------- NEW USER ------------------------------>
       <p class="pt-5 text-center d-none" id="new-user-container">
         <a class="btn btn-primary p-3" id="new-user-button" onclick="scrollToBottom()" data-toggle="collapse" href="#collapse-new-user" role="button" aria-expanded="false" aria-controls="collapse-new-user">
           <i class="fas fa-user-plus"></i>
+          &nbsp;Add User
         </a>
       </p>
-      <div class="d-flex justify-content-center pb-5 mb-5">
+      <div class="d-flex justify-content-center pb-3 mb-3">
         <div class="collapse" id="collapse-new-user">
           <div class="card d-flex justify-content-center" id="newUserCard">
             <div class="card-header">
@@ -212,7 +166,68 @@
       <!------------------------- END NEW USER ------------------------>
     </main>
   </div>
+          <!---- DELETE ALERTS ----->
+  <div class="row justify-content-center ml-5">
+    <div class="alert alert-success fade in shadow text-center" role="alert" id="delete-success-alert">
+      User <strong><span id="delete-success-alert-username"></span></strong> has been deleted.
+    </div>
+    <div class="alert alert-danger fade in shadow text-center" role="alert" id="delete-failure-alert">
+      User could not be deleted.
+    </div>
+  </div>
 </div>
+<!----------------------- MODALS ------------------------------------->
+
+    <!------------ CHANGE PASSWORD MODAL --------->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="changePasswordModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group ml-3 mr-3">
+            <label for="inputChangePassword" class="col-form-label">Password: </label>
+            <input type="password" class="form-control" id="inputChangePassword">
+          </div>
+          <div class="form-group ml-3 mr-3">
+            <label for="inputConfirmChangePassword" class="col-form-label">Confirm Password:</label>
+            <input type="password" class="form-control" id="inputConfirmChangePassword">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <!---------- END CHANGE PASSWORD MODAL ----------->
+
+    <!-------------- DELETE USER MODAL --------------->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete User</h5>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete <span id="deleteUserLabel"></span>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="deleteUser()" data-dismiss="modal">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <!------------- END DELETE USER MODAL ------------>
+<!----------------------- END MODALS ------------------------->
 
 <!------------------- JS FILES ------------------------->
 <script src="https://kit.fontawesome.com/8f4261c3af.js" crossorigin="anonymous"></script>
@@ -220,6 +235,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="../../js/nav.js"></script>
+<script src="../../js/http-utils.js"></script>
 <script src="../../js/auth.js"></script>
 <script src="../../js/users.js"></script>
 <!----------------- END JS FILES --------------------->

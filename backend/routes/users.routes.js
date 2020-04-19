@@ -14,6 +14,9 @@ const usersController = require('../controllers/users.controller');
 
 // endpoint = 'localhost:3000/users/'
 // returns all application users
-router.get('/', usersController.getUsers);
+router.get('/', usersController.getAllUsers);
+
+// endpoint = 'http://localhost:3000/users/remove'
+router.post('/delete', usersController.removeUser);
 
 module.exports = router;

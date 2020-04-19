@@ -18,13 +18,25 @@
 const usersService = require('../services/users.service');
 
 module.exports = {
-  getUsers
+  getAllUsers,
+  removeUser
 };
 
-async function getUsers(req, res, next) {
-  usersService.getUsers().then(userArr => {
+// Returns json of all users (no passwords)
+async function getAllUsers(req, res, next) {
+  usersService.getAllUsers().then(userArr => {
     userArr ? res.json(userArr) :
         res.status(404).json({message: "No users were found"});
+  })
+  .catch(err => next(err));
+}
+
+// Removes the user with the provided username
+async function removeUser(req, res, next) {
+  const {username} = req.body;
+  usersService.deleteUser(username).then(success => {
+    success ? res.status(200).json({message: "User " + username + " deleted"}) :
+        res.status(400).json({message: "Error deleting user"});
   })
   .catch(err => next(err));
 }

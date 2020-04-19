@@ -1,10 +1,11 @@
 const db = require('../db/db');
 
 module.exports = {
-  getUsers
+  getAllUsers,
+  deleteUser
 };
 
-function getUsers() {
+function getAllUsers() {
   const query = "SELECT * FROM users";
   return new Promise(resolve => {
     var userArr = [];
@@ -26,5 +27,24 @@ function getUsers() {
             resolve(userArr);
           }
         });
+  });
+}
+
+function deleteUser(username) {
+  const query = "DELETE FROM users WHERE username=?";
+  return new Promise(resolve => {
+    db.query(query, [username],
+        function(error, results, fields) {
+      if(error) {
+        console.log(error);
+        resolve();
+      } else {
+        if(results.affectedRows > 0) {
+          resolve(true);
+        } else {
+          resolve();
+        }
+      }
+    });
   });
 }
