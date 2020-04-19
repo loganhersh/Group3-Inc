@@ -152,19 +152,16 @@ html, body {
 #home {
 	background-color: #FFC300;
 	padding-top: 10%;
-	padding-bottom: 90%;
+	height: 100%;
 	text-align: center;
 }
 
-#home .container {
-	width: 1000px;
-	height: auto;
-	padding: 50px 50px;
+#home .container-fluid {
 	background-color: white;
 	border-radius: 20px;
 	box-shadow: 0 0 10px 0 #000;
-	margin: auto;
-	font-size: 18px;
+	padding: 50px 50px;
+	width: 80%;
 }
 
 #home h2 {
@@ -228,19 +225,23 @@ html, body {
 	cursor: pointer;
 }
 
-#nav-info {
+#nav-info
+{
 	text-align: right;
 	position: absolute;
-	right: 10px;
-	bottom: 0px;
+	right: 12px;
+	top: 5px;
 	font-size: 13px;
+	font-weight: 400;
 }
-
 .nav-rule {
 	border: 1px solid #555;
 	margin: 0px;
 }
-
+a.nav-link.active
+{
+	color: #D00000!important;
+}
 /*------------------Availabiltiy----------------*/
 #available {
 	text-align: center;
@@ -485,10 +486,6 @@ tr:nth-child(odd) {
 	display: none;
 	border: 1px solid #ccc;
 	border-top: none;
-}
-
-.admin-item {
-	display: none;
 }
 .home-tab
 {
