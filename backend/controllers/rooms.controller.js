@@ -24,7 +24,7 @@ module.exports = {
 async function changeBasePrice(req, res, next) {
   const {roomId,price} = req.body;
   roomsService.changeBasePrice(roomId, price).then(success => {
-    success ? res.json(success) : res.status(404).json({message: "Room could not be found"});
+    success ? res.json({message: "Price changed"}) : res.status(404).json({message: "Room could not be found"});
   })
   .catch(err => next(err));
 }
