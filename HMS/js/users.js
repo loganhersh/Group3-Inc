@@ -71,7 +71,7 @@ function showNewUser() {
 // Fetches all users and populates the users-table
 // Upon failure: displays error
 function populateUsersTable() {
-  var url = "http://localhost:3000/users";
+  var url = baseApiUrl + "/users";
   $.ajax({
     method: "GET",
     url: url,
@@ -137,7 +137,7 @@ function setUsersTableHeight(rowCount) {
 // Sends API request to delete a specific user
 function deleteUser() {
   var username = $('#deleteUserLabel').text();
-  var url = "http://localhost:3000/users/delete";
+  var url = baseApiUrl + "/users/delete";
   var payload = {
     username
   }
@@ -171,7 +171,7 @@ function changePassword() {
     return;
   }
 
-  var url = 'http://localhost:3000/users/update';
+  var url = baseApiUrl + '/users/update';
   var payload = {
     username,
     unhashedPassword
@@ -202,7 +202,7 @@ function createUser() {
     return;
   }
 
-  var url = 'http://localhost:3000/users/create';
+  var url = baseApiUrl + '/users/create';
   var payload = {
     firstname,
     lastname,
