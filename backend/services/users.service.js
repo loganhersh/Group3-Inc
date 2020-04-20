@@ -3,7 +3,8 @@ const db = require('../db/db');
 module.exports = {
   getAllUsers,
   deleteUser,
-  updatePassword
+  updatePassword,
+  insertUser
 };
 
 function getAllUsers() {
@@ -55,9 +56,34 @@ function updatePassword(username, password) {
           console.log(error);
           resolve();
         } else {
+          console.log(JSON.stringify(results));
           resolve(results.affectedRows > 0)
         }
       }
     );
+  });
+}
+
+function insertUser(user) {
+  const query = "INSERT INTO users VALUES(?, ?, ?, ?, ?)"
+  values = [
+      user.username,
+      user.hashedPassword,
+      user.firstname.toLowerCase(),
+      user.lastname.toLowerCase(),
+      user.role.toLowerCase()
+  ];
+
+  // TODO: add duplicate username handling
+  return new Promise(resolve => {
+    db.query(query, values,
+        function (error, results, fields) {
+          if(error) {
+            console.log(error);
+            resolve();
+          } else {
+            resolve(results.affectedRows > 0);
+          }
+        })
   });
 }

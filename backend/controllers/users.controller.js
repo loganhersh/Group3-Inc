@@ -21,7 +21,8 @@ const authService = require('../services/auth.service');
 module.exports = {
   getAllUsers,
   removeUser,
-  updatePassword
+  updatePassword,
+  createUser
 };
 
 // Returns json of all users (no passwords)
@@ -55,5 +56,22 @@ async function updatePassword(req, res, next) {
     .catch(err => next(err));
   } else {
     res.status(400).json({message:'Bad request: expected data missing'});
+  }
+}
+
+// TODO: input validation
+async function createUser(req, res, next) {
+  const {firstname, lastname, username, unhashedPassword, role} = req.body;
+  const hashedPassword = authService.hashPassword(unhashedPassword);
+  const user = {firstname, lastname, username, hashedPassword, role};
+
+  if(hashedPassword) {
+    usersService.insertUser(user).then(success => {
+      success ? res.status(200).json({message: "user successfully created"}) :
+          res.status(400).json({message: "user could not be created"});
+    })
+    .catch(err => next(err));
+  } else {
+    res.status(400).json({message: "Bad request: expected data missting"});
   }
 }

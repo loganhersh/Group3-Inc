@@ -22,4 +22,7 @@ router.post('/delete', usersController.removeUser);
 // endpoint = 'http://localhost:3000/users/update'
 router.post('/update', usersController.updatePassword);
 
+// endpoint = 'http://localhost:3000/users/create
+router.post('/create', usersController.createUser);
+
 module.exports = router;

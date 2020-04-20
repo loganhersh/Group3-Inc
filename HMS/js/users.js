@@ -6,43 +6,45 @@ $(document).ready(function(){
       $("#changeSubmit").click();
     }
   });
-});
 
 
-// -------------------- EVENT LISTENERS ---------------------------
-// Show modal event for changePassword
-$('#changePasswordModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget);
-  var username = button.data('user');
-  var modal = $(this);
-  modal.find('#changeUserLabel').text(username);
-});
+  // -------------------- EVENT LISTENERS ---------------------------
+  let passwordModal = $('#changePasswordModal');
 
-$('#changePasswordModal').on('shown.bs.modal', function(event) {
-  $('#inputChangePassword').focus();
-});
-
-$('#changePasswordModal').on('hidden.bs.modal', function(event) {
-  $(this).find("input").val('').end();
-  $('#confirmPassError').text('');
-});
-
-// Show modal event for deleteUser
-$('#deleteUserModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget);
-  var username = button.data('user');
-  var modal = $(this);
-  modal.find('#deleteUserLabel').text(username);
-});
-
-$('#collapse-new-user').on('hide.bs.collapse', function(event) {
-  $('#new-user-form input').each(function(e) {
-    $(this).val('');
+  // Show modal event for changePassword
+  passwordModal.on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var username = button.data('user');
+    var modal = $(this);
+    modal.find('#changeUserLabel').text(username);
   });
-  $('#selectRole').val('');
-  $('#new-user-form').removeClass('was-validated');
+
+  passwordModal.on('shown.bs.modal', function(event) {
+    $('#inputChangePassword').focus();
+  });
+
+  passwordModal.on('hidden.bs.modal', function(event) {
+    $(this).find("input").val('').end();
+    $('#confirmPassError').text('');
+  });
+
+  // Show modal event for deleteUser
+  $('#deleteUserModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var username = button.data('user');
+    var modal = $(this);
+    modal.find('#deleteUserLabel').text(username);
+  });
+
+  $('#collapse-new-user').on('hide.bs.collapse', function(event) {
+    $('#new-user-form input').each(function(e) {
+      $(this).val('');
+    });
+    $('#selectRole').val('');
+    $('#new-user-form').removeClass('was-validated');
+  });
+  // ------------------- END EVENT LISTENERS -------------------
 });
-// ------------------- END EVENT LISTENERS -------------------
 
 
 // Continuously scrolls to bottom for a fixed period
@@ -93,10 +95,10 @@ function addUsersToTable(users) {
   $.each(users, function(key, value) {
     var rowHtml = '<tr>\n';
     rowHtml += '<th scope="row">' + i++ + '</th>\n';
-    rowHtml += '<td>' + value.firstname + '</td>\n';
-    rowHtml += '<td>' + value.lastname + '</td>\n';
+    rowHtml += '<td class="capitalize">' + value.firstname + '</td>\n';
+    rowHtml += '<td class="capitalize">' + value.lastname + '</td>\n';
     rowHtml += '<td>' + value.username + '</td>\n';
-    rowHtml += '<td>' + value.role + '</td>\n';
+    rowHtml += '<td class="capitalize">' + value.role + '</td>\n';
     rowHtml += '<td class="text-center">\n';
     rowHtml += '<button class="btn m-0" data-toggle="modal" data-target="#changePasswordModal" data-user="' + value.username + '">\n';
     rowHtml += '<i class="fas fa-user-shield table-button"></i>\n';
@@ -186,6 +188,44 @@ function changePassword() {
 
 // ----------------END CHANGE PASSWORD FUNCTIONS ---------------------
 
+// ------------- CREATE USER FUNCTIONS -----------------------------
+function createUser() {
+  var firstname = $('#inputFirstname').val();
+  var lastname = $('#inputLastname').val();
+  var username = $('#inputUsername').val();
+  var unhashedPassword = $('#inputPassword').val();
+  var confirmPassword = $('#inputConfirmPassword').val();
+  var role = $('#selectRole').val();
+
+  if(!(firstname && lastname && username && unhashedPassword && confirmPassword && role)) {
+    $('#new-user-form').addClass('was-validated');
+    return;
+  }
+
+  var url = 'http://localhost:3000/users/create';
+  var payload = {
+    firstname,
+    lastname,
+    username,
+    unhashedPassword,
+    role
+  };
+
+  // TODO: add duplicate username handling
+  sendPostWithCreds(url, payload).done(function(data, status) {
+    $('#collapse-new-user').collapse('hide');
+    $('#create-success-alert-username').text(username);
+    triggerAlert('#create-success-alert');
+    populateUsersTable();
+  }).fail(function(data, status, jqXHR) {
+    console.log(jqXHR.responseJSON);
+    $('#collapse-new-user').collapse('hide');
+    triggerAlert('#create-failure-alert');
+  });
+}
+
+// ------------ END CREATE USER FUNCTIONS --------------------------
+
 // Alert drops in to screen and stops just below nav bar
 // Fades after 5 seconds
 function triggerAlert(alertId) {
@@ -204,25 +244,3 @@ function triggerAlert(alertId) {
     $(alertId).css('top', -80);
   }, 5000);
 }
-
-// ------------- CREATE USER FUNCTIONS -----------------------------
-function createUser() {
-  var firstname = $('#inputFirstname').val();
-  var lastname = $('#inputLastname').val();
-  var username = $('#inputUsername').val();
-  var password = $('#inputPassword').val();
-  var confirmPassword = $('#inputConfirmPassword').val();
-  var role = $('#selectRole').val();
-
-  if(!(firstname && lastname && username && password && confirmPassword && role)) {
-    $('#new-user-form').addClass('was-validated');
-    return;
-  }
-
-  // TODO: Finish Create user functionality
-  console.log("Valid");
-
-
-}
-
-// ------------ END CREATE USER FUNCTIONS --------------------------
