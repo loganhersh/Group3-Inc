@@ -5,7 +5,8 @@ const db = require('../db/db');
 
 module.exports = {
   authenticate,
-  verify
+  verify,
+  hashPassword
 };
 
 // Verifies the provided username and password match a user in the database and resolves
@@ -53,19 +54,20 @@ function verify(username, password) {
   });
 }
 
-// Returns a new JWT with a 30 minute expiration
+// Returns a new JWT with a 20 minute expiration
 function getToken(username, role) {
-  var payload;
-  if(role === 'admin') {
-    payload = {
-      sub: username,
-      permissions: ['admin']
-    };
-  } else {
-    payload = {
-      sub: username,
-      permissions: ['user']
-    }
-  }
+  var permission = (role === 'admin') ? 'admin' : 'user';
+  var payload = {
+    sub: username,
+    permissions: [permission]
+  };
   return jwt.sign(payload, config.secret, {expiresIn: 60 * 20});
 }
+
+// Returns hash of the provided password
+function hashPassword(password) {
+  return (password) ? bcrypt.hashSync(password, 10) : null;
+}
+
+
+
