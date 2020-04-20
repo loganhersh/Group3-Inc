@@ -1,3 +1,5 @@
+// REQUIRES http-utils.js INCLUDED IN HTML
+
 const baseApiUrl = "http://localhost:3000";
 const baseAppUrl = "http://localhost:8080";
 
@@ -9,8 +11,8 @@ $(document).ready(() => {
 
 function auth() {
   const url = baseApiUrl + "/auth";
-  username = $("#username").val();
-  password = $("#password").val();
+  var username = $("#username").val();
+  var password = $("#password").val();
 
   if(username === "" || password === "") {
     loginErr.text("*Username/password cannot be blank");
@@ -21,40 +23,22 @@ function auth() {
     username,
     password
   }
-  sendAuthRequest(url,payload);
-}
 
-function logout() {
-  const url = baseApiUrl + "/auth/logout";
-  $.ajax({
-    method: "POST",
-    url: url,
-    crossDomain: true,
-    xhrFields: {
-      withCredentials: true
-    }
-  }).done(function (data, status, jqXHR) {
-    window.localStorage.clear();
-    window.location.replace(baseAppUrl + '/pages');
-  }).fail(function(data, status, jqXHR) {
-    alert(JSON.stringify(data.responseJSON.message));
-  });
-}
-
-function sendAuthRequest(url, payload) {
-  $.ajax({
-    method: "POST",
-    url: url,
-    data: payload,
-    crossDomain: true,
-    xhrFields: {
-      withCredentials: true
-    }
-  }).done(function (data, status, jqXHR) {
+  sendPostWithCreds(url, payload).done(function (data, status, jqXHR) {
     window.localStorage.setItem('username', data['username']);
     window.localStorage.setItem('ad-auth', data['ad-auth']);
     window.location.assign(baseAppUrl + '/pages/home.html');
   }).fail(function(data, status, jqXHR) {
     loginErr.text("*Username/password not found");
+  });
+}
+
+function logout() {
+  const url = baseApiUrl + "/auth/logout";
+  sendPostWithCreds(url, null).done(function (data, status, jqXHR) {
+    window.localStorage.clear();
+    window.location.replace(baseAppUrl + '/pages');
+  }).fail(function(data, status, jqXHR) {
+    alert(JSON.stringify(data.responseJSON.message));
   });
 }

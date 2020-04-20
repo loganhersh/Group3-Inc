@@ -16,15 +16,62 @@
   the function name must be in the module.exports statement.
  */
 const usersService = require('../services/users.service');
+const authService = require('../services/auth.service');
 
 module.exports = {
-  getUsers
+  getAllUsers,
+  removeUser,
+  updatePassword,
+  createUser
 };
 
-async function getUsers(req, res, next) {
-  usersService.getUsers().then(userArr => {
+// Returns json of all users (no passwords)
+async function getAllUsers(req, res, next) {
+  usersService.getAllUsers().then(userArr => {
     userArr ? res.json(userArr) :
         res.status(404).json({message: "No users were found"});
   })
   .catch(err => next(err));
+}
+
+// Removes the user with the provided username
+async function removeUser(req, res, next) {
+  const {username} = req.body;
+  usersService.deleteUser(username).then(success => {
+    success ? res.status(200).json({message: "User " + username + " deleted"}) :
+        res.status(400).json({message: "Error deleting user"});
+  })
+  .catch(err => next(err));
+}
+
+// Updates the users current password
+async function updatePassword(req, res, next) {
+  const {username, unhashedPassword} = req.body;
+  const hashedPassword = authService.hashPassword(unhashedPassword);
+  if(hashedPassword) {
+    usersService.updatePassword(username, hashedPassword).then(success => {
+      success ? res.status(200).json({message: "Password updated"}) :
+          res.status(400).json({message: "Password could not be updated"});
+    })
+    .catch(err => next(err));
+  } else {
+    res.status(400).json({message:'Bad request: expected data missing'});
+  }
+}
+
+// TODO: input validation
+async function createUser(req, res, next) {
+  const {firstname, lastname, username, unhashedPassword, role} = req.body;
+  const hashedPassword = authService.hashPassword(unhashedPassword);
+  const user = {firstname, lastname, username, hashedPassword, role};
+
+  if(hashedPassword) {
+    usersService.insertUser(user).then(success => {
+      success ? res.status(200).json({message: "user successfully created"}) :
+          res.status(400).json({message: "user could not be created"});
+    })
+    .catch(err => next(err));
+  } else {
+    res.status(400).json({message: "Bad request: expected data missting"});
+  }
 }
