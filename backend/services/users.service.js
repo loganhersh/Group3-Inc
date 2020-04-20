@@ -56,7 +56,6 @@ function updatePassword(username, password) {
           console.log(error);
           resolve();
         } else {
-          console.log(JSON.stringify(results));
           resolve(results.affectedRows > 0)
         }
       }
