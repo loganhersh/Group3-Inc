@@ -27,7 +27,7 @@ function changeBasePrice(roomId, newPrice) {
   // Typically resolve nothing or false if unsuccessful.
   return new Promise(resolve => {
     if(success === true){
-      resolve({message: "Price changed"});
+      resolve(true);
     } else {
       resolve();
     }
