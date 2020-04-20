@@ -19,4 +19,7 @@ router.get('/', usersController.getAllUsers);
 // endpoint = 'http://localhost:3000/users/remove'
 router.post('/delete', usersController.removeUser);
 
+// endpoint = 'http://localhost:3000/users/update'
+router.post('/update', usersController.updatePassword);
+
 module.exports = router;

@@ -2,7 +2,8 @@ const db = require('../db/db');
 
 module.exports = {
   getAllUsers,
-  deleteUser
+  deleteUser,
+  updatePassword
 };
 
 function getAllUsers() {
@@ -39,12 +40,24 @@ function deleteUser(username) {
         console.log(error);
         resolve();
       } else {
-        if(results.affectedRows > 0) {
-          resolve(true);
-        } else {
-          resolve();
-        }
+        resolve(results.affectedRows > 0);
       }
     });
+  });
+}
+
+function updatePassword(username, password) {
+  const query = "UPDATE users SET password = ? WHERE username = ?";
+  return new Promise(resolve => {
+    db.query(query, [password, username],
+      function(error, results, fields) {
+        if(error) {
+          console.log(error);
+          resolve();
+        } else {
+          resolve(results.affectedRows > 0)
+        }
+      }
+    );
   });
 }

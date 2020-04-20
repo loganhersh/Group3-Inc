@@ -1,5 +1,11 @@
 $(document).ready(function(){
   populateUsersTable();
+
+  $("#inputConfirmChangePassword").keyup(function(event) {
+    if(event.key === "Enter") {
+      $("#changeSubmit").click();
+    }
+  });
 })
 
 // Show modal event for changePassword
@@ -7,7 +13,16 @@ $('#changePasswordModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget);
   var username = button.data('user');
   var modal = $(this);
-  modal.find('.modal-title').text('Change Password for ' + username);
+  modal.find('#changeUserLabel').text(username);
+  setTimeout(function() {
+    $('#inputChangePassword').focus();
+  },500);
+
+})
+
+$('#changePasswordModal').on('hidden.bs.modal', function(event) {
+  $(this).find("input").val('').end();
+  $('#confirmPassError').text('');
 })
 
 // Show modal event for deleteUser
@@ -123,6 +138,41 @@ function deleteUser() {
     triggerAlert('#delete-failure-alert');
   })
 }
+// ----------------- END DELETE USER FUNCTIONS -----------------------
+
+// ----------------- CHANGE PASSWORD FUNCTIONS -----------------------
+function changePassword() {
+  var username = $('#changeUserLabel').text();
+  var unhashedPassword = $('#inputChangePassword').val();
+  var confirmPassword = $('#inputConfirmChangePassword').val();
+
+  if(unhashedPassword === '') {
+    $('#confirmPassError').text('Must enter a password');
+    return;
+  } else if(confirmPassword === '') {
+    $('#confirmPassError').text('Must confirm password');
+    return;
+  } else if(unhashedPassword !== confirmPassword) {
+    $('#confirmPassError').text('Passwords do not match');
+    return;
+  }
+
+  var url = 'http://localhost:3000/users/update';
+  var payload = {
+    username,
+    unhashedPassword
+  };
+
+  sendPostWithCreds(url, payload).done(function(data) {
+    $('#changePasswordModal').modal('hide');
+    $('#change-success-alert-username').text(username);
+    triggerAlert('#change-success-alert');
+  }).fail(function(data, status) {
+    triggerAlert('#change-failure-alert');
+  });
+}
+
+// ----------------END CHANGE PASSWORD FUNCTIONS ---------------------
 
 // Alert drops in to screen and stops just below nav bar
 // Fades after 5 seconds
@@ -138,6 +188,7 @@ function triggerAlert(alertId) {
   setTimeout(function() {
     $(alertId).removeClass('show');
   }, 4000);
+  setTimeout(function() {
+    $(alertId).css('top', -80);
+  }, 5000);
 }
-
-// ----------------- END DELETE USER FUNCTIONS -----------------------

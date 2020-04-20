@@ -166,13 +166,19 @@
       <!------------------------- END NEW USER ------------------------>
     </main>
   </div>
-          <!---- DELETE ALERTS ----->
+          <!---- ALERTS ----->
   <div class="row justify-content-center ml-5">
     <div class="alert alert-success fade in shadow text-center" role="alert" id="delete-success-alert">
       User <strong><span id="delete-success-alert-username"></span></strong> has been deleted.
     </div>
     <div class="alert alert-danger fade in shadow text-center" role="alert" id="delete-failure-alert">
       User could not be deleted.
+    </div>
+    <div class="alert alert-success fade in shadow text-center" role="alert" id="change-success-alert">
+      Password for <strong><span id="change-success-alert-username"></span></strong> has been updated.
+    </div>
+    <div class="alert alert-danger fade in shadow text-center" role="alert" id="change-failure-alert">
+      Password could not be changed.
     </div>
   </div>
 </div>
@@ -183,12 +189,15 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="changePasswordModalLabel"></h5>
+        <h5 class="modal-title">
+          Change password for <strong><span id="changeUserLabel"></span></strong>?
+        </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+        <span id="confirmPassError"></span>
         <form>
           <div class="form-group ml-3 mr-3">
             <label for="inputChangePassword" class="col-form-label">Password: </label>
@@ -202,7 +211,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary" id="changeSubmit" onclick="changePassword()">Submit</button>
       </div>
     </div>
   </div>

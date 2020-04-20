@@ -16,10 +16,12 @@
   the function name must be in the module.exports statement.
  */
 const usersService = require('../services/users.service');
+const authService = require('../services/auth.service');
 
 module.exports = {
   getAllUsers,
-  removeUser
+  removeUser,
+  updatePassword
 };
 
 // Returns json of all users (no passwords)
@@ -39,4 +41,19 @@ async function removeUser(req, res, next) {
         res.status(400).json({message: "Error deleting user"});
   })
   .catch(err => next(err));
+}
+
+// Updates the users current password
+async function updatePassword(req, res, next) {
+  const {username, unhashedPassword} = req.body;
+  const hashedPassword = authService.hashPassword(unhashedPassword);
+  if(hashedPassword) {
+    usersService.updatePassword(username, hashedPassword).then(success => {
+      success ? res.status(200).json({message: "Password updated"}) :
+          res.status(400).json({message: "Password could not be updated"});
+    })
+    .catch(err => next(err));
+  } else {
+    res.status(400).json({message:'Bad request: expected data missing'});
+  }
 }
