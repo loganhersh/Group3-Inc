@@ -15,7 +15,7 @@ async function authenticate(req, res, next) {
       const {username, role, token} = user;
       const cookieConfig = {httpOnly: true, sameSite: true}
       res.cookie('auth', token, cookieConfig);
-      res.json({ 'username': username, 'ad-auth': (role === 'admin') });
+      res.status(200).json({ 'username': username, 'ad-auth': (role === 'admin') });
       next();
     } else {
       res.status(400).json({message: 'Username or password is incorrect'});
