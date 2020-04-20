@@ -218,7 +218,6 @@ function createUser() {
     triggerAlert('#create-success-alert');
     populateUsersTable();
   }).fail(function(data, status, jqXHR) {
-    console.log(jqXHR.responseJSON);
     $('#collapse-new-user').collapse('hide');
     triggerAlert('#create-failure-alert');
   });
