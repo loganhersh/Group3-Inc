@@ -7,7 +7,7 @@ module.exports = function() {
       sub: req.user.sub,
       permissions: req.user.permissions
     }
-    var token = jwt.sign(payload, config.secret, {expiresIn: 60 * 20});
+    var token = jwt.sign(payload, config.secret, {expiresIn: config.timeout});
     res.cookie('auth', token, {httpOnly: true, sameSite: true});
     next();
   };

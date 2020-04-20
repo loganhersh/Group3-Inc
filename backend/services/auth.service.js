@@ -61,7 +61,7 @@ function getToken(username, role) {
     sub: username,
     permissions: [permission]
   };
-  return jwt.sign(payload, config.secret, {expiresIn: 60 * 20});
+  return jwt.sign(payload, config.secret, {expiresIn: config.timeout});
 }
 
 // Returns hash of the provided password

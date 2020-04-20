@@ -1,3 +1,4 @@
 {
-  "secret": "CMSC495Group3"
+  "secret": "CMSC495Group3",
+  "timeout": 1200
 }
