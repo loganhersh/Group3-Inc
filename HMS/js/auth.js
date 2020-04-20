@@ -1,12 +1,7 @@
 // REQUIRES http-utils.js INCLUDED IN HTML
 
-const baseApiUrl = "http://localhost:3000";
-const baseAppUrl = "http://localhost:8080";
-
-var loginErr;
-
 $(document).ready(() => {
-  loginErr = $("#invalid-login");
+
 })
 
 function auth() {
@@ -15,7 +10,7 @@ function auth() {
   var password = $("#password").val();
 
   if(username === "" || password === "") {
-    loginErr.text("*Username/password cannot be blank");
+    $('#invalid-login').text("*Username/password cannot be blank");
     return;
   }
 
@@ -29,7 +24,7 @@ function auth() {
     window.localStorage.setItem('ad-auth', data['ad-auth']);
     window.location.assign(baseAppUrl + '/pages/home.html');
   }).fail(function(data, status, jqXHR) {
-    loginErr.text("*Username/password not found");
+    $('#invalid-login').text("*Username/password not found");
   });
 }
 
