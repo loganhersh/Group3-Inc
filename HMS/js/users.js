@@ -6,24 +6,26 @@ $(document).ready(function(){
       $("#changeSubmit").click();
     }
   });
-})
+});
 
+
+// -------------------- EVENT LISTENERS ---------------------------
 // Show modal event for changePassword
 $('#changePasswordModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget);
   var username = button.data('user');
   var modal = $(this);
   modal.find('#changeUserLabel').text(username);
-  setTimeout(function() {
-    $('#inputChangePassword').focus();
-  },500);
+});
 
-})
+$('#changePasswordModal').on('shown.bs.modal', function(event) {
+  $('#inputChangePassword').focus();
+});
 
 $('#changePasswordModal').on('hidden.bs.modal', function(event) {
   $(this).find("input").val('').end();
   $('#confirmPassError').text('');
-})
+});
 
 // Show modal event for deleteUser
 $('#deleteUserModal').on('show.bs.modal', function (event) {
@@ -31,7 +33,16 @@ $('#deleteUserModal').on('show.bs.modal', function (event) {
   var username = button.data('user');
   var modal = $(this);
   modal.find('#deleteUserLabel').text(username);
-})
+});
+
+$('#collapse-new-user').on('hide.bs.collapse', function(event) {
+  $('#new-user-form input').each(function(e) {
+    $(this).val('');
+  });
+  $('#selectRole').val('');
+  $('#new-user-form').removeClass('was-validated');
+});
+// ------------------- END EVENT LISTENERS -------------------
 
 
 // Continuously scrolls to bottom for a fixed period
@@ -39,7 +50,7 @@ $('#deleteUserModal').on('show.bs.modal', function (event) {
 function scrollToBottom() {
   var x = 0;
   var task = setInterval(function() {
-    if(++x > 30) {
+    if(++x > 35) {
       window.clearInterval(task);
     } else {
       window.scrollTo(0, document.body.scrollHeight);
@@ -47,6 +58,7 @@ function scrollToBottom() {
   }, 10);
 }
 
+// Show new user button if data loaded properly
 function showNewUser() {
   $('#new-user-container').removeClass('d-none');
 }
@@ -192,3 +204,25 @@ function triggerAlert(alertId) {
     $(alertId).css('top', -80);
   }, 5000);
 }
+
+// ------------- CREATE USER FUNCTIONS -----------------------------
+function createUser() {
+  var firstname = $('#inputFirstname').val();
+  var lastname = $('#inputLastname').val();
+  var username = $('#inputUsername').val();
+  var password = $('#inputPassword').val();
+  var confirmPassword = $('#inputConfirmPassword').val();
+  var role = $('#selectRole').val();
+
+  if(!(firstname && lastname && username && password && confirmPassword && role)) {
+    $('#new-user-form').addClass('was-validated');
+    return;
+  }
+
+  // TODO: Finish Create user functionality
+  console.log("Valid");
+
+
+}
+
+// ------------ END CREATE USER FUNCTIONS --------------------------

@@ -121,42 +121,43 @@
               New User
             </div>
             <div class="card-body">
-              <form>
+              <form id="new-user-form">
                 <div class="form-row">
                   <div class="form-group col-md-5">
                     <label for="inputFirstname">First name</label>
-                    <input type="text" class="form-control" id="inputFirstname">
+                    <input type="text" class="form-control" id="inputFirstname" placeholder="First name" required>
                   </div>
                   <div class="form-group col-md-5 ml-5">
                     <label for="inputLastname">Last name</label>
-                    <input type="text" class="form-control" id="inputLastname">
+                    <input type="text" class="form-control" id="inputLastname" placeholder="Last name" required>
                   </div>
                 </div>
                 <div class="form-group col-md-6 p-0">
                   <label for="inputUsername">Username</label>
-                  <input type="text" class="form-control" id="inputUsername">
+                  <input type="text" class="form-control" id="inputUsername" placeholder="Username" required>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-5">
                     <label for="inputPassword">Password</label>
-                    <input type="password" class="form-control" id="inputPassword">
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Password" required>
                   </div>
                   <div class="form-group col-md-5 ml-5">
                     <div class="form-group">
                       <label for="inputConfirmPassword">Confirm Password</label>
-                      <input type="password" class="form-control" id="inputConfirmPassword">
+                      <input type="password" class="form-control" id="inputConfirmPassword" placeholder="Re-enter password" required>
                     </div>
                   </div>
                 </div>
                 <div class="form-group col-md-5 p-0">
-                  <select id="selectRole" class="form-control">
-                    <option selected>Choose role...</option>
+                  <label for="selectRole">Role</label>
+                  <select id="selectRole" class="form-control" required>
+                    <option value="">Choose role...</option>
                     <option>Admin</option>
                     <option>User</option>
                   </select>
                 </div>
                 <div class="form-row justify-content-center">
-                  <a class="btn btn-primary">Create User</a>
+                  <a class="btn btn-primary" onclick="createUser()">Create User</a>
                 </div>
               </form>
             </div>
@@ -179,6 +180,12 @@
     </div>
     <div class="alert alert-danger fade in shadow text-center" role="alert" id="change-failure-alert">
       Password could not be changed.
+    </div>
+    <div class="alert alert-success fade in shadow text-center" role="alert" id="create-success-alert">
+      User <strong><span id="create-success-alert-username"></span></strong> has been created.
+    </div>
+    <div class="alert alert-danger fade in shadow text-center" role="alert" id="create-failure-alert">
+      User could not be created.
     </div>
   </div>
 </div>
