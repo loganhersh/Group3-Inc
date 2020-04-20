@@ -3,7 +3,7 @@ const baseAppUrl = 'http://localhost:8080';
 const baseApiUrl = 'http://localhost:3000';
 
 function sendPostWithCreds(url, payload) {
-  return $.ajax({
+  var promise = $.ajax({
     method: "POST",
     url: url,
     data: payload,
@@ -12,8 +12,10 @@ function sendPostWithCreds(url, payload) {
       withCredentials: true
     }
   }).fail(function(data, status, jqXHR) {
-    if(jqXHR.status == 401) {
-      window.location.href(baseAppUrl + '/pages/timeout.html');
+    if(data.status === 401) {
+      window.location.href = baseAppUrl + '/pages/timeout.html';
     }
   });
+
+  return promise;
 }
