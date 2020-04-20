@@ -12,8 +12,18 @@ const express = require('express');
 const router = express.Router();
 const roomsController = require('../controllers/rooms.controller');
 
-// endpoint = 'localhost:3000/rooms/price'
-// request body expected to have the json: { "roomId": 000, "price": 000 }
+
+/**
+ * @api {post} /rooms/price
+ * @apiName Change room price
+ * @apiPermission User
+ * @apiGroup rooms
+ *
+ * @apiParam {String} [roomId] Room ID
+ * @apiParam {String} [price] New price
+ *
+ * @apiSuccess (200) {String} [message]
+ */
 router.post('/price', roomsController.changeBasePrice);
 
 module.exports = router;
