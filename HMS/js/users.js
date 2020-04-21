@@ -72,10 +72,14 @@ function showNewUser() {
 // Upon failure: displays error
 function populateUsersTable() {
   var url = baseApiUrl + "/users";
+  var tableContainer = $('#table-container');
+
   sendGetWithCreds(url).done(function (data, status, jqXHR) {
+    tableContainer.addClass('border');
     addUsersToTable(data);
     showNewUser();
   }).fail(function(data, status, jqXHR) {
+    tableContainer.removeClass('border');
     $('#users-table').hide();
     $('#users-table-error').text("Error loading users. Contact site admin.");
   });
