@@ -211,7 +211,6 @@ function createUser() {
     role
   };
 
-  // TODO: add duplicate username handling
   sendPostWithCreds(url, payload).done(function(data, status) {
     $('#collapse-new-user').collapse('hide');
     $('#create-success-alert-username').text(username);
@@ -219,6 +218,9 @@ function createUser() {
     populateUsersTable();
   }).fail(function(data, status, jqXHR) {
     $('#collapse-new-user').collapse('hide');
+    if(data.responseJSON.message) {
+      $('#create-user-error').text(': ' + data.responseJSON.message);
+    }
     triggerAlert('#create-failure-alert');
   });
 }
