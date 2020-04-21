@@ -119,3 +119,15 @@ body {
 {
   text-transform: capitalize;
 }
+
+/*
+ * DASHBOARD
+ */
+.status-error
+{
+  color: #D00000;
+}
+.status-success
+{
+  color: #05b600
+}
