@@ -24,7 +24,8 @@ module.exports = {
   getAllUsers,
   removeUser,
   updatePassword,
-  createUser
+  createUser,
+  getStatus
 };
 
 // Returns json of all users (no passwords)
@@ -111,4 +112,11 @@ function validateInputLength(user) {
   }
 
   return badParams;
+}
+
+async function getStatus(req, res, next) {
+  usersService.getStatus().then(status => {
+    res.status(200).json(status);
+  })
+  .catch(err => next(err));
 }

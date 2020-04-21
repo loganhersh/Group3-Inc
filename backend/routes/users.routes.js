@@ -61,6 +61,17 @@ router.post('/update', usersController.updatePassword);
  * @apiParam {String} [role] Privilege role
  *
  * @apiSuccess (200) {String} [message]
- */router.post('/create', usersController.createUser);
+ */
+router.post('/create', usersController.createUser);
+
+/**
+ * @api {get} /users/status
+ * @apiName Users status
+ * @apiPermission Admin
+ * @apiGroup users
+ *
+ * @apiSuccess (200) {Object} [statusJSON]
+ */
+router.get('/status', usersController.getStatus);
 
 module.exports = router;

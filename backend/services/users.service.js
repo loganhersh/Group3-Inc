@@ -4,7 +4,8 @@ module.exports = {
   getAllUsers,
   deleteUser,
   updatePassword,
-  insertUser
+  insertUser,
+  getStatus
 };
 
 function getAllUsers() {
@@ -64,7 +65,7 @@ function updatePassword(username, password) {
 }
 
 function insertUser(user) {
-  const query = "INSERT INTO users VALUES(?, ?, ?, ?, ?)"
+  const query = "INSERT INTO users VALUES(?, ?, ?, ?, ?)";
   values = [
       user.username,
       user.hashedPassword,
@@ -83,5 +84,21 @@ function insertUser(user) {
             resolve(results.affectedRows > 0);
           }
         });
+  });
+}
+
+function getStatus() {
+  const query = "SELECT ( SELECT COUNT(username) FROM users) as total,"
+      + "( SELECT COUNT(role) FROM users WHERE role='admin' ) as admins,"
+      + "( SELECT COUNT(role) FROM users WHERE role='user' ) as users";
+  return new Promise((resolve, reject) => {
+    db.query(query, function (error, results) {
+      if (error) {
+        console.log(error);
+        reject(error);
+      } else {
+        resolve(results[0]);
+      }
+    });
   });
 }

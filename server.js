@@ -100,6 +100,7 @@ api.use(cors({
 .use('/auth', routes.authRoutes)
 .use('/rooms', routes.roomsRoutes)
 .use('/users', adminGuard.check(['admin']), routes.usersRoutes)
+.use('/admin', adminGuard.check(['admin']), routes.adminRoutes)
 .use(function(err, req, res, next) {
   // ERROR HANDLER
   if(err.code === 'permission_denied') {

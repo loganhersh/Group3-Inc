@@ -79,9 +79,46 @@
       </div>
     </nav>
     <!------------------------ END SIDE BAR ------------------>
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom pt-3 pb-2 mb-3">
-        <h2>Dashboard</h2>
+    <main role="main" class="col-md-10 ml-sm-auto px-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom pt-3 pb-2 mb-3">
+            <h2>Dashboard</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row ml-3 justify-content-center flex-wrap">
+        <div class="col-12">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+            <h5>Database</h5>
+          </div>
+        </div>
+      </div>
+      <div class="row border-bottom mx-0 mb-3">
+        <div class="col-12">
+          <div class="d-flex flex-wrap flex-md-nowrap align-items-center ml-5 pb-3">
+            Status:&nbsp;&nbsp;&nbsp;<span id="db-status"></span>
+            <button class="btn btn-primary shadow ml-4" onclick="refresh()"><span><i class="fas fa-sync-alt" id="refresh-icon"></i></span></button>
+          </div>
+        </div>
+      </div>
+      <div class="row ml-3 justify-content-center flex-wrap">
+        <div class="col-12">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+            <h5>Users</h5>
+          </div>
+        </div>
+      </div>
+      <div class="row border-bottom pl-5 mx-0 users-data">
+        <div class="col-4 d-flex flex-wrap flex-md-nowrap pb-3">
+          Total:&nbsp;&nbsp;&nbsp;<i><span id="users-total"></span></i>
+        </div>
+        <div class="col-4">
+          Admins:&nbsp;&nbsp;&nbsp;<i><span id="users-admins"></span></i>
+        </div>
+        <div class="col-4">
+          Users:&nbsp;&nbsp;&nbsp;<i><span id="users-users"></span></i>
+        </div>
       </div>
     </main>
   </div>
