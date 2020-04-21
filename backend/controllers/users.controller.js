@@ -73,6 +73,7 @@ async function createUser(req, res, next) {
           res.status(400).json({message: "error creating user"});
     })
     .catch(err => {
+      console.log(err);
       if(err.code === 'ER_DUP_ENTRY') {
         res.status(409).json({message: "Username already exists"});
       } else {
