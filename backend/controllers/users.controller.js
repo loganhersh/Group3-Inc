@@ -18,6 +18,8 @@
 const usersService = require('../services/users.service');
 const authService = require('../services/auth.service');
 
+// TODO: SERVER-SIDE INPUT VALIDATION
+
 module.exports = {
   getAllUsers,
   removeUser,
@@ -68,10 +70,16 @@ async function createUser(req, res, next) {
   if(hashedPassword) {
     usersService.insertUser(user).then(success => {
       success ? res.status(200).json({message: "user successfully created"}) :
-          res.status(400).json({message: "user could not be created"});
+          res.status(400).json({message: "error creating user"});
     })
-    .catch(err => next(err));
+    .catch(err => {
+      if(err.code === 'ER_DUP_ENTRY') {
+        res.status(409).json({message: "Username already exists"});
+      } else {
+        res.status(400).json({message: "error creating user"});
+      }
+    });
   } else {
-    res.status(400).json({message: "Bad request: expected data missting"});
+    res.status(400).json({message: "Bad request: expected data missing"});
   }
 }
