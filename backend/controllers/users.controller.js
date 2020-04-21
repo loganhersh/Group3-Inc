@@ -63,9 +63,15 @@ async function updatePassword(req, res, next) {
 
 // TODO: input validation
 async function createUser(req, res, next) {
-  const {firstname, lastname, username, unhashedPassword, role} = req.body;
+  const unvalidatedUser = {firstname, lastname, username, unhashedPassword, role} = req.body;
   const hashedPassword = authService.hashPassword(unhashedPassword);
   const user = {firstname, lastname, username, hashedPassword, role};
+
+  var badParams = validateInputLength(unvalidatedUser);
+  if(badParams) {
+    res.status(422).json(badParams);
+    return;
+  }
 
   if(hashedPassword) {
     usersService.insertUser(user).then(success => {
@@ -73,8 +79,8 @@ async function createUser(req, res, next) {
           res.status(400).json({message: "error creating user"});
     })
     .catch(err => {
-      console.log(err);
       if(err.code === 'ER_DUP_ENTRY') {
+        console.log("ERROR HANDLED");
         res.status(409).json({message: "Username already exists"});
       } else {
         res.status(400).json({message: "error creating user"});
@@ -83,4 +89,26 @@ async function createUser(req, res, next) {
   } else {
     res.status(400).json({message: "Bad request: expected data missing"});
   }
+}
+
+function validateInputLength(user) {
+  var badParams = {};
+
+  if(user.firstname.length > 30) {
+    badParams.firstname = 30;
+  }
+
+  if(user.lastname.length > 30) {
+    badParams.lastname = 30;
+  }
+
+  if(user.username.length > 25) {
+    badParams.username = 25;
+  }
+
+  if(user.unhashedPassword.length > 30) {
+    badParams.password = 30;
+  }
+
+  return badParams;
 }

@@ -77,12 +77,8 @@ function insertUser(user) {
     db.query(query, values,
         function (error, results, fields) {
           if(error) {
-            if(error.code === 'ER_DUP_ENTRY') {
-              reject(error);
-            } else {
-              console.log(error);
-              reject();
-            }
+            console.log(error);
+            reject(error);
           } else {
             resolve(results.affectedRows > 0);
           }
