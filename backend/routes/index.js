@@ -7,11 +7,13 @@
 const authRoutes = require('./auth.routes')
 const roomsRoutes = require('./rooms.routes');
 const usersRoutes = require('./users.routes');
+const adminRoutes = require('./admin.routes');
 
 module.exports = {
   authRoutes,
   roomsRoutes,
-  usersRoutes
+  usersRoutes,
+  adminRoutes
 };
 
 
