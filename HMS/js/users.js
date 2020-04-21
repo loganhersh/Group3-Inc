@@ -72,14 +72,7 @@ function showNewUser() {
 // Upon failure: displays error
 function populateUsersTable() {
   var url = baseApiUrl + "/users";
-  $.ajax({
-    method: "GET",
-    url: url,
-    crossDomain: true,
-    xhrFields: {
-      withCredentials: true
-    }
-  }).done(function (data, status, jqXHR) {
+  sendGetWithCreds(url).done(function (data, status, jqXHR) {
     addUsersToTable(data);
     showNewUser();
   }).fail(function(data, status, jqXHR) {

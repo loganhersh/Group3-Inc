@@ -19,3 +19,20 @@ function sendPostWithCreds(url, payload) {
 
   return promise;
 }
+
+function sendGetWithCreds(url) {
+  var promise = $.ajax({
+    method: "GET",
+    url: url,
+    crossDomain: true,
+    xhrFields: {
+      withCredentials: true
+    }
+  }).fail(function(data, status, jqXHR) {
+    if(data.status === 401) {
+      window.location.href = baseAppUrl + '/pages/timeout.html';
+    }
+  });
+
+  return promise;
+}
