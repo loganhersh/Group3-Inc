@@ -217,12 +217,32 @@ function createUser() {
     triggerAlert('#create-success-alert');
     populateUsersTable();
   }).fail(function(data, status, jqXHR) {
-    $('#collapse-new-user').collapse('hide');
-    if(data.responseJSON.message) {
-      $('#create-user-error').text(': ' + data.responseJSON.message);
-    }
-    triggerAlert('#create-failure-alert');
+    handleFailedCreate(data);
   });
+}
+
+function handleFailedCreate(data) {
+  $('#collapse-new-user').collapse('hide');
+  if(data.responseJSON) {
+    var error;
+
+    if(Object.keys(data).length > 1) {
+      error = createMaxLengthErrorString(data.responseJSON);
+    } else {
+      error = data.responseJSON.message;
+    }
+
+    $('#create-user-error').text(': ' + error);
+  }
+  triggerAlert('#create-failure-alert');
+}
+
+function createMaxLengthErrorString(badParamsJson) {
+  var string = 'Field(s) too long - ';
+  Object.keys(badParamsJson).forEach(function(key) {
+    string += key + '(max ' + badParamsJson[key] + '), ';
+  });
+  return string.slice(0, -2);
 }
 
 // ------------ END CREATE USER FUNCTIONS --------------------------
