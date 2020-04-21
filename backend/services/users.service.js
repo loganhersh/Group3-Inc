@@ -73,16 +73,19 @@ function insertUser(user) {
       user.role.toLowerCase()
   ];
 
-  // TODO: add duplicate username handling
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     db.query(query, values,
         function (error, results, fields) {
           if(error) {
-            console.log(error);
-            resolve();
+            if(error.code === 'ER_DUP_ENTRY') {
+              reject(error);
+            } else {
+              console.log(error);
+              reject();
+            }
           } else {
             resolve(results.affectedRows > 0);
           }
-        })
+        });
   });
 }
