@@ -98,7 +98,7 @@
         <div class="col-12">
           <div class="d-flex flex-wrap flex-md-nowrap align-items-center ml-5 pb-3">
             Status:&nbsp;&nbsp;&nbsp;<span id="db-status"></span>
-            <button class="btn btn-primary shadow ml-4" onclick="getDbStatus()"><span><i class="fas fa-sync-alt"></i></span></button>
+            <button class="btn btn-primary shadow ml-4" onclick="refresh()"><span><i class="fas fa-sync-alt" id="refresh-icon"></i></span></button>
           </div>
         </div>
       </div>
@@ -109,11 +109,9 @@
           </div>
         </div>
       </div>
-      <div class="row border-bottom pl-5 mx-0">
-        <div class="col-4 d-flex flex-wrap flex-md-nowrap">
-          <div class="pb-3">
-            Total:&nbsp;&nbsp;&nbsp;<i><span id="users-total"></span></i>
-          </div>
+      <div class="row border-bottom pl-5 mx-0 users-data">
+        <div class="col-4 d-flex flex-wrap flex-md-nowrap pb-3">
+          Total:&nbsp;&nbsp;&nbsp;<i><span id="users-total"></span></i>
         </div>
         <div class="col-4">
           Admins:&nbsp;&nbsp;&nbsp;<i><span id="users-admins"></span></i>
