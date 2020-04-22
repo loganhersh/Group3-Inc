@@ -49,16 +49,16 @@ body {
   color: #555;
 }
 
-.sidebar .nav-link.active {
+#sidebar .nav-link.active
+{
   color: #D00000;
 }
 
-.sidebar .nav-link a:hover{
+#sidebar .nav-link a:hover{
   color: #D00000;
 }
 
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
+#sidebar .nav-link.active .feather {
   color: inherit;
 }
 
@@ -66,3 +66,5 @@ body {
   font-size: .75rem;
   text-transform: uppercase;
 }
+
+
