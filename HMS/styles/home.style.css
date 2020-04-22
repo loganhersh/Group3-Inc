@@ -1,0 +1,31 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	background-color: #FFC300;
+	height: 100%;
+	font-size: 1.2rem;
+}
+
+/*----------------------Home----------------*/
+#home {
+	background-color: #FFC300;
+	padding-top: 10%;
+	height: 100%;
+	text-align: center;
+}
+
+#home .container-fluid {
+	background-color: white;
+	border-radius: 20px;
+	box-shadow: 0 0 10px 0 #000;
+	padding: 50px 50px;
+	width: 80%;
+}
+
+#home .h2 {
+	color: #D00000;
+}
+
