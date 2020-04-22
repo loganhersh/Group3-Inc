@@ -7,7 +7,10 @@ body {
   height: 16px;
   vertical-align: text-bottom;
 }
-
+.navbar-nav{
+  font-size:19px;
+  font-weight: 600;
+}
 /*
  * Sidebar
  */
@@ -65,53 +68,6 @@ body {
 .sidebar-heading {
   font-size: .75rem;
   text-transform: uppercase;
-}
-
-/*
- * Nav Bar
- */
-#nav-bar
-{
-  position: sticky;
-  top: 0;
-  z-index: 500;
-}
-.navbar-brand img
-{
-  height: 100px;
-  padding-left: 5px;
-}
-.navbar .nav-link
-{
-  font-weight: 600;
-}
-a.nav-link{
-  color: rgba(0,0,0,0.5);
-}
-a.nav-link:hover
-{
-  color: rgba(0,0,0,0.7);
-}
-a.nav-link.active
-{
-  color: #D00000;
-}
-#nav-info
-{
-  text-align: right;
-  position: absolute;
-  right: 12px;
-  top: 5px;
-  font-size: 13px;
-}
-.nav-rule
-{
-  border: 1px solid #555;
-  margin: 0px;
-}
-#logout-button
-{
-  margin-left: 20px;
 }
 
 /*------------------Availabiltiy----------------*/
@@ -179,54 +135,107 @@ a.nav-link.active
 .dropdown:hover .dropbtn {background-color: #f1f1f1;}
 .dropdown:hover .dropbtn {background-color: #f1f1f1;}
 /*---------------------Room-------------------------*/
-#rooms .room
-{
-  padding-top:40px;
+#rooms {
+  background-color: white;
 }
-#rooms .rates
-{
-  padding-top:50px;
+
+#rooms .room {
+  padding-top: 40px;
+}
+
+#rooms .rates {
+  padding-top: 50px;
   text-align: center;
 }
-#rooms .rates h6
-{
+
+#rooms .rates h6 {
   font-size: 12px;
 }
-#rooms .rates h5
-{
+
+#rooms .rates h5 {
   font-size: 30px;
 }
-#rooms .rates h4
-{
+
+#rooms .rates h4 {
   font-size: 40px;
   color: #0B98DE;
 }
-#rooms .king-button
-{
+
+#rooms .king-button {
   width: 250px;
   height: 40px;
 }
-#rooms .queen-button
-{
+
+#rooms .king-button:hover {
+  color: #D00000;
+}
+
+#rooms .queen-button {
   width: 250px;
   height: 40px;
 }
-#rooms .king-button:hover
-{
+
+#rooms .queen-button:hover {
   color: #D00000;
 }
-#rooms .queen-button:hover
-{
+
+#rooms .ks-button {
+  width: 250px;
+  height: 40px;
+}
+
+#rooms .ks-button:hover {
   color: #D00000;
 }
-#rooms .booked
-{
+
+#rooms .qs-button {
+  width: 250px;
+  height: 40px;
+}
+
+#rooms .qs-button:hover {
+  color: #D00000;
+}
+
+#rooms .kj-button {
+  width: 250px;
+  height: 40px;
+}
+
+#rooms .kj-button:hover {
+  color: #D00000;
+}
+
+#rooms .booked {
   text-align: center;
 }
-#queen .bookingdetails
-{
+
+#queen .bookKingDetails {
   font-size: 15px;
 }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: white;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(odd) {
+  background-color: #c3c3c3;
+}
+
+#exp {
+  float: left;
+  width: 20%;
+  padding: 11px;
+}
+
 .admin-item
 {
   display: none;
@@ -239,4 +248,88 @@ a.nav-link.active
   right: 0;
   left: 0;
   overflow-y: scroll;
+}
+
+.center-box {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+.centered
+{
+  text-align: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 120px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 30px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 20px;
+  width: 75%;
+  height: 95%;
+  overflow: auto;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Times;
+}
+
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+.popup .close:hover {
+  color: #D00000;
+}
+
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+.popup .Submit {
+  width: 210px;
+}
+
+.popup .Submit:hover {
+  color: #D00000;
+}
+
+@media screen and (max-width: 700px) {
+  .box {
+    width: 70%;
+  }
+
+  .popup {
+    width: 70%;
+  }
 }
