@@ -56,44 +56,54 @@
 <section id="available">
 	<div class="container">
 		<h1>GUEST CRITERIA</h1>
-		<div class="row five-cols ml-auto">
-			<div class="col-md-3">
-				<input type="date" id="indate">
-				<h5>Check In</h5>
+		<div class="row justify-content-center">
+			<div class="col-lg-5">
+				<div class="row d-flex flex-nowrap justify-content-around">
+					<div class="col-lg-6 col-md-4 col-xs-5">
+						<input type="date" id="indate">
+						<h5>Check In</h5>
+					</div>
+					<div class="col-lg-6 col-md-4 col-xs-5">
+						<input type="date" id="outdate">
+						<h5>Check Out</h5>
+					</div>
+				</div>
 			</div>
-			<div class="col-md-3">
-				<input type="date" id="outdate">
-				<h5>Check Out</h5>
+			<div class="col-lg-4">
+				<div class="row d-flex flex-nowrap justify-content-around">
+					<div class="col-lg-6 col-md-3 col-xs-3">
+						<select id="adult">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>
+						<h5>Adults</h5>
+					</div>
+					<div class="col-lg-6 col-md-3 col-xs-3">
+						<select id="child">
+							<option value="0">0</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>
+						<h5>Child</h5>
+					</div>
+				</div>
 			</div>
-			<div class="col-md-2">
-				<select id="adult" style="width:150px;height:45px;">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-				</select>
-				<h5>Adults</h5>
-			</div>
-			<div class="col-md-2">
-				<select id="child" style="width:150px;height:45px;">
-					<option value="0">0</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-				</select>
-				<h5>Child</h5>
-			</div>
-			<div class="col-md-2">
-				<button class="button" value="showRooms" onclick="showRooms()">SEARCH
-					<script>
-						function showRooms() {
-							document.getElementById('rooms').style.display = "block";
-						}
-					</script>
-				</button>
+			<div class="col-lg-2">
+				<div class="row justify-content-center">
+					<button class="button" value="showRooms" onclick="showRooms()"><span class="mx-3">SEARCH</span>
+						<script>
+							function showRooms() {
+								document.getElementById('rooms').style.display = "block";
+							}
+						</script>
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
