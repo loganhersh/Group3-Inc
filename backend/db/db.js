@@ -15,28 +15,6 @@ var db_config = {
 
 var connection = mysql.createPool(db_config);
 
-
-// function handleDisconnect() {
-//   connection = mysql.createConnection(db_config);
-//
-//   connection.connect(function(err) {
-//     if(err) {
-//       console.log("Error connecting to DB");
-//       setTimeout(handleDisconnect, 3000);
-//     } else {
-//       console.log("Database connected");
-//     }
-//   });
-//
-//   connection.on('error', function(err) {
-//     if(err.code === 'PROTOCOL_CONNECTION_LOST') {
-//       handleDisconnect();
-//     } else {
-//       throw err;
-//     }
-//   });
-// }
-//
-// handleDisconnect();
+console.log("Database Connected");
 
 module.exports = connection;
