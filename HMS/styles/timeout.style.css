@@ -1,0 +1,15 @@
+html, body {
+  background-color: #FFC300;
+  height: 100%;
+  font-size: 1.2rem;
+}
+#index {
+  background-color: #FFC300;
+  height: 100%;
+}
+#index .form-container {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 0 10px 0 #000;
+}
+

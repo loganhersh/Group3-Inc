@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const db = require('../db/db');
 
+const userTable = 'USER';
+
 module.exports = {
   authenticate,
   verify,
@@ -12,8 +14,8 @@ module.exports = {
 // Verifies the provided username and password match a user in the database and resolves
 // with a new JWT
 function authenticate(username, password) {
-  const query = "SELECT username,password,role FROM users WHERE username=?"
-  const values = [username];
+  const query = "SELECT username,password,role FROM ?? WHERE username=?"
+  const values = [userTable,username];
   return new Promise(resolve => {
     db.query(query, values,
         (error, results) => {
@@ -40,8 +42,8 @@ function authenticate(username, password) {
 
 // Verifies a user with the provided username and password exists in the database
 function verify(username, password) {
-  const query = "SELECT username FROM users WHERE username=? AND password=?"
-  const values = [username, password];
+  const query = "SELECT username FROM ?? WHERE username=? AND password=?"
+  const values = [userTable,username, password];
   return new Promise( resolve => {
     db.query(query, values,
         (error, results) => {
