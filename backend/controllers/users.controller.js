@@ -69,7 +69,8 @@ async function createUser(req, res, next) {
   const user = {firstname, lastname, username, hashedPassword, role};
 
   var badParams = validateInputLength(unvalidatedUser);
-  if(badParams) {
+
+  if(Object.keys(badParams).length > 0) {
     res.status(422).json(badParams);
     return;
   }
