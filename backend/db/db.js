@@ -15,6 +15,12 @@ var db_config = {
 
 var connection = mysql.createPool(db_config);
 
-console.log("Database Connected");
+connection.query('SELECT 1 + 1 AS test', (error, results, fields) => {
+  if(error) {
+    throw error;
+  } else {
+    console.log("Database Connected");
+  }
+});
 
 module.exports = connection;
