@@ -1,5 +1,5 @@
 // Global base urls. All js functions sending http requests should use these urls
-const baseAppUrl = 'http://localhost:80';
+const baseAppUrl = 'http://localhost:8080';
 const baseApiUrl = 'http://localhost:3000';
 
 function sendPostWithCreds(url, payload) {
