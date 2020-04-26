@@ -179,6 +179,7 @@ function changePassword() {
     $('#change-success-alert-username').text(username);
     triggerAlert('#change-success-alert');
   }).fail(function(data, status) {
+    $('#changePasswordModal').modal('hide');
     triggerAlert('#change-failure-alert');
   });
 }
