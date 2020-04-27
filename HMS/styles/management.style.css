@@ -70,4 +70,19 @@ body {
   margin-top: 10px;
   margin-left: 300px;
 }
-
+#roomGrid {
+  margin-top: 155px;
+  margin-left: -40px;
+}
+#roomGrid .row{
+  height:100%;
+  width: 100%;
+  background-color: #f2f2f2;
+}
+#roomGrid .col-md{
+  width: 220px;
+  height: 170px;
+  text-align: center;
+  font-size:17px;
+  border: 10px solid #ffffff;
+}
