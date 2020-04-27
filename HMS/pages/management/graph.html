@@ -83,5 +83,103 @@
 </div>
 </section>
 <!------------------------ END SIDE BAR ------------------>
+<section id="chart">
+<div id="piechart"></div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <br><br>
+    <div id="chart_div"></div>
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['line', 'corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var chartDiv = document.getElementById('chart_div');
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'Week of Years');
+        data.addColumn('number', "Median (2010-2019)");
+        data.addColumn('number',"2020")
+        data.addRows([
+            [1, 45, 50],
+            [2, 50, 55],
+            [3, 55, 60],
+            [4, 56, 61],
+            [5, 57, 62],
+            [6, 58, 63],
+            [7, 59, 64],
+            [8, 60, 65],
+            [9, 65, 66],
+            [10,  65, 67],
+            [11,  65, 68],
+            [12,  65, 69],
+            [13,  65, 70],
+            [14,  65, 71],
+            [15,  65, 72],
+            [16,  65, 73],
+            [17,  65, 74],
+            [18,  65, 75],
+            [19,  65, 76],
+            [20,  65, 77],
+            [21,  67, 78],
+            [22,  68, 79],
+            [23,  69, 80],
+            [24,  70, 79],
+            [25,  70, 79],
+            [26,  71, 78],
+            [27,  72, 77],
+            [28,  73, 76],
+            [29,  74, 77],
+            [30,  75, 78],
+            [31,  76, 77],
+            [32,  77, 76],
+            [33,  78, 75],
+            [34,  79, 74],
+            [35,  65, 73],
+            [36,  64, 72],
+            [37,  63, 70],
+            [38,  63, 70],
+            [39,  64, 69],
+            [40,  65, 70],
+            [41,  65, 68],
+            [42,  64, 65],
+            [43,  65, 65],
+            [44,  69, 64],
+            [45,  69, 64],
+            [46,  66, 63],
+            [47,  63, 62],
+            [48,  64, 62],
+            [49,  64, 60],
+            [50,  50, 59],
+            [51,  55, 58],
+            [52,  54, 54],
+        ]);
+
+        var materialOptions = {
+            chart: {
+                title: 'Hotel Occupancy Rate By Week of Year'
+            },
+            width: 1400,
+            height: 700,
+            series: {
+                // Gives each series an axis name that matches the Y-axis below.
+                0: {axis: 'Temps'},
+
+            },
+            axes: {
+                // Adds labels to each axis; they don't have to match the axis names.
+                y: {
+                    Temps: {label: 'Percentage(%)'},
+                }
+            }
+        };
+        function drawMaterialChart() {
+            var materialChart = new google.charts.Line(chartDiv);
+            materialChart.draw(data, materialOptions);
+        }
+        drawMaterialChart();
+    }
+</script>
+</section>
 </body>
 </html>

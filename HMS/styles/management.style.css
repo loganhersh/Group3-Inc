@@ -66,5 +66,8 @@ body {
   font-size: .75rem;
   text-transform: uppercase;
 }
-
+#chart{
+  margin-top: 150px;
+  margin-left: 400px;
+}
 
