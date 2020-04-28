@@ -86,6 +86,7 @@ api.use(cors({
 .use(parser.urlencoded({extended: false}))
 .use(parser.json())
 .use(cookieParser())
+.use('/reservation', routes.reservationRoutes)
 .use(/\S*\/logout/, function(req, res, next) {
   // if logout route, immediately invalidate auth cookie
   res.cookie('auth', 'bad', {httpOnly: true, sameSite: true});

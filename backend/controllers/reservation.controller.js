@@ -1,8 +1,12 @@
 const guestService = require('../services/guest.service');
+const reservationService = require('../services/reservation.service');
 
 
 module.exports = {
-  createReservation
+  createReservation,
+  getByName,
+  getById,
+  getByRoom
 };
 
 
@@ -13,7 +17,6 @@ async function createReservation(req, res, next) {
   // TODO: Verify availability
 
 
-  // TODO: Create guest (MySQL autoincrement? or use email)
   guestService.createGuest(guest).then(guestId => {
     if(guestId) {
       console.log(guestId);
@@ -32,12 +35,41 @@ async function createReservation(req, res, next) {
 }
 
 
-
-// Returns json of all users (no passwords)
-async function getAllUsers(req, res, next) {
-  usersService.getAllUsers().then(userArr => {
-    userArr ? res.json(userArr) :
-        res.status(404).json({message: "No users were found"});
+async function getByName(req, res, next) {
+  var name = req.params.name;
+  reservationService.getReservationByName(name.toLowerCase()).then(results => {
+    getReservationCallback(results, res);
   })
-  .catch(err => next(err));
+  .catch(err => {
+    res.status(400).json({error: "Error finding reservation"});
+  });
 }
+
+async function getById(req, res, next) {
+  var id = req.params.id;
+  reservationService.getReservationById(id.toUpperCase()).then(results => {
+    getReservationCallback(results, res);
+  })
+  .catch(err => {
+    res.status(400).json({error: "Error finding reservation"})
+  });
+}
+
+async function getByRoom(req, res, next) {
+  var room = req.params.room;
+  reservationService.getReservationByRoom(room).then(results => {
+    getReservationCallback(results, res);
+  })
+  .catch(err => {
+    res.status(400).json({error: "Error finding reservation"})
+  });
+}
+
+function getReservationCallback(results, res) {
+  if(results.length > 0) {
+    res.status(200).json(results);
+  } else {
+    res.status(404).json({error: "No reservations found"});
+  }
+}
+
