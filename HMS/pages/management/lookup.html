@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<title>Management | HMS Group3Inc.</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://kit.fontawesome.com/8f4261c3af.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="/js/nav.js"></script>
+	<script src="../../js/http-utils.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/lookup.js"></script>
+	<link rel="stylesheet" href="/styles/navbar.style.css">
+    <link href="/styles/lookup.style.css" rel="stylesheet">
+</head>
+<body>
+<!------------------------ NAV BAR ------------------->
+<section id="nav-bar">
+	<nav class="navbar navbar-expand-lg fixed-top flex-md-nowrap bg-light shadow">
+		<div class="container-fluid m-0">
+			<a class="navbar-brand" href="../home.html"><img src="../../photos/g3logo.png" alt="HMS logo"></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon">
+          <i class="fas fa-bars"></i>
+        </span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="../reservations">Reservations</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="../billing">Billing</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="#">Management</a>
+					</li>
+					<li class="nav-item d-none" id="admin-tab">
+						<a class="nav-link" href="../admin">Admin</a>
+					</li>
+					<li class="nav-item" id="logout-button">
+						<a class="nav-link" href="#" onclick="logout()">Log Out</a>
+					</li>
+				</ul>
+			</div>
+			<div id="nav-info">
+				<span id="nav-info-text" class=""></span>
+			</div>
+		</div>
+	</nav>
+	<hr class="nav-rule">
+</section>
+<!---------------------- END NAV BAR -------------------->
+<!---------------------- SIDE BAR ----------------------->
+<section id="sidebar">
+<div class="container-fluid">
+	<div class="row">
+		<nav class="col-md-2 d-none d-md-block sidebar">
+			<div class="sidebar-sticky">
+				<ul class="nav flex-column">
+					<li class="nav-item">
+						<a class="nav-link" href="#">
+							<span data-feather="home"></span>
+							Financial Report
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="lookup.html">
+							<span data-feather="lookup"></span>
+							Lookup Reservation <span class="sr-only">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="graph.html">
+							<span data-feather="file"></span>
+							Occupancy Graph
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="rooms.html">
+							<span data-feather="shopping-cart"></span>
+							Rooms
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+</div>
+</section>
+<!------------------------ END SIDE BAR ------------------>
+<section id="searchGrid">
+    <div class="container">
+        <div class="row" id="nameSearch">
+            <form>
+                <label class="searchHeader">Search By Guest Name</label><br>
+                <label for="fname">First name:</label><br>
+                <input type="text" id="fname" name="fname" value="John"><br>
+                <label for="lname">Last name:</label><br>
+                <input type="text" id="lname" name="lname" value="Doe"><br><br>
+                <input  onclick="searchByGuest()" id="searchNameButton" class="btn btn-primary" data-toggle="modal" data-target="#nameModalCenter" type="button" value="Submit">
+            </form> 
+        </div>
+        <br>
+        <div class="row" id="roomSearch">
+            <form>
+                <label class="searchHeader" for="rooms">Search By Room Number</label><br>
+                <label for="rooms">Room Number: </label>
+                <select id="rooms" name="rooms">
+                    <option value="101">101</option>
+                    <option value="102">102</option>
+                    <option value="103">103</option>
+                    <option value="104">104</option>
+                    <option value="105">105</option>
+                    <option value="106">106</option>
+                    <option value="107">107</option>
+                    <option value="108">108</option>
+                    <option value="109">109</option>
+                    <option value="110">110</option>
+                    <option value="111">111</option>
+                    <option value="112">112</option>
+                    <option value="113">113</option>
+                    <option value="114">114</option>
+                    <option value="115">115</option>
+                    <option value="116">116</option>
+                    <option value="117">117</option>
+                    <option value="118">118</option>
+                    <option value="119">119</option>
+                    <option value="120">120</option>
+                    <option value="121">121</option>
+                    <option value="122">122</option>
+                    <option value="123">123</option>
+                    <option value="124">124</option>
+                    <option value="125">125</option>
+                </select>
+                <br>
+                <input onclick="searchByRoom()" id="searchRoomButton" class="btn btn-primary" data-toggle="modal" data-target="#roomModalCenter" type="button" value="Submit">
+            </form>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="nameModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Search By Name Results</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body" id="name-modal-body">
+                        NAME
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <!-- Modal -->
+        <div class="modal fade" id="roomModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Search By Room Results</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body" id="room-modal-body">
+                        ROOM
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+</body>
+</html>
