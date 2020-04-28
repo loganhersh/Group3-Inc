@@ -6,10 +6,7 @@ Reservation / Billing Application
 1. Install NodeJS and add it to your system's PATH<br />
 2. Install MySQL and add it to your system's PATH<br />
     a. From the MySQL console:<br />
-        &nbsp;&nbsp;&nbsp; - run the `create-hms-db.sql` script in the backend/sql folder<br />
-        &nbsp;&nbsp;&nbsp; - run the `database-definition.sql` script in the backend/sql folder<br />
-        &nbsp;&nbsp;&nbsp; - run the `non-generated-data.sql` script in the backend/sql folder<br />
-        &nbsp;&nbsp;&nbsp; - run the `sample-data.sql` script in the backend/sql folder<br />
+        &nbsp;&nbsp;&nbsp; - run the `setup.sql` script in the backend/sql folder<br />
 3. In the project root directory:<br />
     a. run '`npm install`' in a terminal<br />
     b. run '`node server.js`' in the terminal. If it worked you should see that the servers
