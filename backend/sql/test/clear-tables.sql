@@ -1,5 +1,6 @@
 Use HMS_DB;
 
+DELETE FROM availability;
 DELETE FROM invoicecharge;
 DELETE FROM payment;
 DELETE FROM invoice;

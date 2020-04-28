@@ -1,5 +1,6 @@
 USE HMS_DB;
 
+DROP TABLE AVAILABILITY;
 DROP TABLE INVOICECHARGE;
 DROP TABLE PAYMENT;
 DROP TABLE INVOICE;
@@ -40,7 +41,7 @@ CREATE TABLE ROOM (
 
 
 CREATE TABLE GUEST (
-    guest_id INT(10) NOT NULL,
+    guest_id INT(10) AUTO_INCREMENT,
     guest_firstname VARCHAR(30) NOT NULL,
     guest_lastname VARCHAR(30) NOT NULL,
     guest_email VARCHAR(50) NOT NULL,
@@ -52,6 +53,8 @@ CREATE TABLE GUEST (
     PRIMARY KEY (guest_id)
 );
 
+ALTER TABLE GUEST AUTO_INCREMENT=1000;
+
 
 CREATE TABLE RESERVATION (
     reservation_id VARCHAR(40) NOT NULL,
@@ -60,7 +63,6 @@ CREATE TABLE RESERVATION (
     roomtype_id VARCHAR(2) NOT NULL,
     check_in_date DATE NOT NULL,
     check_out_date DATE NOT NULL ,
-    num_days INT(3) NOT NULL,
     PRIMARY KEY (reservation_id),
     FOREIGN KEY (guest_id) REFERENCES GUEST(guest_id),
     FOREIGN KEY (room_id) REFERENCES ROOM(room_id),
@@ -105,3 +107,10 @@ CREATE TABLE INVOICECHARGE (
 );
 
 
+CREATE TABLE AVAILABILITY (
+    date DATE NOT NULL,
+    roomtype VARCHAR(2) NOT NULL,
+    num_reserved INT(3),
+    PRIMARY KEY (date, roomtype),
+    FOREIGN KEY (roomtype) REFERENCES ROOMTYPE(type_id)
+);
