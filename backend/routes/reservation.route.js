@@ -46,4 +46,7 @@ router.get('/name/:name', reservationController.getByName);
  */
 router.get('/room/:room', reservationController.getByRoom);
 
+
+router.post('/rooms', reservationController.getAvailableRooms);
+
 module.exports = router;

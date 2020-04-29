@@ -7,7 +7,8 @@ const reservationTable = "RESERVATION";
 module.exports = {
   getReservationByName,
   getReservationById,
-  getReservationByRoom
+  getReservationByRoom,
+  getAvailableRooms
 }
 
 const reservationSelectQuery = "SELECT r.reservation_id AS 'ReservationID', r.room_id AS 'RoomNumber'"
@@ -64,6 +65,21 @@ function getReservationByRoom(room) {
       }
     })
   });
+}
+
+// INCOMPLETE
+function getAvailableRooms(checkin, checkout) {
+  const query = "SELECT * FROM roomtype";
+
+  return new Promise((resolve, reject) => {
+    db.query(query, (error, results) => {
+      if(error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    })
+  })
 }
 
 
