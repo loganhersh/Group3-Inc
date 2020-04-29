@@ -1,3 +1,9 @@
+@media (min-width: 576px) {
+    .modal-dialog{
+        max-width: 1800px !important;
+    }
+}
+
 body {
     font-size: 1.2rem;
 }
@@ -117,4 +123,8 @@ body {
     font-weight: bold;
     text-align: center;
     display: block;
+}
+
+.modal-body{
+    overflow: auto;
 }
