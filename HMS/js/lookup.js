@@ -1,14 +1,32 @@
 function searchByGuest(){
-    console.log("SEARCHING BY GUEST");
-    var searchedFName = document.getElementById("fname").value;
-    var searchedLName = document.getElementById("lname").value;
-    console.log("Searched FName is: ", searchedFName, ", and searched LName is: ", searchedLName);
-    // NEED TO LOOK UP RESERVATIONS BY FIRST AND LAST NAME
+    // Get the value of the of the last name text box
+    var searchedName = document.getElementById("lname").value;
+    
+    // Concatinating the string
+    var searchURL = baseApiUrl + "/reservation/name/" + searchedName;
+
+    // Performing http request
+    sendGetWithCreds(searchURL);
 }
 
 function searchByRoom(){
-    console.log("SEARCHING BY ROOM");
+    // Get the value of the room number selected in the dropdown
     var searchedRoom = document.getElementById("rooms").value;
-    console.log("Searched Rooms is: ", searchedRoom);
-    // NEED TO LOOK UP RESERVATIONS BY ROOM NUMBER
+
+    // Concatinating the string
+    var searchURL = baseApiUrl + "/reservation/room/" + searchedRoom;
+
+    // Performing http request
+    sendGetWithCreds(searchURL);
+}
+
+function searchById(){
+    // Get the value of the room number selected in the dropdown
+    var searchedId = document.getElementById("idNumber").value;
+
+    // Concatinating the string
+    var searchURL = baseApiUrl + "/reservation/id/" + searchedId;
+
+    // Performing http request
+    sendGetWithCreds(searchURL);
 }

@@ -107,6 +107,12 @@ body {
     margin-left: 33%;
 }
 
+#searchIdButton {
+    background-color: #fe9f26;
+    border-color: #fe9f26;
+    margin-left: 33%;
+}
+
 .searchHeader {
     font-weight: bold;
     text-align: center;
