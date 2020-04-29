@@ -27,6 +27,7 @@ CREATE TABLE ROOMTYPE (
     type_base_price DECIMAL(6,2) NOT NULL,
     type_num_beds INT(2),
     type_max_occupancy INT(3),
+    image_path VARCHAR(50),
     PRIMARY KEY (type_id)
 );
 

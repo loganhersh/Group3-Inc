@@ -32,6 +32,7 @@ CREATE TABLE ROOMTYPE (
     type_base_price DECIMAL(6,2) NOT NULL,
     type_num_beds INT(2),
     type_max_occupancy INT(3),
+    image_path VARCHAR(50),
     PRIMARY KEY (type_id)
 );
 
@@ -132,11 +133,12 @@ INSERT INTO USER VALUES ('kelinkowski', '$2b$10$hf2WwnBkhwjXNwturHMPTuasjCipC3R3
 INSERT INTO USER VALUES ('emusk', '$2b$10$hf2WwnBkhwjXNwturHMPTuasjCipC3R3GbB9ERtkSCmMRDy.OcpZe','elon','musk','user');
 
 -- ROOMTYPE DATA
-INSERT INTO ROOMTYPE VALUES ('KI', 'King','Non-smoking room with king-size bed', 79.99, 1, 2);
-INSERT INTO ROOMTYPE VALUES ('QD', 'Double Queen', 'Non-smoking room with two queen-size beds', 89.99, 2, 4);
-INSERT INTO ROOMTYPE VALUES ('KS', 'King Suite', 'Non-smoking suite with king-size bed and pull-out couch', 99.99, 2, 4);
-INSERT INTO ROOMTYPE VALUES ('QS', 'Double Queen Suite', 'Non-smoking room with two queen-size beds and a pull-out couch', 109.99, 3, 6);
-INSERT INTO ROOMTYPE VALUES ('KJ', 'King Jacuzzi Suite', 'Non-smoking room with a king-size bed and a jacuzzi tub', 129.99, 1, 2);
+INSERT INTO ROOMTYPE VALUES ('KI', 'King','Non-smoking room with king-size bed', 79.99, 1, 2, '/photos/kingRoom.jpg');
+INSERT INTO ROOMTYPE VALUES ('QD', 'Double Queen', 'Non-smoking room with two queen-size beds', 89.99, 2, 4, '/photos/queen-bed.jpg');
+INSERT INTO ROOMTYPE VALUES ('KS', 'King Suite', 'Non-smoking suite with king-size bed and pull-out couch', 99.99, 2, 4, '/photos/king.jpg');
+INSERT INTO ROOMTYPE VALUES ('QS', 'Double Queen Suite', 'Non-smoking room with two queen-size beds and a pull-out couch', 109.99, 3, 6, '/photos/queen-suite.jpg');
+INSERT INTO ROOMTYPE VALUES ('KJ', 'King Jacuzzi Suite', 'Non-smoking room with a king-size bed and a jacuzzi tub', 129.99, 1, 2, '/photos/jacuzzi.jpg');
+
 
 
 
