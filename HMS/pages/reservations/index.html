@@ -109,15 +109,15 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-3">
-					<img src="/photos/kingRoom.jpg" class="img-responsive" style="width:100%">
+					<img src="" class="img-responsive" style="width:100%" id="room-photo">
 				</div>
 				<div class="col-sm-4">
-					<p><b>Room:</b><span id="roomtype"></span></p>
-					<p><b>Dates:</b> <span id="checkin"></span> to <span
+					<p><b>Room:&emsp;</b><span id="roomtype"></span></p>
+					<p><b>Dates:&emsp;</b> <span id="checkin"></span> to <span
 							id="checkout"></span></p>
-					<p><b>Nights:</b> <span id="num-nights"></span></p>
-					<p><b>Adults:</b> <span id="num-adult"></span></p>
-					<p><b>Child:</b> <span id="num-child"></span></p>
+					<p><b>Nights:&emsp;</b> <span id="num-nights"></span></p>
+					<p><b>Adults:&emsp;</b> <span id="num-adult"></span></p>
+					<p><b>Child:&emsp;</b> <span id="num-child"></span></p>
 				</div>
 				<div class="col-sm-5">
 					<table>
@@ -141,16 +141,16 @@
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-sm-5 text-right mr-5">
-					<span class="required">*&nbsp;<input type="text" name="FirstName" size="24" placeholder="First Name"></span><br/><br/>
-					<span class="required">*&nbsp;<input type="text" name="Email" size="24" placeholder="Email"></span><br/><br/>
-					<span class="required">*&nbsp;<input type="text" name="Address" size="24" placeholder="Address"></span><br/><br/>
-					<span class="required">*&nbsp;<input type="text" name="State" size="24" placeholder="State"></span><br/><br/>
+					<span class="required">*&nbsp;<input type="text" id="firstname" size="24" placeholder="First Name"></span><br/><br/>
+					<span class="required">*&nbsp;<input type="text" id="email" size="24" placeholder="Email"></span><br/><br/>
+					<span class="required">*&nbsp;<input type="text" id="street" size="24" placeholder="Address"></span><br/><br/>
+					<span class="required">*&nbsp;<input type="text" id="state" size="24" placeholder="State"></span><br/><br/>
 				</div>
 				<div class="col-sm-5 text-left ml-5">
-					<span class="required">*&nbsp;<input type="text" name="LastName" size="24" placeholder="Last Name"></span><br/><br/>
-					<span class="required">*&nbsp;<input type="text" name="Phone" size="24" placeholder="Phone Number"></span><br/><br/>
-					<span class="required">*&nbsp;<input type="text" name="City" size="24" placeholder="City"></span><br/><br/>
-					<span class="required">*&nbsp;<input type="text" name="ZipCode" size="24" placeholder="Zip Code"></span><br/><br/>
+					<span class="required">*&nbsp;<input type="text" id="lastname" size="24" placeholder="Last Name"></span><br/><br/>
+					<span class="required">*&nbsp;<input type="text" id="phone" size="24" placeholder="Phone Number"></span><br/><br/>
+					<span class="required">*&nbsp;<input type="text" id="city" size="24" placeholder="City"></span><br/><br/>
+					<span class="required">*&nbsp;<input type="text" id="zip" size="24" placeholder="Zip Code"></span><br/><br/>
 				</div>
 			</div>
 			<!------------ Payment Details ----------->
@@ -159,32 +159,32 @@
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-sm-5 text-center">
-					<label for="paymentKing" style="color:#555;">Payment Method</label><br/>
+					<label for="paymentMethod" style="color:#555;">Payment Method</label><br/>
 					<span class="required">*&nbsp;</span>
-					<select id="paymentKing" style="width:210px;">
+					<select id="paymentMethod" style="width:210px;">
 						<option value="CC">Credit Card</option>
 						<option value="CA">Pay At Check In</option>
 					</select><br/><br/>
 					<span class="required">*&nbsp;</span>
-					<input type="text" name="CardNumber" size="24" placeholder="Card Number"><br/><br/>
+					<input type="text" id="accountNum" size="24" placeholder="Card Number"><br/><br/>
 					<span class="required">*&nbsp;</span>
-					<input type="text" name="NameOnCard" size="24" placeholder="Name on Card">
+					<input type="text" id="accountHolder" size="24" placeholder="Name on Card">
 				</div>
 				<div class="col-sm-5 text-center mr-3">
-					<label for="cardTypeKing" style="color:#555">Card Type</label><br/>
+					<label for="cardType" style="color:#555">Card Type</label><br/>
 					<span class="required">*&nbsp;</span>
-					<select id="cardTypeKing" style="width:200px">
-						<option value="Visa">Visa</option>
-						<option value="Master Card">Master Card</option>
-						<option value="American Express">American Express</option>
-						<option value="Discover">Discover</option>
+					<select id="cardType" style="width:200px">
+						<option value="visa">Visa</option>
+						<option value="mastercard">Master Card</option>
+						<option value="amex">American Express</option>
+						<option value="discover">Discover</option>
 					</select><br/>
-					<label for="expKing" style="color:#555"><br/>Expiration</label><br/>
+					<label for="expMonth" style="color:#555"><br/>Expiration</label><br/>
 					<div class="row">
 						<div class="col-sm-6">
-							<label for="expKing" style="color:#555">Month</label><br/>
+							<label for="expMonth" style="color:#555">Month</label><br/>
 							<span class="required">*&nbsp;
-								<select id="expKing" style="width:130px">
+								<select id="expMonth" style="width:130px">
 									<option value="">Month...</option>
 									<option value="01">JANUARY</option>
 									<option value="02">FEBRUARY</option>
@@ -202,20 +202,9 @@
 							</span>
 						</div>
 						<div class="col-sm-6">
-							<label for="expYearKing" style="color:#555">Year</label><br/>
+							<label for="expYear" style="color:#555">Year</label><br/>
 							<span class="required">*&nbsp;
-								<select id="expYearKing" style="width:130px">
-									<option value="">Year...</option>
-									<option value="2020">2020</option>
-									<option value="2021">2021</option>
-									<option value="2022">2022</option>
-									<option value="2023">2023</option>
-									<option value="2024">2024</option>
-									<option value="2025">2025</option>
-									<option value="2026">2026</option>
-									<option value="2027">2027</option>
-									<option value="2028">2028</option>
-									<option value="2029">2029</option>
+								<select id="expYear" style="width:130px">
 								</select>
 							</span>
 						</div>
@@ -229,7 +218,25 @@
 				</div>
 			</div>
 			<div class="row justify-content-center my-3">
-				<button class="confirmbooking px-4">CONFIRM BOOKING</button>
+				<button class="px-4" onclick="bookRoom()">CONFIRM BOOKING</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="error-modal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Error</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p id="error-modal-text"></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>

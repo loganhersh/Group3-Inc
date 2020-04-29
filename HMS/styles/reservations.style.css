@@ -108,7 +108,7 @@ tr:nth-child(odd) {
 
 .overlay {
   position: fixed;
-  top: 120px;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
@@ -125,6 +125,7 @@ tr:nth-child(odd) {
 
 .popup {
   margin: 30px auto;
+  margin-top: 100px;
   padding: 20px;
   background: #fff;
   border-radius: 20px;
