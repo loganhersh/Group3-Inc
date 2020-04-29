@@ -6,7 +6,8 @@ module.exports = {
   createReservation,
   getByName,
   getById,
-  getByRoom
+  getByRoom,
+  getAvailableRooms
 };
 
 
@@ -71,5 +72,21 @@ function getReservationCallback(results, res) {
   } else {
     res.status(404).json({error: "No reservations found"});
   }
+}
+
+
+async function getAvailableRooms(req, res, next) {
+  var checkin = req.body.checkin;
+  var checkout = req.body.checkout;
+  reservationService.getAvailableRooms(checkin, checkout).then(results => {
+    if(results.length > 0) {
+      res.status(200).json(results);
+    } else {
+      res.status(404).json({error: "No rooms found"});
+    }
+  })
+  .catch(err => {
+    res.status(400).json({error: "Error finding rooms"});
+  })
 }
 
