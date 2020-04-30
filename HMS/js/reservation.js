@@ -9,14 +9,15 @@ $(document).ready(function () {
   });
 
   configureDatePickers();
-  configureYearSelect();
+  configureExpSelect();
 
 });
 
 // Adds the next 15 years as expiration options
-function configureYearSelect() {
+function configureExpSelect() {
   var date = new Date();
   var year = parseInt(date.getFullYear());
+  var yearSelect = $('#expYear');
 
   var html = '<option value="">Year...</option>';
   for(var i=0; i<15; i++) {
@@ -24,8 +25,31 @@ function configureYearSelect() {
     html += '<option value="'+y+'">'+y+'</option>';
   }
 
-  $('#expYear').empty();
-  $('#expYear').append(html);
+  // Checks if current year is selected, if so only populates valid months
+  yearSelect.change(function() {
+    var selectedYear = yearSelect.val();
+    (year === parseInt(selectedYear)) ? populateMonthSelect(new Date().getMonth()) : populateMonthSelect(0);
+  });
+
+  populateMonthSelect(0);
+  yearSelect.empty();
+  yearSelect.append(html);
+}
+
+// populates the month selector with all months starting with the firstMo
+function populateMonthSelect(firstMo) {
+  var months = ["January","February","March","April","May","June","July","August",
+    "September","October","November","December"];
+
+  var monthSelector = $('#expMonth');
+  var html = '<option value="">Month...</option>';
+
+  for(var i=firstMo; i < months.length; i++) {
+    html += "<option value='"+(i+1)+"'>"+months[i]+"</option>";
+  }
+
+  monthSelector.empty();
+  monthSelector.append(html);
 }
 
 
@@ -208,6 +232,7 @@ function buildRoomRow(room) {
 }
 
 
+// Function called when user clicks to confirm booking
 function bookRoom() {
   var guest = getGuestInfo();
   var payment = getPaymentInfo();
@@ -216,32 +241,36 @@ function bookRoom() {
     showErrorModal(err);
     return;
   }
+  // TODO: finish creating reservation
   showErrorModal("All input valid");
 }
 
+// Retrieves guest info from the page
 function getGuestInfo() {
   var guest = {};
   guest.firstname = $('#firstname').val();
   guest.lastname = $('#lastname').val();
-  guest.email = $('#email');
-  guest.phone = $('#phone');
+  guest.email = $('#email').val();
+  guest.phone = $('#phone').val();
   guest.address = {};
-  guest.address.street = $('#street');
-  guest.address.city = $('#city');
-  guest.address.state = $('#state');
-  guest.address.zip = $('#zip');
+  guest.address.street = $('#street').val();
+  guest.address.city = $('#city').val();
+  guest.address.state = $('#state').val();
+  guest.address.zip = $('#zip').val();
 
   return guest;
 }
 
-
+// Retrieves payment info from the page
 function getPaymentInfo() {
   var payment = {};
   payment.method = $('#paymentMethod').val();
   if(payment.method === 'CC') {
+    payment.credit = {};
     payment.credit.type = $('#cardType').val();
     payment.credit.number = $('#accountNum').val();
     payment.credit.name = $('#accountHolder').val();
+    payment.credit.exp = {};
     payment.credit.exp.month = $('#expMonth').val();
     payment.credit.exp.year = $('#expYear').val();
   }
@@ -249,12 +278,13 @@ function getPaymentInfo() {
   return payment;
 }
 
-
+// Validates input fields on booking popup
 function validateBooking(guest, payment) {
   var err = '';
   var missingArr = [];
   var invalidArr = [];
 
+  // Check for empty guest fields
   if(!guest.firstname) missingArr.push('First name');
   if(!guest.lastname) missingArr.push('Last name');
   if(!guest.email) missingArr.push('Email');
@@ -263,6 +293,7 @@ function validateBooking(guest, payment) {
   if(!guest.address.state) missingArr.push('Address - State');
   if(!guest.address.zip) missingArr.push('Address - Zip');
 
+  // Check for empty payment fields
   if(!payment.method) missingArr.push('Payment method');
   if(payment.method === 'CC') {
     if(!payment.credit.type) missingArr.push('Card type');
@@ -272,18 +303,41 @@ function validateBooking(guest, payment) {
     if(!payment.credit.exp.year) missingArr.push('Card expiration year');
   }
 
+  // Create string if items are missing
   if(missingArr.length > 0) {
-    err += "Missing items:\n";
+    err += "\tMISSING ITEMS:\n";
     missingArr.forEach(item => {
-      err += "\t"+item+"\n";
+      err += "\t\t- "+item+"\n";
     });
+    return err;
+  }
+
+  // Validate applicable fields
+  if(!/^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/.test(guest.email)) invalidArr.push('Email invalid');
+  if(!/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/.test(guest.phone)) invalidArr.push('Phone invalid');
+  var state = getState(guest.address.state);
+  (state) ? guest.address.state = state : invalidArr.push('State not found');
+  if(!/^(?!0{5})(\d{5})(?!-?0{4})(|-\d{4})?$/.test(guest.address.zip)) invalidArr.push('Zip invalid');
+  if(payment.method === 'CC') {
+    if (payment.credit.number.length < 15) invalidArr.push('Card number too short');
+  }
+
+  // Create string if items are invalid
+  if(invalidArr.length > 0) {
+    err += "\tINVALID ITEMS:\n";
+    invalidArr.forEach(item => {
+      err += "\t\t- "+item+"\n";
+    });
+    return err;
   }
 
   return err;
 }
 
-
+// Verifies the state and converts to 2 char abbreviation if necessary
 function getState(state) {
+  state = state.toUpperCase();
+
   var states = {"AL": "Alabama", "AK": "Alaska","AS": "American Samoa", "AZ": "Arizona",
     "AR": "Arkansas","CA": "California","CO": "Colorado","CT": "Connecticut",
     "DE": "Delaware","DC": "District Of Columbia","FM": "Federated States Of Micronesia",
@@ -300,15 +354,17 @@ function getState(state) {
     "WV": "West Virginia","WI": "Wisconsin","WY": "Wyoming"
   };
 
-  if(states['state']) {
-    return state.toUpperCase();
+  if(states[state]) {
+    return state;
   }
 
+  var stateAbbr = '';
+
   Object.keys(states).forEach((key) => {
-    if(states[key] === state.toUpperCase()) {
-      return key;
+    if(states[key].toUpperCase() === state) {
+      stateAbbr = key;
     }
   });
 
-  return "";
+  return stateAbbr;
 }
