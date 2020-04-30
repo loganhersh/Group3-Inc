@@ -17,7 +17,7 @@ BEGIN
             LEAVE row_loop;
         END IF;
 
-        INSERT INTO availability VALUES(d, type, 0);
+        INSERT INTO availability VALUES(d, type, 0, true);
     END LOOP;
 END $$
 
@@ -38,6 +38,24 @@ BEGIN
         END WHILE;
 END $$
 
+
+DROP PROCEDURE IF EXISTS check_isAvail_after_upd $$
+CREATE PROCEDURE check_isAvail_after_upd(type VARCHAR(2), num_reserved INT, d DATE)
+BEGIN
+    DECLARE num_rooms INT;
+    SET num_rooms = (SELECT COUNT(room_id) FROM room WHERE roomtype=type AND room_in_service=true);
+    IF (num_rooms > num_reserved) THEN
+        UPDATE availability
+        SET isAvailable = true
+        WHERE date=d AND roomtype=type;
+    ELSE
+        UPDATE availability
+        SET isAvailable = false
+        WHERE date=d AND roomtype=type;
+    END IF ;
+END $$
+
+
 DELIMITER ;
 
 
@@ -56,37 +74,56 @@ CREATE TRIGGER ins_invoice_after_reservation AFTER INSERT ON reservation
 
 
  -- Creates trigger that updates availability table when a reservation is created
-CREATE TRIGGER upd_avail_after_ins AFTER INSERT ON reservation
-    FOR EACH ROW
-    BEGIN
-        DECLARE x INT;
-        DECLARE num_days INT;
-        SET x = 0;
-        SET num_days = DATEDIFF(new.check_out_date, new.check_in_date);
-        WHILE x < num_days DO
-            UPDATE availability
-            SET num_reserved = (num_reserved + 1)
-            WHERE ((date = DATE_ADD(new.check_in_date, INTERVAL x DAY)) AND
-                   (roomtype = new.roomtype_id));
-            SET x = x + 1;
-            END WHILE;
-    END $$
+ CREATE TRIGGER upd_avail_after_ins AFTER INSERT ON reservation
+     FOR EACH ROW
+ BEGIN
+     DECLARE x INT;
+     DECLARE num_days INT;
+     DECLARE num_res INT;
+     DECLARE curr_date DATE;
+     SET x = 0;
+     SET num_days = DATEDIFF(new.check_out_date, new.check_in_date);
+     WHILE x < num_days DO
+             SET curr_date = DATE_ADD(new.check_in_date, INTERVAL x DAY);
+             UPDATE availability
+             SET num_reserved = (num_reserved + 1)
+             WHERE ((date = curr_date) AND
+                    (roomtype = new.roomtype_id));
+             SET x = x + 1;
+
+             SELECT num_reserved INTO num_res FROM availability WHERE date=curr_date AND roomtype=new.roomtype_id;
+             CALL check_isAvail_after_upd(new.roomtype_id, num_res, curr_date);
+
+         END WHILE;
+ END $$
 
 -- Creates trigger that updates availability table when a reservation is deleted
-CREATE TRIGGER upd_avail_after_delete AFTER DELETE ON reservation
+CREATE TRIGGER upd_avail_after_cancel AFTER UPDATE ON reservation
     FOR EACH ROW
     BEGIN
         DECLARE x INT;
         DECLARE num_days INT;
+        DECLARE num_res INT;
+        DECLARE curr_date DATE;
         SET x = 0;
         SET num_days = DATEDIFF(old.check_out_date, old.check_in_date);
-        WHILE x < num_days DO
-            UPDATE availability
-            SET num_reserved = (num_reserved - 1)
-            WHERE ((date = DATE_ADD(old.check_in_date, INTERVAL x DAY)) AND
-                   (roomtype = old.roomtype_id));
-            SET x = x + 1;
-            END WHILE;
+
+        IF (new.status LIKE 'cancelled' AND old.status NOT LIKE 'cancelled') THEN
+
+            WHILE x < num_days DO
+                SET curr_date = DATE_ADD(old.check_in_date, INTERVAL x DAY);
+                UPDATE availability
+                SET num_reserved = (num_reserved - 1)
+                WHERE ((date = curr_date) AND
+                       (roomtype = old.roomtype_id));
+                SET x = x + 1;
+
+                SELECT num_reserved INTO num_res FROM availability WHERE date=curr_date AND roomtype=old.roomtype_id;
+                CALL check_isAvail_after_upd(old.roomtype_id, num_res, curr_date);
+
+                END WHILE;
+
+        END IF ;
     END $$
 
 
@@ -96,6 +133,8 @@ CREATE TRIGGER upd_avail_after_update AFTER UPDATE ON reservation
     BEGIN
         DECLARE x INT;
         DECLARE num_days INT;
+        DECLARE num_res INT;
+        DECLARE curr_date DATE;
         SET x = 0;
         SET num_days = DATEDIFF(old.check_out_date, old.check_in_date);
 
@@ -111,11 +150,16 @@ CREATE TRIGGER upd_avail_after_update AFTER UPDATE ON reservation
 
             -- add new reservation
             WHILE x < num_days DO
+                SET curr_date = DATE_ADD(old.check_in_date, INTERVAL x DAY);
                 UPDATE availability
                 SET num_reserved = (num_reserved + 1)
-                WHERE ((date = DATE_ADD(new.check_in_date, INTERVAL x DAY)) AND
+                WHERE ((date = curr_date) AND
                        (roomtype = new.roomtype_id));
                 SET x = x + 1;
+
+                SELECT num_reserved INTO num_res FROM availability WHERE date=curr_date AND roomtype=new.roomtype_id;
+                CALL check_isAvail_after_upd(new.roomtype_id, num_res, curr_date);
+
                 END WHILE;
         END IF;
     END $$

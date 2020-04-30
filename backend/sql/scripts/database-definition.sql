@@ -36,6 +36,7 @@ CREATE TABLE ROOM (
     room_id INT(4) NOT NULL,
     room_in_service BOOLEAN NOT NULL,
     roomtype VARCHAR(2) NOT NULL,
+    isVacant BOOLEAN NOT NULL,
     PRIMARY KEY (room_id),
     FOREIGN KEY (roomtype) REFERENCES ROOMTYPE(type_id)
 );
@@ -63,7 +64,9 @@ CREATE TABLE RESERVATION (
     room_id INT(4),
     roomtype_id VARCHAR(2) NOT NULL,
     check_in_date DATE NOT NULL,
-    check_out_date DATE NOT NULL ,
+    check_out_date DATE NOT NULL,
+    comments VARCHAR(255),
+    status VARCHAR(20) NOT NULL,
     PRIMARY KEY (reservation_id),
     FOREIGN KEY (guest_id) REFERENCES GUEST(guest_id),
     FOREIGN KEY (room_id) REFERENCES ROOM(room_id),
@@ -111,7 +114,8 @@ CREATE TABLE INVOICECHARGE (
 CREATE TABLE AVAILABILITY (
     date DATE NOT NULL,
     roomtype VARCHAR(2) NOT NULL,
-    num_reserved INT(3),
+    num_reserved INT(3) NOT NULL,
+    isAvailable BOOLEAN NOT NULL,
     PRIMARY KEY (date, roomtype),
     FOREIGN KEY (roomtype) REFERENCES ROOMTYPE(type_id)
 );
