@@ -177,3 +177,8 @@ tr:nth-child(odd) {
 {
   width: 100%;
 }
+
+.modal-body
+{
+  white-space: pre-wrap;
+}
