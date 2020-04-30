@@ -178,7 +178,7 @@ tr:nth-child(odd) {
   width: 100%;
 }
 
-.modal-body
+#error-modal-text
 {
   white-space: pre-wrap;
 }

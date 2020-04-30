@@ -184,14 +184,14 @@
 						<option value="CA">Pay At Check In</option>
 					</select><br/><br/>
 					<span class="required">*&nbsp;</span>
-					<input type="text" id="accountNum" size="24" placeholder="Card Number"><br/><br/>
+					<input class="cc-item" type="text" id="accountNum" size="24" placeholder="Card Number"><br/><br/>
 					<span class="required">*&nbsp;</span>
-					<input type="text" id="accountHolder" size="24" placeholder="Name on Card">
+					<input class="cc-item" type="text" id="accountHolder" size="24" placeholder="Name on Card">
 				</div>
 				<div class="col-sm-5 text-center mr-3">
 					<label for="cardType" style="color:#555">Card Type</label><br/>
 					<span class="required">*&nbsp;</span>
-					<select id="cardType" style="width:200px">
+					<select class="cc-item" id="cardType" style="width:200px">
 						<option value="visa">Visa</option>
 						<option value="mastercard">Master Card</option>
 						<option value="amex">American Express</option>
@@ -202,14 +202,14 @@
 						<div class="col-sm-6">
 							<label for="expMonth" style="color:#555">Month</label><br/>
 							<span class="required">*&nbsp;
-								<select id="expMonth" style="width:130px">
+								<select class="cc-item" id="expMonth" style="width:130px">
 								</select>
 							</span>
 						</div>
 						<div class="col-sm-6">
 							<label for="expYear" style="color:#555">Year</label><br/>
 							<span class="required">*&nbsp;
-								<select id="expYear" style="width:130px">
+								<select class="cc-item" id="expYear" style="width:130px">
 								</select>
 							</span>
 						</div>
@@ -239,6 +239,23 @@
 			</div>
 			<div class="modal-body">
 				<p id="error-modal-text"></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="success-modal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="success-modal-title"></h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body text-center" id="success-modal-body">
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

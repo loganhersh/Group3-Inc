@@ -8,6 +8,10 @@ $(document).ready(function () {
     $('body').removeClass('overlay-open');
   });
 
+  $('#paymentMethod').change(function(event) {
+    ($('#paymentMethod').val() === 'CA') ? disableCC() : enableCC();
+  });
+
   configureDatePickers();
   configureExpSelect();
 
@@ -232,17 +236,51 @@ function buildRoomRow(room) {
 }
 
 
+function disableCC() {
+  $('.cc-item').each(function() {
+    $(this).prop('disabled', true);
+  });
+}
+
+function enableCC() {
+  $('.cc-item').each(function() {
+    $(this).prop('disabled', false);
+  });
+}
+
+
 // Function called when user clicks to confirm booking
 function bookRoom() {
   var guest = getGuestInfo();
   var payment = getPaymentInfo();
+  var comments = $('#comments').val();
   var err = validateBooking(guest, payment);
   if(err) {
     showErrorModal(err);
     return;
   }
-  // TODO: finish creating reservation
-  showErrorModal("All input valid");
+
+  var url = baseApiUrl + '/reservation';
+  var payload = {
+    guest: guest,
+    payment: payment,
+    comments: comments
+  };
+  sendPostWithCreds(url, payload).done((data, status, jqXHR) => {
+    showBookedModal(data);
+  })
+  .fail((data, status, jqXHR) => {
+    showErrorModal("There was an error creating reservation");
+  });
+}
+
+
+function showBookedModal(reservationID) {
+  $('#success-modal-title').text('Booked!');
+  var html = "<strong>Reservation Complete</strong><br/>"
+      + "Reservation ID: " + reservationID;
+  $('#success-modal-body').append(html);
+  $('#success-modal').modal('show');
 }
 
 // Retrieves guest info from the page
@@ -361,6 +399,7 @@ function getState(state) {
   var stateAbbr = '';
 
   Object.keys(states).forEach((key) => {
+
     if(states[key].toUpperCase() === state) {
       stateAbbr = key;
     }
