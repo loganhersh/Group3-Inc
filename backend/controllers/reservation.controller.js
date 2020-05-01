@@ -15,29 +15,50 @@ module.exports = {
 
 async function createReservation(req, res, next) {
   var reservation = req.body.reservation;
+  var payment = req.body.payment;
   var guest = req.body.guest;
-
-  res.status(200).send('12341234SAMPLE12341234');
-
-
-  // TODO: Verify availability
-
-
-  // guestService.createGuest(guest).then(guestId => {
-  //   if(guestId) {
-  //     console.log(guestId);
-  //   } else {
-  //     console.log("Guest could not be created");
-  //   }
-  // });
-
-  // TODO: Generate reservation ID
+  var comments = req.body.comments;
+  var checkinDate = new Date(reservation.checkin+" EST");
+  var checkoutDate = new Date(reservation.checkout+" EST");
+  reservation.comments = comments;
 
 
-  // TODO: Calculate num days
+  // Verify room availability for specified dates
+  var verify = await availabilityService.verifyAvailability(reservation.roomtype,
+      checkinDate, checkoutDate);
 
-  // TODO: insert reservation
+  if(!verify.verification) {
+    res.status(400).json({error: "Room type no longer available on specified dates"});
+    res.end();
+    return;
+  }
 
+  // Create guest in database
+  var guestID = await guestService.createGuest(guest);
+  if(!guestID.guest_id) {
+    res.status(400).json({error: "Error creating new guest"});
+    res.end();
+    return;
+  }
+  reservation.guest_id = guestID.guest_id;
+
+  // Calculate cost of reservation
+  var cost = await reservationService.calculateCostOfReservation(checkinDate,checkoutDate,reservation.roomtype);
+  if(cost !== parseFloat(reservation.estCost).toFixed(2)) {
+    console.log(cost + " : " + reservation.estCost);
+    res.status(400).json({error: "Payment amount does not match calculated price"});
+    res.end();
+    return;
+  }
+
+  // Insert reservation
+  var reservationId = await reservationService.insertReservation(reservation);
+
+  // TODO: Insert invoice charge
+
+  // TODO: Insert payment
+
+  res.status(200).json({id: reservationId});
 }
 
 
@@ -103,7 +124,7 @@ async function getAvailableRooms(req, res, next) {
     if(commonRooms.length > 0) {
       res.status(200).json(commonRooms);
     } else {
-      res.status(404).json({error: "No rooms found"});
+      res.status(404).json({error: "No rooms available on the given dates"});
     }
   })
   .catch(err => {
