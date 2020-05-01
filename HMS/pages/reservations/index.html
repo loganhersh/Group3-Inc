@@ -141,34 +141,34 @@
 			</div>
 			<div class="row justify-content-center">
 				<div class="col text-right mr-5">
-					<span class="required">*&nbsp;<input type="text" id="firstname" size="24" placeholder="First Name"></span>
+					<span class="required">*&nbsp;<input type="text" class="reset-booking" id="firstname" size="24" placeholder="First Name"></span>
 				</div>
 				<div class="col text-left ml-5">
-					<span class="required">*&nbsp;<input type="text" id="lastname" size="24" placeholder="Last Name"></span>
+					<span class="required">*&nbsp;<input type="text" class="reset-booking" id="lastname" size="24" placeholder="Last Name"></span>
 				</div>
 			</div>
 			<div class="row my-3">
 				<div class="col text-right mr-5">
-					<span class="required">*&nbsp;<input type="text" id="email" size="24" placeholder="Email"></span>
+					<span class="required">*&nbsp;<input type="text" class="reset-booking" id="email" size="24" placeholder="Email"></span>
 				</div>
 				<div class="col text-left ml-5">
-					<span class="required">*&nbsp;<input type="text" id="phone" size="24" placeholder="Phone Number"></span>
+					<span class="required">*&nbsp;<input type="text" class="reset-booking" id="phone" size="24" placeholder="Phone Number"></span>
 				</div>
 			</div>
 			<div class="row my-3">
 				<div class="col text-right mr-5">
-					<span class="required">*&nbsp;<input type="text" id="street" size="24" placeholder="Address"></span>
+					<span class="required">*&nbsp;<input type="text" class="reset-booking" id="street" size="24" placeholder="Address"></span>
 				</div>
 				<div class="col text-left ml-5">
-					<span class="required">*&nbsp;<input type="text" id="city" size="24" placeholder="City"></span>
+					<span class="required">*&nbsp;<input type="text" class="reset-booking" id="city" size="24" placeholder="City"></span>
 				</div>
 			</div>
 			<div class="row my-3">
 				<div class="col text-right mr-5">
-					<span class="required">*&nbsp;<input type="text" id="state" size="24" placeholder="State"></span>
+					<span class="required">*&nbsp;<input type="text" class="reset-booking" id="state" size="24" placeholder="State"></span>
 				</div>
 				<div class="col text-left ml-5">
-					<span class="required">*&nbsp;<input type="text" id="zip" size="24" placeholder="Zip Code"></span>
+					<span class="required">*&nbsp;<input type="text" class="reset-booking" id="zip" size="24" placeholder="Zip Code"></span>
 				</div>
 			</div>
 			<!------------ Payment Details ----------->
@@ -184,9 +184,9 @@
 						<option value="CA">Pay At Check In</option>
 					</select><br/><br/>
 					<span class="required">*&nbsp;</span>
-					<input class="cc-item" type="text" id="accountNum" size="24" placeholder="Card Number"><br/><br/>
+					<input class="cc-item" type="text" class="reset-booking" id="accountNum" size="24" placeholder="Card Number"><br/><br/>
 					<span class="required">*&nbsp;</span>
-					<input class="cc-item" type="text" id="accountHolder" size="24" placeholder="Name on Card">
+					<input class="cc-item" type="text" class="reset-booking" id="accountHolder" size="24" placeholder="Name on Card">
 				</div>
 				<div class="col-sm-5 text-center mr-3">
 					<label for="cardType" style="color:#555">Card Type</label><br/>
@@ -202,14 +202,14 @@
 						<div class="col-sm-6">
 							<label for="expMonth" style="color:#555">Month</label><br/>
 							<span class="required">*&nbsp;
-								<select class="cc-item" id="expMonth" style="width:130px">
+								<select class="cc-item reset-booking" id="expMonth" style="width:130px">
 								</select>
 							</span>
 						</div>
 						<div class="col-sm-6">
 							<label for="expYear" style="color:#555">Year</label><br/>
 							<span class="required">*&nbsp;
-								<select class="cc-item" id="expYear" style="width:130px">
+								<select class="cc-item reset-booking" id="expYear" style="width:130px">
 								</select>
 							</span>
 						</div>
@@ -219,11 +219,11 @@
 			<div class="row border-top justify-content-center mt-4 pt-3">
 				<div class="col-sm-12 text-center">
 					<h5>Comments</h5>
-					<textarea rows="4" id="comments" placeholder="Enter Comments..."></textarea>
+					<textarea rows="4" class="reset-booking" id="comments" placeholder="Enter Comments..."></textarea>
 				</div>
 			</div>
 			<div class="row justify-content-center my-3">
-				<button class="px-4" onclick="bookRoom()">CONFIRM BOOKING</button>
+				<a href="#"><button class="px-4" onclick="bookRoom()">CONFIRM BOOKING</button></a>
 			</div>
 		</div>
 	</div>

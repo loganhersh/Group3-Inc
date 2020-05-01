@@ -7,6 +7,7 @@ function sendPostWithCreds(url, payload) {
     method: "POST",
     url: url,
     data: payload,
+    dataType: "json",
     crossDomain: true,
     xhrFields: {
       withCredentials: true
