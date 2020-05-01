@@ -1,13 +1,20 @@
+const differenceInCalendarDays = require('date-fns/differenceInCalendarDays');
 const db = require('../db/db');
+const roomService = require('./rooms.service');
+const availabilityService = require('./availability.service');
+
 
 
 const reservationTable = "RESERVATION";
+const taxrate = 1.06625;
 
 
 module.exports = {
   getReservationByName,
   getReservationById,
-  getReservationByRoom
+  getReservationByRoom,
+  calculateCostOfReservation,
+  insertReservation
 }
 
 const reservationSelectQuery = "SELECT r.reservation_id AS 'ReservationID', r.room_id AS 'RoomNumber'"
@@ -65,6 +72,50 @@ function getReservationByRoom(room) {
     })
   });
 }
+
+
+function calculateCostOfReservation(checkin, checkout, roomtype) {
+  var numDays = differenceInCalendarDays(checkout, checkin);
+
+  const query = "SELECT type_base_price FROM roomtype WHERE type_id=?";
+  const values = [roomtype];
+  return new Promise((resolve, reject) => {
+    db.query(query, values, (error,results) => {
+      if(error) reject(error);
+      resolve((results[0].type_base_price*taxrate*numDays).toFixed(2));
+    });
+  });
+}
+
+
+function insertReservation(reservation) {
+  // Generate reservation ID
+  var reservationId = reservation.checkin.replace(/-/g,'') + reservation.roomtype + new Date().getTime();
+
+  const query = "INSERT INTO RESERVATION VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
+  const values = [
+      reservationId,
+      reservation.guest_id,
+      null,
+      reservation.roomtype,
+      reservation.checkin,
+      reservation.checkout,
+      reservation.comments,
+      'active'
+  ];
+
+  return new Promise((resolve, reject) => {
+    db.query(query, values, (error, results) => {
+      if(error) reject(error);
+      if(results.affectedRows > 0) {
+        resolve(reservationId);
+      } else {
+        reject();
+      }
+    });
+  });
+}
+
 
 
 

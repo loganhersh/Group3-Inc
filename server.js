@@ -83,7 +83,7 @@ api.use(cors({
   optionsSuccessStatus: 200,
   credentials: true
 }))
-.use(parser.urlencoded({extended: false}))
+.use(parser.urlencoded({extended: true}))
 .use(parser.json())
 .use(cookieParser())
 .use(/\S*\/logout/, function(req, res, next) {

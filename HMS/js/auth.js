@@ -15,8 +15,8 @@ function auth() {
   }
 
   const payload = {
-    username,
-    password
+    username: username,
+    password: password
   }
 
   sendPostWithCreds(url, payload).done(function (data, status, jqXHR) {
@@ -34,6 +34,7 @@ function logout() {
     window.localStorage.clear();
     window.location.replace(baseAppUrl + '/pages');
   }).fail(function(data, status, jqXHR) {
-    alert(JSON.stringify(data.responseJSON.message));
+    window.localStorage.clear();
+    window.location.replace(baseAppUrl + '/pages');
   });
 }

@@ -1,30 +1,68 @@
-const addDays = require('date-fns/addDays');
+const eachDayOfInterval = require('date-fns/eachDayOfInterval');
 const roomService = require('./rooms.service');
 const db = require('../db/db');
 
 
 module.exports = {
-
+  getAvailableRoomsForInterval,
+  verifyAvailability
 };
 
 
+// Returns all room type info and the rooms available each day of the interval
+function getAvailableRoomsForInterval(checkin, checkout) {
+  var days = eachDayOfInterval({start: checkin, end: checkout});
+  days.pop();
 
-// Citation: https://stackoverflow.com/questions/8619879/javascript-calculate-the-day-of-the-year-1-366
-// Answer by Joe Orost
+  var promises = [];
+  promises.push(roomService.getAllRoomTypeInfo());
+  days.forEach(day => {
+    promises.push(getRoomsAvailableOnDate(day.toISOString().slice(0,10)));
+  });
 
-Date.prototype.isLeapYear = function() {
-  const year = this.getFullYear();
-  if((year & 3) != 0){
-    return false;
-  }
-  return ((year % 100) != 0 || (year % 400) == 0);
-};
-
-Date.prototype.getJulianDate = function() {
-  var days = [0,31,59,90,120,151,181,212,243,273,304,334];
-  var month = this.getMonth();
-  var date = this.getDate();
-  var julianDate = days[month] + date;
-  if(month > 1 && this.isLeapYear()) julianDate++;
-  return julianDate;
+  return Promise.all(promises);
 }
+
+
+function verifyAvailability(roomtype, checkin, checkout) {
+  var days = eachDayOfInterval({start: checkin, end: checkout});
+  days.pop();
+
+  var promises = [];
+  days.forEach(day => {
+    promises.push(getRoomsAvailableOnDate(day.toISOString().slice(0,10)));
+  });
+
+  var result = {verification: true};
+  return Promise.all(promises).then(results => {
+    results.forEach(dayResults => {
+      if(!dayResults.includes(roomtype)) {
+        result.verification = false;
+        console.log("HERE");
+        return result;
+      }
+    });
+    return result;
+  })
+  .catch(error => {
+    result.error = error.toString();
+    return result;
+  });
+}
+
+
+// Returns the available room types for a given day
+function getRoomsAvailableOnDate(date) {
+  const query = "SELECT roomtype FROM availability WHERE date=? AND isAvailable=true";
+  const values = [date];
+  return new Promise((resolve, reject) => {
+    db.query(query,values,(error, results) => {
+      if(error) reject(error);
+      var arr = [];
+      results.forEach(type => arr.push(type.roomtype));
+      resolve(arr);
+    });
+  });
+}
+
+

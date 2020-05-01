@@ -24,12 +24,8 @@ function createGuest(guest) {
   return new Promise(resolve => {
     db.query(query, values,
         (error, results, fields) => {
-          if(error) {
-            console.log(error);
-            resolve();
-          } else {
-            resolve({"guest_id":results.insertId});
-          }
+          if(error) reject(error);
+          resolve({"guest_id":results.insertId});
         });
   });
 }

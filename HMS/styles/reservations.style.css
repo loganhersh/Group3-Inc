@@ -2,72 +2,9 @@ body {
   font-size: 1.2rem;
 }
 
-.feather {
-  width: 16px;
-  height: 16px;
-  vertical-align: text-bottom;
-}
-.navbar-nav{
-  font-size:19px;
-  font-weight: 600;
-}
-/*
- * Sidebar
- */
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100; /* Behind the navbar */
-  padding: 120px 0 0; /* Height of navbar */
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-  background-color: #f1f1f1;
-}
-
-.sidebar-sticky {
-  position: relative;
-  top: 0;
-  height: calc(100vh - 128px);
-  padding-top: .5rem;
-  overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-}
-
-@supports ((position: -webkit-sticky) or (position: sticky)) {
-  .sidebar-sticky {
-    position: -webkit-sticky;
-    position: sticky;
-  }
-}
-
-.sidebar .nav-link {
-  font-weight: 400;
-  text-align: right;
-}
-
-.sidebar .nav-link .feather {
-  margin-right: 4px;
-  color: #555;
-}
-
-.sidebar .nav-link.active {
-  color: #D00000;
-}
-
-.sidebar .nav-link a:hover{
-  color: #D00000;
-}
-
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
-  color: inherit;
-}
-
-.sidebar-heading {
-  font-size: .75rem;
-  text-transform: uppercase;
+body.overlay-open
+{
+  overflow: hidden;
 }
 
 /*------------------Availabiltiy----------------*/
@@ -146,49 +83,6 @@ body {
   color: #D00000;
 }
 
-#rooms .queen-button {
-  width: 250px;
-  height: 40px;
-}
-
-#rooms .queen-button:hover {
-  color: #D00000;
-}
-
-#rooms .ks-button {
-  width: 250px;
-  height: 40px;
-}
-
-#rooms .ks-button:hover {
-  color: #D00000;
-}
-
-#rooms .qs-button {
-  width: 250px;
-  height: 40px;
-}
-
-#rooms .qs-button:hover {
-  color: #D00000;
-}
-
-#rooms .kj-button {
-  width: 250px;
-  height: 40px;
-}
-
-#rooms .kj-button:hover {
-  color: #D00000;
-}
-
-#rooms .booked {
-  text-align: center;
-}
-
-#queen .bookKingDetails {
-  font-size: 15px;
-}
 
 table {
   border-collapse: collapse;
@@ -212,34 +106,9 @@ tr:nth-child(odd) {
   padding: 11px;
 }
 
-.admin-item
-{
-  display: none;
-}
-.scroll
-{
-  position: absolute;
-  top: 199px;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  overflow-y: scroll;
-}
-
-.center-box {
-  flex-direction: column;
-  display: flex;
-  align-items: center;
-}
-
-.centered
-{
-  text-align: center;
-}
-
 .overlay {
   position: fixed;
-  top: 120px;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
@@ -256,14 +125,15 @@ tr:nth-child(odd) {
 
 .popup {
   margin: 30px auto;
+  margin-top: 100px;
   padding: 20px;
   background: #fff;
   border-radius: 20px;
   width: 75%;
-  height: 95%;
-  overflow: auto;
-  position: relative;
-  transition: all 5s ease-in-out;
+  transition: all 300ms ease-in-out;
+  max-width: 1100px;
+  min-width: 750px;
+  max-height: 90%;
 }
 
 .popup h2 {
@@ -272,9 +142,9 @@ tr:nth-child(odd) {
   font-family: Times;
 }
 
-.popup .close {
+.close {
   position: absolute;
-  top: 20px;
+  top: 5px;
   right: 30px;
   transition: all 200ms;
   font-size: 30px;
@@ -287,25 +157,28 @@ tr:nth-child(odd) {
   color: #D00000;
 }
 
-.popup .content {
-  max-height: 30%;
-  overflow: auto;
-}
-
-.popup .Submit {
-  width: 210px;
-}
-
 .popup .Submit:hover {
   color: #D00000;
 }
 
-@media screen and (max-width: 700px) {
-  .box {
-    width: 70%;
-  }
+.required
+{
+  color: red;
+}
 
-  .popup {
-    width: 70%;
-  }
+.booking-scrollbar
+{
+  position: relative;
+  overflow: auto;
+}
+
+
+#comments
+{
+  width: 100%;
+}
+
+#error-modal-text
+{
+  white-space: pre-wrap;
 }
