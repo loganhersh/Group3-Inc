@@ -2,17 +2,23 @@
 ///////////////////////// Page Config \\\\\\\\\\\\\\\\\\\\\\\\\\
 
 $(document).ready(function () {
+  // make page scrollable again
   $('.close').on('click', function (event) {
     $('body').removeClass('overlay-open');
   });
 
+  // disable credit card fields if pay later is chosen
   $('#paymentMethod').change(function(event) {
     ($('#paymentMethod').val() === 'CA') ? disableCC() : enableCC();
   });
 
+  // clear modal when closed
+  $('#success-modal').on('hidden.bs.modal', function(event) {
+    $(this).find('.modal-body').empty();
+  });
+
   configureDatePickers();
   configureExpSelect();
-
 });
 
 // Adds the next 15 years as expiration options
@@ -67,19 +73,42 @@ function configureDatePickers() {
     var date;
     date = (dateStr) ? new Date(dateStr) : new Date();
     date.setDate(date.getDate() + 1);
-    outdate.attr('min', date.toISOString().slice(0, 10));
+    var dateStr = date.toISOString().slice(0,10);
+    outdate.attr('min', dateStr);
+    outdate.val(dateStr);
   });
 
+  // hide rooms on change
   outdate.change(function () {
     hideRooms();
   });
 
   // Set initial min dates
   var currDate = new Date();
-  indate.attr('min', currDate.toISOString().slice(0,10));
+  indate.attr('min', getLocalStringForPicker(currDate));
   currDate.setDate(currDate.getDate() + 1);
   outdate.attr('min', currDate.toISOString().slice(0,10));
 }
+
+// Returns a date string in the proper format for the date input
+function getLocalStringForPicker(date) {
+  var dateParts = date.toLocaleString().split(',')[0].split('/');
+
+  var addLeadingZeros = function(string, totalLength) {
+    var zeros = '';
+    if(string.length < totalLength) {
+      for(var i=string.length; i < totalLength; i++) {
+        zeros += '0';
+      }
+    }
+    return zeros + string;
+  }
+
+  return dateParts[2] + '-' + addLeadingZeros(dateParts[0], 2)  + '-'
+      + addLeadingZeros(dateParts[1], 2);
+}
+
+
 
 /////////////////////////// END PAGE CONFIG \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -131,7 +160,7 @@ function showErrorModal(text) {
   $('#error-modal').modal('show');
 }
 
-
+// Hides rooms that are displayed
 function hideRooms() {
   $('#rooms').addClass('d-none');
 }
@@ -141,11 +170,15 @@ function hideRooms() {
 function getAvailableRooms(checkin, checkout) {
   var url = baseApiUrl + '/reservation/rooms';
   var payload = {
-    checkin: checkin,
-    checkout: checkout
-  }
+    checkin,
+    checkout
+  };
+
   sendPostWithCreds(url, payload).done((data, status, jqXHR)=>{
     buildRoomRows(data);
+  })
+  .fail((data, status, jqXHR) => {
+    showErrorModal(data.responseJSON.error);
   });
 }
 
@@ -190,13 +223,14 @@ function buildRoomRow(room) {
   return rowHtml;
 }
 
-
+// disable credit card fields
 function disableCC() {
   $('.cc-item').each(function() {
     $(this).prop('disabled', true);
   });
 }
 
+// enable credit card fields
 function enableCC() {
   $('.cc-item').each(function() {
     $(this).prop('disabled', false);
@@ -255,6 +289,7 @@ function bookRoom() {
   var guest = getGuestInfo();
   var payment = getPaymentInfo();
   var comments = $('#comments').val();
+  var reservation = getReservation();
   var err = validateBooking(guest, payment);
   if(err) {
     showErrorModal(err);
@@ -263,25 +298,42 @@ function bookRoom() {
 
   var url = baseApiUrl + '/reservation';
   var payload = {
+    reservation: reservation,
     guest: guest,
     payment: payment,
     comments: comments
   };
   sendPostWithCreds(url, payload).done((data, status, jqXHR) => {
-    showBookedModal(data);
+    hideRooms();
+    $('body').removeClass('overlay-open');
+    resetDatePickers();
+    resetBookingPopup();
+    showBookedModal(data.id);
   })
   .fail((data, status, jqXHR) => {
-    showErrorModal("There was an error creating reservation");
+    showErrorModal(JSON.stringify(data));
   });
 }
 
-
+// show modal with Booked! title and reservation and payment IDs
 function showBookedModal(reservationID) {
   $('#success-modal-title').text('Booked!');
   var html = "<strong>Reservation Complete</strong><br/>"
-      + "Reservation ID: " + reservationID;
+      + "<span>Reservation ID: " + reservationID + "</span><br/>"
+      + "<span>Payment ID: </span>";
   $('#success-modal-body').append(html);
   $('#success-modal').modal('show');
+}
+
+// Retrieves reservation info from page
+function getReservation() {
+  var reservation = {};
+  reservation.roomtype = window.localStorage.getItem('currType');
+  var dates = JSON.parse(window.localStorage.getItem('currDates'));
+  reservation.checkin = dates.in;
+  reservation.checkout = dates.out;
+  reservation.estCost = parseFloat($('#total').text());
+  return reservation;
 }
 
 // Retrieves guest info from the page
@@ -407,4 +459,19 @@ function getState(state) {
   });
 
   return stateAbbr;
+}
+
+
+// Reset date pickers
+function resetDatePickers() {
+  $('#indate').val('');
+  $('#outdate').val('');
+}
+
+// Reset all fields on booking popup
+function resetBookingPopup() {
+  $('.reset-booking').val('');
+  $('#paymentMethod').val('CC');
+  $('#cardType').val('visa');
+  enableCC();
 }
