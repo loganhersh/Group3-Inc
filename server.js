@@ -83,10 +83,9 @@ api.use(cors({
   optionsSuccessStatus: 200,
   credentials: true
 }))
-.use(parser.urlencoded({extended: false}))
+.use(parser.urlencoded({extended: true}))
 .use(parser.json())
 .use(cookieParser())
-.use('/reservation', routes.reservationRoutes)
 .use(/\S*\/logout/, function(req, res, next) {
   // if logout route, immediately invalidate auth cookie
   res.cookie('auth', 'bad', {httpOnly: true, sameSite: true});
@@ -100,6 +99,7 @@ api.use(cors({
 .use(refreshJwt().unless({ path: excludedApiPaths }))
 .use('/auth', routes.authRoutes)
 .use('/rooms', routes.roomsRoutes)
+.use('/reservation', routes.reservationRoutes)
 .use('/users', adminGuard.check(['admin']), routes.usersRoutes)
 .use('/admin', adminGuard.check(['admin']), routes.adminRoutes)
 .use(function(err, req, res, next) {
