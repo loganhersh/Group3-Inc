@@ -1,7 +1,5 @@
 
-// TODO: prevent booking popup when invalid dates
-// TODO: prevent checkout date before check in date
-
+///////////////////////// Page Config \\\\\\\\\\\\\\\\\\\\\\\\\\
 
 $(document).ready(function () {
   $('.close').on('click', function (event) {
@@ -83,6 +81,9 @@ function configureDatePickers() {
   outdate.attr('min', currDate.toISOString().slice(0,10));
 }
 
+/////////////////////////// END PAGE CONFIG \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
 // Checks reservation dates
 // Returns string if error and empty string otherwise
 function checkDates(checkin, checkout) {
@@ -119,7 +120,7 @@ function showRooms() {
     return;
   }
 
-  getAvailableRooms();
+  getAvailableRooms(checkin, checkout);
   $('#rooms').removeClass("d-none");
 }
 
@@ -131,67 +132,21 @@ function showErrorModal(text) {
 }
 
 
-// populates data in the booking popup
-function configureAndShowBookingPopup(roomtypeId) {
-
-  var indateStr = $('#indate').val();
-  var outdateStr = $('#outdate').val();
-  var err = checkDates(indateStr, outdateStr);
-  if(err){
-    showErrorModal(err);
-    hideRooms();
-    return;
-  }
-
-  // prevent scroll on body
-  $('body').addClass('overlay-open');
-
-  // get room info and set room name
-  var roomtype = JSON.parse(window.localStorage.getItem(roomtypeId));
-  $('#roomtype').text(roomtype.type_name);
-
-  // Set popup dates
-  $('#checkin').text(indateStr);
-  $('#checkout').text(outdateStr);
-
-  // Set popup num adults and children
-  $('#num-adult').text($('#adult').val());
-  $('#num-child').text($('#child').val());
-
-  var indate = new Date(indateStr);
-  var outdate = new Date(outdateStr);
-  var numdays = (outdate.getTime() - indate.getTime()) / (24*60*60*1000);
-  var price = (numdays*roomtype.type_base_price).toFixed(2);
-  var totalWithTax = (price * 1.06625).toFixed(2);
-
-  // display pricing info
-  $('#num-nights').text(numdays);
-  $('#price').text(price);
-  $('#total').text(totalWithTax);
-
-  // display appropriate photo
-  $('#room-photo').attr('src', roomtype.image_path);
-
-  window.localStorage.setItem('currType', roomtypeId);
-  window.localStorage.setItem('currDates', JSON.stringify({in:indateStr, out:outdateStr}));
-}
-
-
 function hideRooms() {
   $('#rooms').addClass('d-none');
 }
 
 
 // gets available rooms from the backend
-function getAvailableRooms() {
+function getAvailableRooms(checkin, checkout) {
   var url = baseApiUrl + '/reservation/rooms';
   var payload = {
-    checkin: '2020-04-30',
-    checkout: '2020-05-03'
+    checkin: checkin,
+    checkout: checkout
   }
   sendPostWithCreds(url, payload).done((data, status, jqXHR)=>{
     buildRoomRows(data);
-  })
+  });
 }
 
 // generates and appends the html for each avialable room type
@@ -246,6 +201,52 @@ function enableCC() {
   $('.cc-item').each(function() {
     $(this).prop('disabled', false);
   });
+}
+
+
+// populates data in the booking popup
+function configureAndShowBookingPopup(roomtypeId) {
+
+  var indateStr = $('#indate').val();
+  var outdateStr = $('#outdate').val();
+  var err = checkDates(indateStr, outdateStr);
+  if(err){
+    showErrorModal(err);
+    hideRooms();
+    return;
+  }
+
+  // prevent scroll on body
+  $('body').addClass('overlay-open');
+
+  // get room info and set room name
+  var roomtype = JSON.parse(window.localStorage.getItem(roomtypeId));
+  $('#roomtype').text(roomtype.type_name);
+
+  // Set popup dates
+  $('#checkin').text(indateStr);
+  $('#checkout').text(outdateStr);
+
+  // Set popup num adults and children
+  $('#num-adult').text($('#adult').val());
+  $('#num-child').text($('#child').val());
+
+  var indate = new Date(indateStr);
+  var outdate = new Date(outdateStr);
+  var numdays = (outdate.getTime() - indate.getTime()) / (24*60*60*1000);
+  var price = (numdays*roomtype.type_base_price).toFixed(2);
+  var totalWithTax = (price * 1.06625).toFixed(2);
+
+  // display pricing info
+  $('#num-nights').text(numdays);
+  $('#price').text(price);
+  $('#total').text(totalWithTax);
+
+  // display appropriate photo
+  $('#room-photo').attr('src', roomtype.image_path);
+
+  window.localStorage.setItem('currType', roomtypeId);
+  window.localStorage.setItem('currDates', JSON.stringify({in:indateStr, out:outdateStr}));
 }
 
 
