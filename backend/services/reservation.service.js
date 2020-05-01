@@ -1,4 +1,7 @@
 const db = require('../db/db');
+const roomService = require('./rooms.service');
+const availabilityService = require('./availability.service');
+
 
 
 const reservationTable = "RESERVATION";
@@ -68,7 +71,11 @@ function getReservationByRoom(room) {
 }
 
 // INCOMPLETE
-function getAvailableRooms(checkin, checkout) {
+async function getAvailableRooms(checkin, checkout) {
+  const results = await availabilityService.getAvailableRoomsForInterval(checkin, checkout);
+  console.log(results.toString());
+
+
   const query = "SELECT * FROM roomtype";
 
   return new Promise((resolve, reject) => {
@@ -78,8 +85,8 @@ function getAvailableRooms(checkin, checkout) {
       } else {
         resolve(results);
       }
-    })
-  })
+    });
+  });
 }
 
 
