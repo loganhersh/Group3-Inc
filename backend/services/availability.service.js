@@ -4,10 +4,12 @@ const db = require('../db/db');
 
 
 module.exports = {
-  getAvailableRoomsForInterval
+  getAvailableRoomsForInterval,
+  verifyAvailability
 };
 
 
+// Returns all room type info and the rooms available each day of the interval
 function getAvailableRoomsForInterval(checkin, checkout) {
   var days = eachDayOfInterval({start: checkin, end: checkout});
   days.pop();
@@ -20,6 +22,34 @@ function getAvailableRoomsForInterval(checkin, checkout) {
 
   return Promise.all(promises);
 }
+
+
+function verifyAvailability(roomtype, checkin, checkout) {
+  var days = eachDayOfInterval({start: checkin, end: checkout});
+  days.pop();
+
+  var promises = [];
+  days.forEach(day => {
+    promises.push(getRoomsAvailableOnDate(day.toISOString().slice(0,10)));
+  });
+
+  var result = {verification: true};
+  return Promise.all(promises).then(results => {
+    results.forEach(dayResults => {
+      if(!dayResults.includes(roomtype)) {
+        result.verification = false;
+        console.log("HERE");
+        return result;
+      }
+    });
+    return result;
+  })
+  .catch(error => {
+    result.error = error.toString();
+    return result;
+  });
+}
+
 
 // Returns the available room types for a given day
 function getRoomsAvailableOnDate(date) {
