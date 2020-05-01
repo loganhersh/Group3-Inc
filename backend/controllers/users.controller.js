@@ -18,7 +18,6 @@
 const usersService = require('../services/users.service');
 const authService = require('../services/auth.service');
 
-// TODO: SERVER-SIDE INPUT VALIDATION
 
 module.exports = {
   getAllUsers,
@@ -62,7 +61,7 @@ async function updatePassword(req, res, next) {
   }
 }
 
-// TODO: input validation
+
 async function createUser(req, res, next) {
   const unvalidatedUser = {firstname, lastname, username, unhashedPassword, role} = req.body;
   const hashedPassword = authService.hashPassword(unhashedPassword);
@@ -92,6 +91,7 @@ async function createUser(req, res, next) {
     res.status(400).json({message: "Bad request: expected data missing"});
   }
 }
+
 
 function validateInputLength(user) {
   var badParams = {};
