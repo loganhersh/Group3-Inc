@@ -39,6 +39,7 @@ BEGIN
 END $$
 
 
+-- Updates isAvailable based on current total number of rooms for given type
 DROP PROCEDURE IF EXISTS check_isAvail_after_upd $$
 CREATE PROCEDURE check_isAvail_after_upd(type VARCHAR(2), num_reserved INT, d DATE)
 BEGIN
@@ -73,7 +74,7 @@ CREATE TRIGGER ins_invoice_after_reservation AFTER INSERT ON reservation
     END $$
 
 
- -- Creates trigger that updates availability table when a reservation is created
+ -- Updates num_reserved on availability table when a reservation is created
  CREATE TRIGGER upd_avail_after_ins AFTER INSERT ON reservation
      FOR EACH ROW
  BEGIN
@@ -97,7 +98,7 @@ CREATE TRIGGER ins_invoice_after_reservation AFTER INSERT ON reservation
          END WHILE;
  END $$
 
--- Creates trigger that updates availability table when a reservation is deleted
+-- Updates num_reserved on availability table when a reservation is cancelled
 CREATE TRIGGER upd_avail_after_cancel AFTER UPDATE ON reservation
     FOR EACH ROW
     BEGIN
@@ -127,7 +128,7 @@ CREATE TRIGGER upd_avail_after_cancel AFTER UPDATE ON reservation
     END $$
 
 
--- Creates trigger that updates availability table when a reservation is updated
+-- Updates num_reserved on availability table when a reservation's dates are updated
 CREATE TRIGGER upd_avail_after_update AFTER UPDATE ON reservation
     FOR EACH ROW
     BEGIN
@@ -165,7 +166,7 @@ CREATE TRIGGER upd_avail_after_update AFTER UPDATE ON reservation
     END $$
 
 
--- Creates trigger that updates amount paid on invoice when a payment is inserted
+-- Updates amount paid on invoice when a payment is inserted
 CREATE TRIGGER upd_invoice_after_payment AFTER INSERT ON payment
     FOR EACH ROW
     BEGIN
@@ -175,7 +176,7 @@ CREATE TRIGGER upd_invoice_after_payment AFTER INSERT ON payment
     END $$
 
 
--- Creates trigger that updates invoice total when a new invoice charge is inserted
+-- Updates invoice total when a new invoice charge is inserted
 CREATE TRIGGER upd_invoice_after_charge AFTER INSERT ON invoicecharge
     FOR EACH ROW
     BEGIN

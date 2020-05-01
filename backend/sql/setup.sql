@@ -137,12 +137,11 @@ INSERT INTO USER VALUES ('kelinkowski', '$2b$10$hf2WwnBkhwjXNwturHMPTuasjCipC3R3
 INSERT INTO USER VALUES ('emusk', '$2b$10$hf2WwnBkhwjXNwturHMPTuasjCipC3R3GbB9ERtkSCmMRDy.OcpZe','elon','musk','user');
 
 -- ROOMTYPE DATA
-INSERT INTO ROOMTYPE VALUES ('KI', 'King','Non-smoking room with king-size bed', 79.99, 1, 2, '/photos/kingRoom.jpg');
-INSERT INTO ROOMTYPE VALUES ('QD', 'Double Queen', 'Non-smoking room with two queen-size beds', 89.99, 2, 4, '/photos/queen-bed.jpg');
-INSERT INTO ROOMTYPE VALUES ('KS', 'King Suite', 'Non-smoking suite with king-size bed and pull-out couch', 99.99, 2, 4, '/photos/king.jpg');
-INSERT INTO ROOMTYPE VALUES ('QS', 'Double Queen Suite', 'Non-smoking room with two queen-size beds and a pull-out couch', 109.99, 3, 6, '/photos/queen-suite.jpg');
-INSERT INTO ROOMTYPE VALUES ('KJ', 'King Jacuzzi Suite', 'Non-smoking room with a king-size bed and a jacuzzi tub', 129.99, 1, 2, '/photos/jacuzzi.jpg');
-
+INSERT INTO ROOMTYPE VALUES ('KI', 'King','Non-smoking room with king-size bed', 79.99, 1, 3, '/photos/kingRoom.jpg');
+INSERT INTO ROOMTYPE VALUES ('QD', 'Double Queen', 'Non-smoking room with two queen-size beds', 89.99, 2, 5, '/photos/queen-bed.jpg');
+INSERT INTO ROOMTYPE VALUES ('KS', 'King Suite', 'Non-smoking suite with king-size bed and pull-out couch', 99.99, 2, 5, '/photos/king.jpg');
+INSERT INTO ROOMTYPE VALUES ('QS', 'Double Queen Suite', 'Non-smoking room with two queen-size beds and a pull-out couch', 109.99, 3, 7, '/photos/queen-suite.jpg');
+INSERT INTO ROOMTYPE VALUES ('KJ', 'King Jacuzzi Suite', 'Non-smoking room with a king-size bed and a jacuzzi tub', 129.99, 1, 3, '/photos/jacuzzi.jpg');
 
 
 DELIMITER $$
@@ -185,6 +184,7 @@ BEGIN
 END $$
 
 
+-- Updates isAvailable based on current total number of rooms for given type
 DROP PROCEDURE IF EXISTS check_isAvail_after_upd $$
 CREATE PROCEDURE check_isAvail_after_upd(type VARCHAR(2), num_reserved INT, d DATE)
 BEGIN
@@ -219,7 +219,7 @@ BEGIN
 END $$
 
 
--- Creates trigger that updates availability table when a reservation is created
+-- Updates num_reserved on availability table when a reservation is created
 CREATE TRIGGER upd_avail_after_ins AFTER INSERT ON reservation
     FOR EACH ROW
 BEGIN
@@ -243,7 +243,7 @@ BEGIN
         END WHILE;
 END $$
 
--- Creates trigger that updates availability table when a reservation is deleted
+-- Updates num_reserved on availability table when a reservation is cancelled
 CREATE TRIGGER upd_avail_after_cancel AFTER UPDATE ON reservation
     FOR EACH ROW
 BEGIN
@@ -273,7 +273,7 @@ BEGIN
 END $$
 
 
--- Creates trigger that updates availability table when a reservation is updated
+-- Updates num_reserved on availability table when a reservation's dates are updated
 CREATE TRIGGER upd_avail_after_update AFTER UPDATE ON reservation
     FOR EACH ROW
 BEGIN
@@ -311,7 +311,7 @@ BEGIN
 END $$
 
 
--- Creates trigger that updates amount paid on invoice when a payment is inserted
+-- Updates amount paid on invoice when a payment is inserted
 CREATE TRIGGER upd_invoice_after_payment AFTER INSERT ON payment
     FOR EACH ROW
 BEGIN
@@ -321,7 +321,7 @@ BEGIN
 END $$
 
 
--- Creates trigger that updates invoice total when a new invoice charge is inserted
+-- Updates invoice total when a new invoice charge is inserted
 CREATE TRIGGER upd_invoice_after_charge AFTER INSERT ON invoicecharge
     FOR EACH ROW
 BEGIN
