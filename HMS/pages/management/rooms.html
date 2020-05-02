@@ -19,7 +19,8 @@
     <nav class="navbar navbar-expand-lg fixed-top flex-md-nowrap bg-light shadow">
         <div class="container-fluid m-0">
             <a class="navbar-brand" href="../home.html"><img src="../../photos/g3logo.png" alt="HMS logo"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon">
           <i class="fas fa-bars"></i>
         </span>
@@ -53,40 +54,40 @@
 <!---------------------- END NAV BAR -------------------->
 <!---------------------- SIDE BAR ----------------------->
 <section id="sidebar">
-<div class="container-fluid">
-    <div class="row">
-        <nav class="col-md-2 d-none d-md-block sidebar">
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">
-                            <span data-feather="home"></span>
-                            Financial Report <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-						<a class="nav-link" href="lookup.html">
-							<span data-feather="lookup"></span>
-							Lookup Reservation
-						</a>
-					</li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="graph.html">
-                            <span data-feather="file"></span>
-                            Occupancy Graph
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">
-                            <span data-feather="shopping-cart"></span>
-                            Rooms
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <span data-feather="home"></span>
+                                Financial Report <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="lookup.html">
+                                <span data-feather="lookup"></span>
+                                Lookup Reservation
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="graph.html">
+                                <span data-feather="file"></span>
+                                Occupancy Graph
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <span data-feather="shopping-cart"></span>
+                                Rooms
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     </div>
-</div>
 </section>
 <!------------------------ END SIDE BAR ------------------>
 <!----------------------- Report TABLE ---------------------------------->
@@ -103,31 +104,72 @@
             </thead>
             <tbody>
             <tr>
-                <td style="padding: 3px 0px;vertical-align: middle; text-align: center"><input type="checkbox" id="1" name="1" value="1"></td>
-                <td>101</td>
-                <td>&nbsp;<select id="status1">
-                    <option value="Available">Available</option>
-                    <option value="Unavailable">Unavailable</option>
-                </select></td>
-                <td>&nbsp;</td>
+                <td style="padding: 3px 0px;vertical-align: middle; text-align: center; width: 100px">
+                    <input type="checkbox" id="1" name="1" value="1">
+                </td>
+                <td style="width: 100px">
+                    101
+                </td>
+                <td style="width: 200px">&nbsp;
+                    <select id="status1" style="width: 96%">
+                        <option value="Available">Available</option>
+                        <option value="Unavailable">Unavailable</option>
+                    </select>
+                </td>
+                <td>&nbsp;
+                    <input id="reason1" style="width: 99%">
+                </td>
             </tr>
             <tr>
-                <td style="padding: 3px 0px;vertical-align: middle; text-align: center"><input type="checkbox" id="2" name="2" value="2"></td>
-                <td>102</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td style="padding: 3px 0px;vertical-align: middle; text-align: center; width: 100px">
+                    <input type="checkbox" id="2" name="2" value="2">
+                </td>
+                <td style="width: 100px">
+                    102
+                </td>
+                <td style="width: 200px">&nbsp;
+                    <select id="status2" style="width: 96%">
+                        <option value="Available">Available</option>
+                        <option value="Unavailable">Unavailable</option>
+                    </select>
+                </td>
+                <td>&nbsp;
+                    <input id="reason2" style="width: 99%">
+                </td>
             </tr>
             <tr>
-                <td style="padding: 3px 0px;vertical-align: middle; text-align: center"><input type="checkbox" id="3" name="3" value="3"></td>
-                <td>103</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td style="padding: 3px 0px;vertical-align: middle; text-align: center; width: 100px">
+                    <input type="checkbox" id="3" name="3" value="3">
+                </td>
+                <td style="width: 100px">
+                    103
+                </td>
+                <td style="width: 200px">&nbsp;
+                    <select id="status3" style="width: 96%">
+                        <option value="Available">Available</option>
+                        <option value="Unavailable">Unavailable</option>
+                    </select>
+                </td>
+                <td>&nbsp;
+                    <input id="reason3" style="width: 99%">
+                </td>
             </tr>
             <tr>
-                <td style="padding: 3px 0px;vertical-align: middle; text-align: center"><input type="checkbox" id="4" name="4" value="4"></td>
-                <td>104</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td style="padding: 3px 0px;vertical-align: middle; text-align: center; width: 100px">
+                    <input type="checkbox" id="4" name="4" value="4">
+                </td>
+                <td style="width: 100px">
+                    104
+                </td>
+                <td style="width: 200px">&nbsp;
+                    <select id="status4" style="width: 96%">
+                        <option value="Available">Available</option>
+                        <option value="Unavailable">Unavailable</option>
+                    </select>
+                </td>
+                <td>&nbsp;
+                    <input id="reason4" style="width: 99%">
+                </td>
             </tr>
             </tbody>
         </table>
@@ -139,13 +181,16 @@
         <table class="modifyTable">
             <tbody>
             <tr>
-                <td>&nbsp;<button type="button"><b>New</b></button></td>
+                <td>&nbsp;<button type="button"><b>New</b></button>
+                </td>
             </tr>
             <tr>
-                <td>&nbsp;<button type="button"><b>Delete</b></button></td>
+                <td>&nbsp;<button type="button"><b>Delete</b></button>
+                </td>
             </tr>
             <tr>
-                <td>&nbsp;<button type="button"><b>Edit</b></button></td>
+                <td>&nbsp;<button type="button"><b>Edit</b></button>
+                </td>
             </tr>
             </tbody>
         </table>
