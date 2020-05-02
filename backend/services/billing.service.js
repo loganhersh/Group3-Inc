@@ -24,12 +24,20 @@ module.exports = {
     chargeInvoice
 };
 
-function generateInvoice(invoice) {
-    const query = "INSERT INTO ?? VALUES(?, ?)"; // invoice_id skipped because of foreign reference
+function createCCPayment(payment) {
+    const query = "INSERT INTO ?? VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; // invoice_id skipped
     values = [
-        invoiceTable,
-        invoice.total_amount, // variables have the same names in the controllers + tables
-        invoice.amount_paid
+        paymentTable,
+        payment.payment_id,
+        payment.payment_date,
+        payment.payment_type,
+        payment.payment_amount,
+        payment.accountholder_id,
+        payment.account_number,
+        payment.expiration_month,
+        payment.expiration_year,
+        payment.card_cvv,
+        payment.card_network
     ];
 
     return new Promise( (resolve, reject) => {
@@ -45,7 +53,7 @@ function generateInvoice(invoice) {
     });
 }
 
-function createPayment(payment) {
+function createCAPayment(payment) {
     const query = "INSERT INTO ?? VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; // invoice_id skipped
     values = [
         paymentTable,
