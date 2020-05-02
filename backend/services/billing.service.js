@@ -19,12 +19,13 @@ const paymentTable = "PAYMENT";
 const invoiceChargeTable = "INVOICECHARGE";
 
 module.exports = {
-    generateInvoice,
-    createPayment,
+    createCCPayment,
+    createCAPayment,
     chargeInvoice
 };
 
 function createCCPayment(payment) {
+    const invoiceIDQuery = "SELECT invoice_id FROM INVOICE WHERE invoice_id = ?";
     const query = "INSERT INTO ?? VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; // invoice_id skipped
     values = [
         paymentTable,
@@ -54,7 +55,7 @@ function createCCPayment(payment) {
 }
 
 function createCAPayment(payment) {
-    const query = "INSERT INTO ?? VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; // invoice_id skipped
+    const query = "INSERT INTO ?? VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     values = [
         paymentTable,
         payment.payment_id,
