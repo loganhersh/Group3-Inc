@@ -14,26 +14,42 @@
 
 const db = require('../db/db');
 
-const invoiceTable = "INVOICE";
-const paymentTable = "PAYMENT";
-const invoiceChargeTable = "INVOICECHARGE";
-
 module.exports = {
     createCCPayment,
     createCAPayment,
     chargeInvoice
 };
 
-function createCCPayment(payment) {
+/*function generateChargeID() {
     const invoiceIDQuery = "SELECT invoice_id FROM INVOICE WHERE invoice_id = ?";
-    const query = "INSERT INTO ?? VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; // invoice_id skipped
+    var invoiceID = "";
+
+    return new Promise( (resolve, reject) => {
+        db.query(invoiceIDQuery,
+            function (error, result, fields) {
+                if(error) {
+                    console.log(error);
+                    reject(error);
+                } else {
+                    resolve(result.affectedRows > 0);
+                    resolve(invoiceID = result);
+                }
+            });
+    });
+
+    const invoiceChargesQuery = "SELECT COUNT()";
+
+}*/
+
+function createCCPayment(payment) {
+    // Generates payment when the credit card option is selected
+    const query = "INSERT INTO PAYMENT VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     values = [
-        paymentTable,
         payment.payment_id,
         payment.payment_date,
         payment.payment_type,
         payment.payment_amount,
-        payment.accountholder_id,
+        payment.accountholder_name,
         payment.account_number,
         payment.expiration_month,
         payment.expiration_year,
@@ -55,19 +71,16 @@ function createCCPayment(payment) {
 }
 
 function createCAPayment(payment) {
-    const query = "INSERT INTO ?? VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    // Generates payment when the cash option is selected
+
+    const query = "INSERT INTO PAYMENT(payment_id, invoice_id, payment_date, payment_type, " +
+        "payment_amount, accountholder_name) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     values = [
-        paymentTable,
         payment.payment_id,
         payment.payment_date,
         payment.payment_type,
         payment.payment_amount,
-        payment.accountholder_id,
-        payment.account_number,
-        payment.expiration_month,
-        payment.expiration_year,
-        payment.card_cvv,
-        payment.card_network
+        payment.accountholder_name,
     ];
 
     return new Promise( (resolve, reject) => {
@@ -84,10 +97,11 @@ function createCAPayment(payment) {
 }
 
 function chargeInvoice(invoiceCharge) {
-    const query = "INSERT INTO ?? VALUES(?, ?, ?, ?)"; // invoice_id skipped
+    // Creates and invoice charge
+    const query = "INSERT INTO INVOICECHARGE VALUES(?, ?, ?, ?, ?)";
     values = [
-        invoiceChargeTable,
         invoice.charge_id,
+        invoice.invoice_id,
         invoice.date_applied,
         invoice.charge_amount,
         invoice.charge_reason
