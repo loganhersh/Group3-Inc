@@ -2,6 +2,7 @@ const dateFns = require('date-fns');
 const guestService = require('../services/guest.service');
 const reservationService = require('../services/reservation.service');
 const availabilityService = require('../services/availability.service');
+const emailer = require('../services/email.service');
 
 
 module.exports = {
@@ -13,6 +14,8 @@ module.exports = {
 };
 
 
+// Creates a new reservation, invoice charge for the cost of the reservation, and
+// a new payment if applicable
 async function createReservation(req, res, next) {
   var reservation = req.body.reservation;
   var payment = req.body.payment;
@@ -59,9 +62,21 @@ async function createReservation(req, res, next) {
   // TODO: Insert payment
 
   res.status(200).json({id: reservationId});
+
+  // Compile email info with payment details
+  // TODO: finish adding required fields
+  var emailInfo = {
+    reservation_id: reservationId,
+    checkin: reservation.checkin,
+    checkout: reservation.checkout
+  };
+
+
+  emailer.sendConfirmationEmail(guest.email, emailInfo);
 }
 
 
+// Gets a reservation by searching for the guest's last name
 async function getByName(req, res, next) {
   var name = req.params.name;
   reservationService.getReservationByName(name.toLowerCase()).then(results => {
@@ -72,6 +87,8 @@ async function getByName(req, res, next) {
   });
 }
 
+
+// Gets a reservation by ID
 async function getById(req, res, next) {
   var id = req.params.id;
   reservationService.getReservationById(id.toUpperCase()).then(results => {
@@ -82,6 +99,8 @@ async function getById(req, res, next) {
   });
 }
 
+
+// Gets all reservations related to a room number
 async function getByRoom(req, res, next) {
   var room = req.params.room;
   reservationService.getReservationByRoom(room).then(results => {
@@ -92,6 +111,7 @@ async function getByRoom(req, res, next) {
   });
 }
 
+// callback for all of the functions that search reservations
 function getReservationCallback(results, res) {
   if(results.length > 0) {
     res.status(200).json(results);
@@ -101,6 +121,7 @@ function getReservationCallback(results, res) {
 }
 
 
+// Finds and returns the available room types for the given dates
 async function getAvailableRooms(req, res, next) {
   var checkin = req.body.checkin;
   var checkout = req.body.checkout;

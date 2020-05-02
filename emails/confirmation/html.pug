@@ -1,0 +1,43 @@
+// TODO: Finish adding dynamic email info
+doctype html
+html(lang='en')
+    head
+        meta(
+            name='viewport'
+            content='width=device-width, initial-scale=1.0'
+        )
+        meta(
+            http-equiv='Content-Type'
+            content='text/html; charset=utf-8'
+        )
+        title Reservation Confirmation
+        style.
+            .space-right {
+                padding-right: 50px;
+            }
+    body
+        h1 Reservation Confirmation
+        h4 Your stay has been booked!
+        table
+            tr
+                td.space-right Reservation ID:
+                td #{reservationId}
+            tr
+                td.space-right Check In:
+                td #{checkin}
+            tr
+                td.space-right Check Out:
+                td #{checkout}
+            tr
+                td.space-right Room:
+                td King Suite
+            tr
+                td.space-right Total:
+                td $180.00
+            tr
+                td.space-right Amount Paid:
+                td $100.00
+            tr
+                td.space-right Amount Owed:
+                td $80.00
+        h3 We look forward to your arrival!
