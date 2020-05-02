@@ -117,15 +117,15 @@ api.use(cors({
 
 //////////// TESTING ///////////////////
 
-var reservation = {
-  reservation_id: 'TEST_RES_ID',
-  checkin: '2020-05-10',
-  checkout: '2020-05-12'
-};
-
-const emailer = require('./backend/services/email.service');
-emailer.sendConfirmationEmail('fakeemail@scam.com', reservation);
-emailer.sendReceiptEmail('fakeemail@scam.com', null);
+// var reservation = {
+//   reservation_id: 'TEST_RES_ID',
+//   checkin: '2020-05-10',
+//   checkout: '2020-05-12'
+// };
+//
+// const emailer = require('./backend/services/email.service');
+// emailer.sendConfirmationEmail('fakeemail@scam.com', reservation);
+// emailer.sendReceiptEmail('fakeemail@scam.com', null);
 
 /////////////////////////////////////////
 
