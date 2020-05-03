@@ -26,7 +26,8 @@ var transporter = nodemailer.createTransport({
 
 // Create and configure email
 var email = new EmailTemplate({
-  // send: true,
+  send: true,
+  preview: false,
   message: {
     from: 'myhmsmailer@gmail.com'
   },
