@@ -47,128 +47,126 @@
 </section>
 <!---------------------- END NAV BAR -------------------->
 <!---------------------- SIDE BAR ----------------------->
-<section id="sidebar">
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">
-                                <span data-feather="home"></span>
-                                Financial Report <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="lookup.html">
-                                <span data-feather="lookup"></span>
-                                Lookup Reservation
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="graph.html">
-                                <span data-feather="file"></span>
-                                Occupancy Graph
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                <span data-feather="shopping-cart"></span>
-                                Rooms
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
-</section>
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <span data-feather="home"></span>
+                            Financial Report <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="lookup.html">
+                            <span data-feather="lookup"></span>
+                            Lookup Reservation
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="graph.html">
+                            <span data-feather="file"></span>
+                            Occupancy Graph
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <span data-feather="shopping-cart"></span>
+                            Rooms
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 <!------------------------ END SIDE BAR ------------------>
 <!----------------------- Report TABLE ---------------------------------->
-<section id="roomsTable">
-    <div class="container">
-        <table class="roomsTable">
-            <thead>
-            <tr>
-                <th>&nbsp;</th>
-                <th>Room</th>
-                <th>Status</th>
-                <th>Reason</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td style="padding: 3px 0px;vertical-align: middle; text-align: center; width: 100px">
-                    <input type="checkbox" id="1" name="1" value="1">
-                </td>
-                <td style="width: 100px">
-                    101
-                </td>
-                <td style="width: 200px">&nbsp;
-                    <select id="status1" style="width: 96%">
-                        <option value="Available">Available</option>
-                        <option value="Unavailable">Unavailable</option>
-                    </select>
-                </td>
-                <td>&nbsp;
-                    <input id="reason1" style="width: 99%">
-                </td>
-            </tr>
-            <tr>
-                <td style="padding: 3px 0px;vertical-align: middle; text-align: center; width: 100px">
-                    <input type="checkbox" id="2" name="2" value="2">
-                </td>
-                <td style="width: 100px">
-                    102
-                </td>
-                <td style="width: 200px">&nbsp;
-                    <select id="status2" style="width: 96%">
-                        <option value="Available">Available</option>
-                        <option value="Unavailable">Unavailable</option>
-                    </select>
-                </td>
-                <td>&nbsp;
-                    <input id="reason2" style="width: 99%">
-                </td>
-            </tr>
-            <tr>
-                <td style="padding: 3px 0px;vertical-align: middle; text-align: center; width: 100px">
-                    <input type="checkbox" id="3" name="3" value="3">
-                </td>
-                <td style="width: 100px">
-                    103
-                </td>
-                <td style="width: 200px">&nbsp;
-                    <select id="status3" style="width: 96%">
-                        <option value="Available">Available</option>
-                        <option value="Unavailable">Unavailable</option>
-                    </select>
-                </td>
-                <td>&nbsp;
-                    <input id="reason3" style="width: 99%">
-                </td>
-            </tr>
-            <tr>
-                <td style="padding: 3px 0px;vertical-align: middle; text-align: center; width: 100px">
-                    <input type="checkbox" id="4" name="4" value="4">
-                </td>
-                <td style="width: 100px">
-                    104
-                </td>
-                <td style="width: 200px">&nbsp;
-                    <select id="status4" style="width: 96%">
-                        <option value="Available">Available</option>
-                        <option value="Unavailable">Unavailable</option>
-                    </select>
-                </td>
-                <td>&nbsp;
-                    <input id="reason4" style="width: 99%">
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <main role="main" class="col-md-10 ml-sm-auto px-4">
+            <div class="row justify-content-center">
+                <table class="roomsTable">
+                    <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>Room</th>
+                        <th>Status</th>
+                        <th>Reason</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td style="padding: 3px 0px;vertical-align: middle; text-align: center; width: 100px">
+                            <input type="checkbox" id="1" name="1" value="1">
+                        </td>
+                        <td style="width: 100px">
+                            101
+                        </td>
+                        <td style="width: 200px">&nbsp;
+                            <select id="status1" style="width: 96%">
+                                <option value="Available">Available</option>
+                                <option value="Unavailable">Unavailable</option>
+                            </select>
+                        </td>
+                        <td>&nbsp;
+                            <input id="reason1" style="width: 95%">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 3px 0px;vertical-align: middle; text-align: center; width: 100px">
+                            <input type="checkbox" id="2" name="2" value="2">
+                        </td>
+                        <td style="width: 100px">
+                            102
+                        </td>
+                        <td style="width: 200px">&nbsp;
+                            <select id="status2" style="width: 96%">
+                                <option value="Available">Available</option>
+                                <option value="Unavailable">Unavailable</option>
+                            </select>
+                        </td>
+                        <td>&nbsp;
+                            <input id="reason2" style="width: 95%">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 3px 0px;vertical-align: middle; text-align: center; width: 100px">
+                            <input type="checkbox" id="3" name="3" value="3">
+                        </td>
+                        <td style="width: 100px">
+                            103
+                        </td>
+                        <td style="width: 200px">&nbsp;
+                            <select id="status3" style="width: 96%">
+                                <option value="Available">Available</option>
+                                <option value="Unavailable">Unavailable</option>
+                            </select>
+                        </td>
+                        <td>&nbsp;
+                            <input id="reason3" style="width: 95%">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 3px 0px;vertical-align: middle; text-align: center; width: 100px">
+                            <input type="checkbox" id="4" name="4" value="4">
+                        </td>
+                        <td style="width: 100px">
+                            104
+                        </td>
+                        <td style="width: 200px">&nbsp;
+                            <select id="status4" style="width: 96%">
+                                <option value="Available">Available</option>
+                                <option value="Unavailable">Unavailable</option>
+                            </select>
+                        </td>
+                        <td>&nbsp;
+                            <input id="reason4" style="width: 95%">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
     </div>
-</section>
+</div>
 <!----------------------- END TABLE ---------------------------------->
 <section id="modifyTable">
     <div class="container">

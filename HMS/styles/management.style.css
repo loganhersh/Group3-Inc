@@ -9,10 +9,6 @@ body {
 }
 
 
-#chart{
-  margin-top: 10px;
-  margin-left: 300px;
-}
 #roomGrid {
   margin-top: 155px;
   margin-left: -40px;
@@ -161,4 +157,9 @@ table.modifyTable button{
 
 [role="main"] {
   padding-top: 128px; /* Space for fixed navbar */
+}
+
+.chart-container
+{
+  min-height: 600px;
 }
