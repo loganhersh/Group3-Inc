@@ -1,3 +1,8 @@
+/**
+ * This version of the billing controller hasn't been updated yet. Waiting to finish the billing service properly
+ * before finishing and pushing the updated version of the billing controller.
+ */
+
 const dateFns = require('date-fns');
 const billingService = require('../services/billing.service');
 
