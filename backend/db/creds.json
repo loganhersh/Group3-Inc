@@ -1,5 +1,5 @@
 {
-  "host": "localhost",
+  "host": "hms-db-v1.cjevwtmfbz9z.us-east-1.rds.amazonaws.com",
   "user": "hms_owner",
   "password": "password123",
   "database": "HMS_DB"
