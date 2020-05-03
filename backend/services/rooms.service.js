@@ -4,13 +4,13 @@ const async = require('async');
 const roomtypeTable = "ROOMTYPE";
 
 module.exports = {
-  getTotalRoomsOfEachType,
+  getTotalAvailableRoomsOfEachType,
   getAllRoomTypeInfo
 };
 
 
 // Returns the total number of rooms for each room type
-function getTotalRoomsOfEachType() {
+function getTotalAvailableRoomsOfEachType() {
   return new Promise((resolve, reject) => {
     var types;
     var callback = function(roomTypeTotals) {
@@ -22,7 +22,7 @@ function getTotalRoomsOfEachType() {
       types = roomtypes;
       var roomTypeTotals = {};
       for(var i = 0; i < roomtypes.length; i++) {
-        const query = "SELECT roomtype,COUNT(roomtype) AS num FROM room WHERE roomtype=?";
+        const query = "SELECT roomtype,COUNT(roomtype) AS num FROM room WHERE roomtype=? AND room_in_service=true";
         db.query(query, [roomtypes[i]], function(error, results) {
           (error) ? reject(error) : roomTypeTotals[results[0].roomtype] = results[0].num;
           callback(roomTypeTotals);
