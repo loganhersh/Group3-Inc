@@ -53,7 +53,7 @@ function verifyAvailability(roomtype, checkin, checkout) {
 
 // Returns the available room types for a given day
 function getRoomsAvailableOnDate(date) {
-  const query = "SELECT roomtype FROM availability WHERE date=? AND isAvailable=true";
+  const query = "SELECT roomtype FROM AVAILABILITY WHERE date=? AND isAvailable=true";
   const values = [date];
   return new Promise((resolve, reject) => {
     db.query(query,values,(error, results) => {
