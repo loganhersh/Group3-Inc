@@ -122,10 +122,10 @@ function checkDates(checkin, checkout) {
   }
 
   // Check that checkin date is before checkout date
-  var dateCheckIn = new Date(checkin);
-  var dateCheckOut = new Date(checkout);
+  var dateCheckIn = new Date(checkin + " EST");
+  var dateCheckOut = new Date(checkout + " EST");
 
-  var compDate = new Date();
+  var compDate = new Date(new Date().toLocaleDateString());
   if(dateCheckIn < compDate && dateCheckIn.toISOString().slice(0,10) !== compDate.toISOString().slice(0,10)) {
     return "Cannot choose check-in date from the past";
   }

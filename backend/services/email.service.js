@@ -54,8 +54,8 @@ function sendConfirmationEmail(receiverEmail, confirmInfo){
       locals: {
         firstname: 'Logan',
         reservationId: confirmInfo.reservation_id,
-        checkin: format(new Date(confirmInfo.checkin), 'MMMM d, yyyy'),
-        checkout: format(new Date(confirmInfo.checkout), 'MMMM d, yyyy')
+        checkin: format(new Date(confirmInfo.checkin+" EST"), 'MMMM d, yyyy'),
+        checkout: format(new Date(confirmInfo.checkout+" EST"), 'MMMM d, yyyy')
       }
   })
   .catch(console.error);
